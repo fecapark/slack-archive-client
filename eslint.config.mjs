@@ -86,6 +86,7 @@ const config = [
       'perfectionist/sort-maps': 'off',
       'perfectionist/sort-objects': 'off',
       'perfectionist/sort-objects': 'off',
+      'perfectionist/sort-modules': 'off',
       'react-compiler/react-compiler': 'warn',
       // 'react-hooks/exhaustive-deps': [
       //   'error',
