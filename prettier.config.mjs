@@ -8,7 +8,7 @@ const config = {
   trailingComma: 'es5',
   plugins: ['prettier-plugin-tailwindcss'],
   semi: false,
-  // tailwindFunctions: ["tv", "clsx"],
+  tailwindFunctions: ['clsx'],
 }
 
 export default config

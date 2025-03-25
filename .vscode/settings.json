@@ -13,5 +13,6 @@
     "**/node_modules": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.useFlatConfig": true
+  "eslint.useFlatConfig": true,
+  "tailwindCSS.experimental.classRegex": [["clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]]
 }
