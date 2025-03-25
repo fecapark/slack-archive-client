@@ -22,5 +22,8 @@ if (commitMessagePath) {
     .replace(/^pp /, ':poop: ')
     // 📦 Update compiled files or packages.
     .replace(/^p /, ':package: ')
+    // 🔧 Write configuration file.
+    .replace(/^w /, ':wrench: ')
+
   fs.writeFileSync(commitMessagePath, newCommitMessage)
 }
