@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { LandingLogo } from '@/app/(root)/components/LandingLogo'
 import { SlackMessageInput } from '@/app/(root)/components/SlackMessageInput'
+import { SlackMessageItem } from '@/app/(root)/components/SlackMessageItem'
 import { GNB } from '@/components/GNB'
 import { convertNewlineToJSX } from '@toss/react'
 
@@ -31,7 +32,12 @@ const Home = () => {
           </Link>
         </div>
 
-        <SlackMessageInput>{convertNewlineToJSX('@fe\n안녕하세요!')}</SlackMessageInput>
+        <div className="flex w-full items-center justify-center gap-8 select-none">
+          <SlackMessageItem>
+            {'`@fe` (<@Feca [Web FE]> <@Hanna> <@Juun> <@Ssol> <@EATSTEAK> <@Jerome>)\n안녕하세요!'}
+          </SlackMessageItem>
+          <SlackMessageInput>{convertNewlineToJSX('@fe\n안녕하세요!')}</SlackMessageInput>
+        </div>
       </div>
     </div>
   )
