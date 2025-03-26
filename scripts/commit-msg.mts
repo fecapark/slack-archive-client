@@ -24,6 +24,8 @@ if (commitMessagePath) {
     .replace(/^p /, ':package: ')
     // 🔧 Write configuration file.
     .replace(/^w /, ':wrench: ')
+    // 🚚 Move file or directory.
+    .replace(/^t /, ':truck: ')
 
   fs.writeFileSync(commitMessagePath, newCommitMessage)
 }

@@ -1,4 +1,4 @@
-import AutoHeightImage from '@/app/components/AutoHeightImage'
+import AutoHeightImage from '@/components/AutoHeightImage'
 
 export const GNB = () => {
   return (
