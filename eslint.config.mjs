@@ -14,12 +14,6 @@ const compat = new FlatCompat({
 })
 
 const config = [
-  /* 
-    https://nextjs.org/docs/pages/api-reference/config/eslint#reference
-    하지만, next/core-web-vitals 에서 비명시적으로 아래 두 패키지의 설치를 요구해요.
-    - eslint-plugin-react-hooks
-    - @next/eslint-plugin-next
-  */
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 
   reactCompiler.configs.recommended,
