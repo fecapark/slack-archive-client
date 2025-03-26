@@ -88,6 +88,8 @@
   --purple700: #8222a2;
   --purple800: #73228e;
   --purple900: #65237b;
+
+  --text-primary: var(--grey800);
 }
 
 /* scripts/codegen/gen-theme.ts에 의해서 자동으로 채워져요. */
@@ -172,4 +174,5 @@
 --color-purple700: var(--purple700);
 --color-purple800: var(--purple800);
 --color-purple900: var(--purple900);
+--color-text-primary: var(--text-primary);
 }
