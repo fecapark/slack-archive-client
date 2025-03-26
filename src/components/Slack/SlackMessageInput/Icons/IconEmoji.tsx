@@ -1,4 +1,4 @@
-import { IconProps } from '@/app/(root)/components/SlackMessageInput/Icons/type'
+import { IconProps } from '@/components/Slack/SlackMessageInput/Icons/type'
 
 export const IconEmoji = ({ className }: IconProps) => {
   return (

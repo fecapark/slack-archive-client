@@ -3,10 +3,10 @@ import { MdArrowOutward } from 'react-icons/md'
 
 import { LandingLogo } from '@/app/(root)/components/LandingLogo'
 import { LandingSlackConversation } from '@/app/(root)/components/LandingSlackConversation'
-import { SlackMessageInput } from '@/app/(root)/components/SlackMessageInput'
-import { SlackMessageItem } from '@/app/(root)/components/SlackMessageItem'
 import { YourssuSlackLink } from '@/app/(root)/components/YourssuSlackLink'
 import { GNB } from '@/components/GNB'
+import { SlackMessageInput } from '@/components/Slack/SlackMessageInput'
+import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { convertNewlineToJSX } from '@toss/react'
 
 const Home = () => {

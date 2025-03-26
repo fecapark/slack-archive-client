@@ -1,10 +1,10 @@
-import { IconAdd } from '@/app/(root)/components/SlackMessageInput/Icons/IconAdd'
-import { IconCaretDown } from '@/app/(root)/components/SlackMessageInput/Icons/IconCaretDown'
-import { IconEllipsisHorizontal } from '@/app/(root)/components/SlackMessageInput/Icons/IconEllipsisHorizontal'
-import { IconEmoji } from '@/app/(root)/components/SlackMessageInput/Icons/IconEmoji'
-import { IconFormatting } from '@/app/(root)/components/SlackMessageInput/Icons/IconFormatting'
-import { IconSendFilled } from '@/app/(root)/components/SlackMessageInput/Icons/IconSendFilled'
-import { IconWrapper } from '@/app/(root)/components/SlackMessageInput/IconWrapper'
+import { IconAdd } from '@/components/Slack/SlackMessageInput/Icons/IconAdd'
+import { IconCaretDown } from '@/components/Slack/SlackMessageInput/Icons/IconCaretDown'
+import { IconEllipsisHorizontal } from '@/components/Slack/SlackMessageInput/Icons/IconEllipsisHorizontal'
+import { IconEmoji } from '@/components/Slack/SlackMessageInput/Icons/IconEmoji'
+import { IconFormatting } from '@/components/Slack/SlackMessageInput/Icons/IconFormatting'
+import { IconSendFilled } from '@/components/Slack/SlackMessageInput/Icons/IconSendFilled'
+import { IconWrapper } from '@/components/Slack/SlackMessageInput/IconWrapper'
 
 export const SlackMessageInput = ({ children }: React.PropsWithChildren<unknown>) => {
   return (
