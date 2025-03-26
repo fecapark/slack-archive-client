@@ -11,12 +11,12 @@ import { convertNewlineToJSX } from '@toss/react'
 
 const Home = () => {
   return (
-    <div className="w-full">
-      <div className="pb-20">
+    <div className="flex h-full w-full flex-col">
+      <header className="pb-20">
         <GNB />
-      </div>
+      </header>
 
-      <div className="flex flex-col items-center gap-10">
+      <main className="flex grow flex-col items-center gap-10 px-5">
         {/* CLS를 방지해요 */}
         <div className="h-[86px] w-[64px]">
           <LandingLogo />
@@ -84,7 +84,11 @@ const Home = () => {
             </LandingSlackConversation.LinkButton>
           </LandingSlackConversation>
         </div>
-      </div>
+      </main>
+
+      <footer className="bg-grey100 text-grey500 mt-20 w-full px-5 py-3 text-center text-xs font-medium">
+        &copy; {new Date().getFullYear()} Sanghyeok Park, Yourssu
+      </footer>
     </div>
   )
 }
