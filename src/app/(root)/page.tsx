@@ -4,19 +4,15 @@ import { MdArrowOutward } from 'react-icons/md'
 import { LandingLogo } from '@/app/(root)/components/LandingLogo'
 import { LandingSlackConversation } from '@/app/(root)/components/LandingSlackConversation'
 import { YourssuSlackLink } from '@/app/(root)/components/YourssuSlackLink'
-import { GNB } from '@/components/GNB'
+import { Footer } from '@/components/Footer'
 import { SlackMessageInput } from '@/components/Slack/SlackMessageInput'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { convertNewlineToJSX } from '@toss/react'
 
 const Home = () => {
   return (
-    <div className="flex h-full w-full flex-col">
-      <header className="pb-20">
-        <GNB />
-      </header>
-
-      <main className="flex grow flex-col items-center gap-10 px-5">
+    <div className="flex size-full flex-col pt-20">
+      <main className="flex grow flex-col items-center gap-10 px-10">
         {/* CLS를 방지해요 */}
         <div className="h-[86px] w-[64px]">
           <LandingLogo />
@@ -86,9 +82,7 @@ const Home = () => {
         </div>
       </main>
 
-      <footer className="bg-grey100 text-grey500 mt-20 w-full px-5 py-3 text-center text-xs font-medium">
-        &copy; {new Date().getFullYear()} Sanghyeok Park, Yourssu
-      </footer>
+      <Footer />
     </div>
   )
 }

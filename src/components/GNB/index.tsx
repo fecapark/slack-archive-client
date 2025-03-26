@@ -4,7 +4,7 @@ import AutoHeightImage from '@/components/AutoHeightImage'
 
 export const GNB = () => {
   return (
-    <div className="flex h-[64px] w-full items-center justify-between px-5 md:justify-start">
+    <header className="flex h-[64px] w-full shrink-0 items-center justify-between px-5 md:justify-start">
       <div className="mr-[50px] flex items-center gap-3">
         <div className="w-[32px]">
           <AutoHeightImage alt="Logo" src="/logo.svg" unoptimized />
@@ -23,6 +23,6 @@ export const GNB = () => {
           아카이브
         </Link>
       </div>
-    </div>
+    </header>
   )
 }
