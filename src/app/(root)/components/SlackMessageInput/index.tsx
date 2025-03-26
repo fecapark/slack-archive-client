@@ -8,7 +8,7 @@ import { IconWrapper } from '@/app/(root)/components/SlackMessageInput/IconWrapp
 
 export const SlackMessageInput = ({ children }: React.PropsWithChildren<unknown>) => {
   return (
-    <div className="w-full max-w-[380px] rounded-lg border border-[rgba(29,28,29,0.3)]">
+    <div className="w-full rounded-lg border border-[rgba(29,28,29,0.3)]">
       <div className="px-3 py-2">{children}</div>
       <div className="flex h-[40px] items-center justify-between pr-1 pl-1.5">
         <div className="flex items-center">

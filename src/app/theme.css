@@ -91,6 +91,7 @@
 
   --text-primary: var(--grey800);
   --text-secondary: var(--grey700);
+  --yourssu-primary: #816dec;
 }
 
 /* scripts/codegen/gen-theme.ts에 의해서 자동으로 채워져요. */
@@ -177,4 +178,5 @@
 --color-purple900: var(--purple900);
 --color-text-primary: var(--text-primary);
 --color-text-secondary: var(--text-secondary);
+--color-yourssu-primary: var(--yourssu-primary);
 }
