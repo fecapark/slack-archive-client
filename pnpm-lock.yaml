@@ -36,9 +36,6 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3
         version: 3.3.1
-      '@next/eslint-plugin-next':
-        specifier: ^15.2.3
-        version: 15.2.3
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.0.15
@@ -72,9 +69,6 @@ importers:
       eslint-plugin-react-compiler:
         specifier: 19.0.0-beta-aeaed83-20250323
         version: 19.0.0-beta-aeaed83-20250323(eslint@9.23.0(jiti@2.4.2))
-      eslint-plugin-react-hooks:
-        specifier: ^5.2.0
-        version: 5.2.0(eslint@9.23.0(jiti@2.4.2))
       eslint-plugin-react-refresh:
         specifier: ^0.4.19
         version: 0.4.19(eslint@9.23.0(jiti@2.4.2))
