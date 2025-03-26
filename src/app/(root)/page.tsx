@@ -35,14 +35,17 @@ const Home = () => {
 
         <div className="flex w-full max-w-[1300px] flex-wrap gap-18 md:flex-nowrap">
           <div className="flex w-full flex-col items-center gap-12">
-            <h3 className="text-xl font-bold">
-              원하는{' '}
-              <Link className="px-0.5 underline" href="/">
-                키워드
-                <MdArrowOutward className="inline text-base" />
-              </Link>
-              로 사람들을 멘션하세요.
-            </h3>
+            <div className="flex flex-col items-center gap-2">
+              <h3 className="text-xl font-bold">
+                원하는{' '}
+                <Link className="px-0.5 underline" href="/">
+                  키워드
+                  <MdArrowOutward className="inline text-base" />
+                </Link>
+                로 사람들을 멘션하세요.
+              </h3>
+              <h4 className="text-base font-semibold text-gray-500">키워드를 만들 수도 있어요.</h4>
+            </div>
             <div className="flex w-full flex-col justify-between gap-8 select-none">
               <SlackMessageItem
                 createdAt="오후 12:39"
@@ -57,7 +60,12 @@ const Home = () => {
             </div>
           </div>
           <div className="flex w-full flex-col items-center gap-12">
-            <h3 className="text-xl font-bold">다시 보고 싶은 스레드를 아카이브하세요.</h3>
+            <div className="flex flex-col items-center gap-2">
+              <h3 className="text-xl font-bold">다시 보고 싶은 스레드를 아카이브하세요.</h3>
+              <h4 className="text-base font-semibold text-gray-500">
+                90일이 지나도 계속 볼 수 있어요.
+              </h4>
+            </div>
             <div className="flex w-full flex-col justify-between gap-8 select-none">
               <div className="flex flex-col gap-3.5">
                 <SlackMessageItem
