@@ -1,5 +1,11 @@
+import { GNB } from '@/app/components/GNB'
+
 const Home = () => {
-  return <div />
+  return (
+    <div className="w-full">
+      <GNB />
+    </div>
+  )
 }
 
 export default Home
