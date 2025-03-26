@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { MdArrowOutward } from 'react-icons/md'
 
 import { LandingLogo } from '@/app/(root)/components/LandingLogo'
 import { SlackMessageInput } from '@/app/(root)/components/SlackMessageInput'
@@ -35,8 +36,12 @@ const Home = () => {
         <div className="flex w-full max-w-[1300px] flex-wrap gap-18 md:flex-nowrap">
           <div className="flex w-full flex-col items-center gap-12">
             <h3 className="text-xl font-bold">
-              원하는 <span className="text-yourssu-primary">키워드</span>로 사람들을{' '}
-              <span className="text-yourssu-primary">멘션</span>하세요.
+              원하는{' '}
+              <Link className="px-0.5 underline" href="/">
+                키워드
+                <MdArrowOutward className="inline text-base" />
+              </Link>
+              로 사람들을 멘션하세요.
             </h3>
             <div className="flex w-full flex-col justify-between gap-8 select-none">
               <SlackMessageItem
@@ -52,9 +57,7 @@ const Home = () => {
             </div>
           </div>
           <div className="flex w-full flex-col items-center gap-12">
-            <h3 className="text-xl font-bold">
-              다시 보고 싶은 스레드를 <span className="text-yourssu-primary">아카이브</span>하세요.
-            </h3>
+            <h3 className="text-xl font-bold">다시 보고 싶은 스레드를 아카이브하세요.</h3>
             <div className="flex w-full flex-col justify-between gap-8 select-none">
               <div className="flex flex-col gap-3.5">
                 <SlackMessageItem
@@ -75,6 +78,12 @@ const Home = () => {
               </div>
               <SlackMessageInput>!아카이브</SlackMessageInput>
             </div>
+            <Link
+              className="bg-grey900 flex items-center gap-1 rounded-[10px] px-4 py-2.5 font-semibold text-white"
+              href="/"
+            >
+              아카이브 <MdArrowOutward className="text-xl" />
+            </Link>
           </div>
         </div>
       </div>
