@@ -15,6 +15,7 @@
   "dependencies": {
     "@toss/react": "^1.8.1",
     "clsx": "^2.1.1",
+    "markdown-to-jsx": "^7.7.4",
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
