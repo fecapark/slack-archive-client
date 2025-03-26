@@ -13,7 +13,7 @@ export const LandingLogo = () => {
     : { speed: 1.2, direction: 1 }
 
   return (
-    <div ref={ref} style={{ width: 64 }}>
+    <div ref={ref}>
       <Lottie animationData={lottieData} loop={false} play {...option} />
     </div>
   )
