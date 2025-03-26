@@ -2,7 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { LandingLogo } from '@/app/(root)/components/LandingLogo'
+import { SlackMessageInput } from '@/app/(root)/components/SlackMessageInput'
 import { GNB } from '@/components/GNB'
+import { convertNewlineToJSX } from '@toss/react'
 
 const Home = () => {
   return (
@@ -28,6 +30,8 @@ const Home = () => {
             </div>
           </Link>
         </div>
+
+        <SlackMessageInput>{convertNewlineToJSX('@fe\n안녕하세요!')}</SlackMessageInput>
       </div>
     </div>
   )
