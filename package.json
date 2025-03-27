@@ -16,8 +16,10 @@
     "gen-route:watch": "pnpm tsx watch --clear-screen=false --include './src/app/**/page.tsx' ./scripts/codegen/gen-route-type.mts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.69.0",
     "@toss/react": "^1.8.1",
     "clsx": "^2.1.1",
+    "ky": "^1.7.5",
     "markdown-to-jsx": "^7.7.4",
     "next": "15.2.3",
     "react": "^19.0.0",
