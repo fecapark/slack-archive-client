@@ -3,7 +3,8 @@ import { fs } from 'zx'
 import { indent, log, sourceBasePath, writeFileEnsureDirectorySync } from './common.mts'
 
 const stylesheetsBasePath = `${sourceBasePath}/styles`
-const variablesFilePath = `${stylesheetsBasePath}/theme.variable.css`
+const variablesFileName = 'theme.variable.css'
+const variablesFilePath = `${stylesheetsBasePath}/${variablesFileName}`
 const resultPath = `${stylesheetsBasePath}/theme.gen.css`
 
 function assertFileExist(path: string) {
@@ -45,9 +46,10 @@ function convertToTailwindThemeTokens(variables: string[]) {
 function getGeneratedResult(tokens: string[]) {
   const comment = '/* scripts/codegen/gen-theme.ts에 의해서 자동으로 채워져요. */'
   const importTailwind = "@import 'tailwindcss';"
+  const importVariables = `@import './${variablesFileName}';`
   const themeBlock = `\n@theme {\n${tokens.join('\n')}\n}`
 
-  return [comment, importTailwind, themeBlock].join('\n')
+  return [comment, importVariables, importTailwind, themeBlock].join('\n')
 }
 
 function main() {
