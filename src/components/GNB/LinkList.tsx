@@ -1,10 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
+import { trim } from 'es-toolkit'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-import { RouteNames } from '@/__generated__/route'
 
 /* 
   Why?
@@ -21,9 +20,19 @@ import { RouteNames } from '@/__generated__/route'
 export const LinkList = () => {
   const pathname = usePathname()
 
-  return linkData.map(({ href, name }) => (
+  const isPathActive = (href: string, startsWith?: boolean) => {
+    if (startsWith) {
+      return trim(pathname, '/').startsWith(trim(href, '/'))
+    }
+    return trim(pathname, '/') === trim(href, '/')
+  }
+
+  return linkData.map(({ href, name, startsWith }) => (
     <Link
-      className={clsx('text-lg font-extrabold', pathname !== href && 'text-text-disabled')}
+      className={clsx(
+        'text-lg font-extrabold',
+        !isPathActive(href, startsWith) && 'text-text-disabled'
+      )}
       href={href}
       key={name}
     >
@@ -32,7 +41,7 @@ export const LinkList = () => {
   ))
 }
 
-const linkData: Array<{ href: RouteNames; name: string }> = [
+const linkData: Array<{ href: string; name: string; startsWith?: boolean }> = [
   {
     name: '홈',
     href: '/',
@@ -40,5 +49,6 @@ const linkData: Array<{ href: RouteNames; name: string }> = [
   {
     name: '아카이브',
     href: '/archives',
+    startsWith: true,
   },
 ]
