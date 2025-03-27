@@ -2,11 +2,11 @@
 
 import { useRouter } from 'next/navigation'
 
-import { MessageItem } from '@/apis/messages'
+import { ThreadItem } from '@/apis/threads'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 
 interface SlackThreadHeadItemProps {
-  head: MessageItem
+  head: ThreadItem['head']
 }
 
 export const SlackThreadHeadItem = ({ head }: SlackThreadHeadItemProps) => {
