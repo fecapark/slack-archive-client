@@ -44,6 +44,7 @@ async function main() {
     .map(removeAppRouteBasePath)
     .map(removePageFileName)
     .map(addSlashForEmptyRoute)
+    .sort((a, b) => a.length - b.length)
 
   const result = getGeneratedResult(routes)
 
@@ -51,7 +52,6 @@ async function main() {
 
   log.success(
     `Next.js 라우트 타입들을 생성했어요.\n${routes
-      .sort((a, b) => a.length - b.length)
       .map((r) => `${indent.repeat(2)}- ${r}`)
       .join('\n')}`,
     { end: '\n' }
