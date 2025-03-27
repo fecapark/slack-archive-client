@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently 'next dev --turbopack' 'pnpm gen-theme:watch' 'pnpm gen-route:watch'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
