@@ -11,9 +11,9 @@
     "format": "prettier --write .",
     "prepare": "husky",
     "gen-theme": "pnpm tsx ./scripts/codegen/gen-theme.mts",
-    "gen-theme:watch": "pnpm tsx watch --include ./src/styles/theme.variable.css ./scripts/codegen/gen-theme.mts",
+    "gen-theme:watch": "pnpm tsx watch --clear-screen=false --include ./src/styles/theme.variable.css ./scripts/codegen/gen-theme.mts",
     "gen-route": "pnpm tsx ./scripts/codegen/gen-route-type.mts",
-    "gen-route:watch": "pnpm tsx watch --include './src/app/**/page.tsx' ./scripts/codegen/gen-route-type.mts"
+    "gen-route:watch": "pnpm tsx watch --clear-screen=false --include './src/app/**/page.tsx' ./scripts/codegen/gen-route-type.mts"
   },
   "dependencies": {
     "@toss/react": "^1.8.1",

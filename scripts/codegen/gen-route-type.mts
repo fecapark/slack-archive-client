@@ -36,7 +36,7 @@ function getGeneratedResult(routes: string[]) {
 }
 
 async function main() {
-  log.running('Next.js 라우트 타입을 생성하고 있어요...\n')
+  log.running('Next.js 라우트 타입을 생성하고 있어요...\n', { pre: '\n' })
 
   const files: string[] = await glob(`${appRouteBasePath}/**/${pageFileName}`)
   const routes = files
@@ -53,7 +53,8 @@ async function main() {
     `Next.js 라우트 타입들을 생성했어요.\n${routes
       .sort((a, b) => a.length - b.length)
       .map((r) => `${indent.repeat(2)}- ${r}`)
-      .join('\n')}`
+      .join('\n')}`,
+    { end: '\n' }
   )
 }
 

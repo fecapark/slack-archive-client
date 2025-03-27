@@ -51,7 +51,7 @@ function getGeneratedResult(tokens: string[]) {
 }
 
 function main() {
-  log.running('@theme 블록에 변수를 생성하고 있어요...\n')
+  log.running('@theme 블록에 변수를 생성하고 있어요...\n', { pre: '\n' })
 
   assertFileExist(variablesFilePath)
 
@@ -62,7 +62,9 @@ function main() {
 
   writeFileEnsureDirectorySync(resultPath, result)
 
-  log.success('src/styles/theme.gen.css 파일에 Tailwind CSS 테마 변수를 추가했어요.')
+  log.success('src/styles/theme.gen.css 파일에 Tailwind CSS 테마 변수를 추가했어요.', {
+    end: '\n',
+  })
 }
 
 main()

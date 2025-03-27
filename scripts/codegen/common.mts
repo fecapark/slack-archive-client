@@ -42,14 +42,25 @@ const logColor = {
 }
 
 export const log = {
-  info: (message: string) => console.log(`ℹ️ ${message}`),
-  warn: (message: string) => console.log(logColor.fgGreen, `⚠️ ${message}`, logColor.reset),
-  error: (message: string, { throwError = true }: { throwError?: boolean } = {}) => {
+  info: (message: string, { pre = '', end = '' }: { end?: string; pre?: string } = {}) =>
+    console.log(pre, `ℹ️ ${message}`, end),
+  warn: (message: string, { pre = '', end = '' }: { end?: string; pre?: string } = {}) =>
+    console.log(pre, logColor.fgGreen, `⚠️ ${message}`, logColor.reset, end),
+  error: (
+    message: string,
+    {
+      throwError = true,
+      pre = '',
+      end = '',
+    }: { end?: string; pre?: string; throwError?: boolean } = {}
+  ) => {
     if (throwError) {
-      throw new Error(`${logColor.fgRed}❗️ ${message}${logColor.reset}`)
+      throw new Error(`${pre}${logColor.fgRed}❗️ ${message}${logColor.reset}${end}`)
     }
-    console.log(logColor.fgRed, `❗️ ${message}`, logColor.reset)
+    console.log(pre, logColor.fgRed, `❗️ ${message}`, logColor.reset, end)
   },
-  running: (message: string) => console.log(logColor.fgCyan, `🏃 ${message}`, logColor.reset),
-  success: (message: string) => console.log(logColor.fgGreen, `✅ ${message}`, logColor.reset),
+  running: (message: string, { pre = '', end = '' }: { end?: string; pre?: string } = {}) =>
+    console.log(pre, logColor.fgCyan, `🏃 ${message}`, logColor.reset, end),
+  success: (message: string, { pre = '', end = '' }: { end?: string; pre?: string } = {}) =>
+    console.log(pre, logColor.fgGreen, `✅ ${message}`, logColor.reset, end),
 }
