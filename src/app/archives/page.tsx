@@ -1,5 +1,5 @@
-const Archives = () => {
-  return <div>Archives</div>
+const Archives = async () => {
+  return undefined
 }
 
 export default Archives
