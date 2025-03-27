@@ -5,8 +5,9 @@ import { dirname } from 'node:path'
 import { fs } from 'zx'
 
 export const __root = process.cwd() // eslint-disable-line @typescript-eslint/naming-convention
-export const appRouteBasePath = `${__root}/src/app`
-export const generatedPath = `${__root}/src/__generated__`
+export const sourceBasePath = `${__root}/src`
+export const appRouteBasePath = `${sourceBasePath}/app`
+export const generatedPath = `${sourceBasePath}/__generated__`
 
 export const indent = ' '.repeat(2)
 

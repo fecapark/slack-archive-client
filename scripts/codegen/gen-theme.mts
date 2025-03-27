@@ -1,19 +1,24 @@
 import { fs } from 'zx'
 
-import { appRouteBasePath, indent, log } from './common.mts'
+import { indent, log, sourceBasePath, writeFileEnsureDirectorySync } from './common.mts'
 
-const themeFilePath = `${appRouteBasePath}/theme.css`
+const stylesheetsBasePath = `${sourceBasePath}/styles`
+const variablesFilePath = `${stylesheetsBasePath}/theme.variable.css`
+const resultPath = `${stylesheetsBasePath}/theme.gen.css`
 
-function assertThemeFileExist() {
-  if (!fs.existsSync(themeFilePath)) {
-    log.error(`${appRouteBasePath} 경로에 theme.css를 찾을 수 없어요: ${themeFilePath}`, {
-      throwError: true,
-    })
+function assertFileExist(path: string) {
+  if (!fs.existsSync(variablesFilePath)) {
+    log.error(
+      `${path.replace(sourceBasePath + '/', '')}를 찾을 수 없어요:\n입력: ${variablesFilePath}`,
+      {
+        throwError: true,
+      }
+    )
   }
 }
 
-function readThemeFile() {
-  return fs.readFileSync(themeFilePath, 'utf-8')
+function readThemeVariableFile() {
+  return fs.readFileSync(variablesFilePath, 'utf-8')
 }
 
 function readThemeVariableNames(file: string) {
@@ -37,23 +42,27 @@ function convertToTailwindThemeTokens(variables: string[]) {
   })
 }
 
-function injectTailwindThemeTokens(file: string, tokens: string[]) {
-  return file.replace(/@theme\s*{([^}]*)}/s, `@theme {\n${tokens.join('\n')}\n}`)
+function getGeneratedResult(tokens: string[]) {
+  const comment = '/* scripts/codegen/gen-theme.ts에 의해서 자동으로 채워져요. */'
+  const importTailwind = "@import 'tailwindcss';"
+  const themeBlock = `\n@theme {\n${tokens.join('\n')}\n}`
+
+  return [comment, importTailwind, themeBlock].join('\n')
 }
 
 function main() {
   log.running('@theme 블록에 변수를 생성하고 있어요...\n')
 
-  assertThemeFileExist()
+  assertFileExist(variablesFilePath)
 
-  const file = readThemeFile()
-  const variables = readThemeVariableNames(file)
+  const varFile = readThemeVariableFile()
+  const variables = readThemeVariableNames(varFile)
   const tokens = convertToTailwindThemeTokens(variables)
-  const newFile = injectTailwindThemeTokens(file, tokens)
+  const result = getGeneratedResult(tokens)
 
-  fs.writeFileSync(themeFilePath, newFile)
+  writeFileEnsureDirectorySync(resultPath, result)
 
-  log.success('theme.css 파일에 Tailwind CSS 테마 변수를 추가했어요.')
+  log.success('src/styles/theme.gen.css 파일에 Tailwind CSS 테마 변수를 추가했어요.')
 }
 
 main()

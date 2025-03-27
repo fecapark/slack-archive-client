@@ -2,7 +2,7 @@ const config = {
   '**/*.{js,jsx,ts,tsx}': (stagedFiles) => {
     const filteredStagedFiles = stagedFiles
       .filter((file) => {
-        const isGenerated = file.includes('__generated__')
+        const isGenerated = file.includes('__generated__') || file.includes('.gen.')
         return !isGenerated
       })
       .join(' ')

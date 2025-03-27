@@ -2,3 +2,4 @@ pnpm-lock.yaml
 README.md
 
 src/__generated__/**/*
+src/**/*.gen.*
