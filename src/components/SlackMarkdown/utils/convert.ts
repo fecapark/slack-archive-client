@@ -1,3 +1,5 @@
+import { trim, trimEnd, trimStart } from 'es-toolkit'
+
 export const convertMentionString = (text: string) => {
   const wrapMentions = (text: string) => {
     return text.replace(/(<@[^>]+>\s*)+/g, (match) => {
@@ -20,5 +22,15 @@ export const magicCodeBlockString = '2f039ff4-73cb-44e1-8b70-8873978b8e1f'
 export const convertCodeBlockString = (text: string) => {
   return text.replace(/```([^`]+)```/g, (match) => {
     return match.replace(/```/, '```' + magicCodeBlockString).replace('<br />', '\n')
+  })
+}
+
+export const convertLinkString = (text: string) => {
+  return text.replace(/<(http[^>]+)>/g, (match) => {
+    const [rawUrl, rawText] = match.split('|')
+    const url = trimStart(rawUrl, '<')
+    const text = trimEnd(rawText, '>')
+
+    return `<a href="${trim(url, '<')}">${text || url}</a>`
   })
 }

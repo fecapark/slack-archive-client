@@ -1,23 +1,31 @@
 'use client'
 
 import ReactMarkdown, { RuleType } from 'markdown-to-jsx'
-import { HTMLAttributes } from 'react'
+import { AnchorHTMLAttributes, HTMLAttributes } from 'react'
 
 import { Code } from '@/components/SlackMarkdown/components/Code'
 import { CodeBlock } from '@/components/SlackMarkdown/components/CodeBlock'
 import { MdImage } from '@/components/SlackMarkdown/components/MdImage'
+import { MdLink } from '@/components/SlackMarkdown/components/MdLink'
 import { MentionSpan, Span } from '@/components/SlackMarkdown/components/Span'
 import {
   convertCodeBlockString,
+  convertLinkString,
   convertMentionString,
   convertNewlineDouble,
   magicCodeBlockString,
 } from '@/components/SlackMarkdown/utils/convert'
 import { parseDataset } from '@/components/SlackMarkdown/utils/dataset'
 import { tramsformToHTMLAttributes } from '@/components/SlackMarkdown/utils/transform'
+import { assertNonNullish } from '@/utils/assertion'
 
 export const SlackMarkdown = ({ children }: { children: string }) => {
-  const converts = [convertMentionString, convertNewlineDouble, convertCodeBlockString]
+  const converts = [
+    convertMentionString,
+    convertNewlineDouble,
+    convertCodeBlockString,
+    convertLinkString,
+  ]
 
   return (
     <ReactMarkdown
@@ -46,6 +54,11 @@ export const SlackMarkdown = ({ children }: { children: string }) => {
           p: ({ children }) => <>{children}</>,
           b: ({ children }) => <em>{children}</em>,
           em: ({ children }) => <b>{children}</b>,
+          a: (props) => {
+            const p = tramsformToHTMLAttributes<AnchorHTMLAttributes<HTMLAnchorElement>>(props)
+            assertNonNullish(p.href)
+            return <MdLink {...p} href={p.href} />
+          },
         },
       }}
     >
