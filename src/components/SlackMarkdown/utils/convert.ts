@@ -14,3 +14,11 @@ export const convertMentionString = (text: string) => {
 export const convertNewlineDouble = (text: string) => {
   return text.replace(/\n/g, '<br />')
 }
+
+export const magicCodeBlockString = '2f039ff4-73cb-44e1-8b70-8873978b8e1f'
+
+export const convertCodeBlockString = (text: string) => {
+  return text.replace(/```([^`]+)```/g, (match) => {
+    return match.replace(/```/, '```' + magicCodeBlockString).replace('<br />', '\n')
+  })
+}
