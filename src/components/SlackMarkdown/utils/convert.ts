@@ -1,4 +1,4 @@
-import { trim, trimEnd, trimStart } from 'es-toolkit'
+import { trimEnd, trimStart } from 'es-toolkit'
 
 export const convertMentionString = (text: string) => {
   const wrapMentions = (text: string) => {
@@ -28,9 +28,14 @@ export const convertCodeBlockString = (text: string) => {
 export const convertLinkString = (text: string) => {
   return text.replace(/<(http[^>]+)>/g, (match) => {
     const [rawUrl, rawText] = match.split('|')
-    const url = trimStart(rawUrl, '<')
-    const text = trimEnd(rawText, '>')
 
-    return `<a href="${trim(url, '<')}">${text || url}</a>`
+    let url = trimStart(rawUrl ?? '', '<')
+    let text = trimEnd(rawText ?? '', '>')
+    if (!text) {
+      url = trimEnd(url, '>')
+      text = url
+    }
+
+    return `<a href="${url}">${text}</a>`
   })
 }
