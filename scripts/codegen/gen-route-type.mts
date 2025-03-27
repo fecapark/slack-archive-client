@@ -1,6 +1,12 @@
 import { glob } from 'glob'
 
-import { appRouteBasePath, generatedPath, writeFileEnsureDirectorySync } from './common.mts'
+import {
+  appRouteBasePath,
+  generatedPath,
+  indent,
+  log,
+  writeFileEnsureDirectorySync,
+} from './common.mts'
 
 const pageFileName = 'page.tsx'
 const resultPath = `${generatedPath}/route.d.ts`
@@ -30,6 +36,8 @@ function getGeneratedResult(routes: string[]) {
 }
 
 async function main() {
+  log.running('Next.js 라우트 타입을 생성하고 있어요...\n')
+
   const files: string[] = await glob(`${appRouteBasePath}/**/${pageFileName}`)
   const routes = files
     .map(removeNextRouteGroups)
@@ -40,6 +48,13 @@ async function main() {
   const result = getGeneratedResult(routes)
 
   writeFileEnsureDirectorySync(resultPath, result)
+
+  log.success(
+    `Next.js 라우트 타입들을 생성했어요.\n${routes
+      .sort((a, b) => a.length - b.length)
+      .map((r) => `${indent.repeat(2)}- ${r}`)
+      .join('\n')}`
+  )
 }
 
 main()

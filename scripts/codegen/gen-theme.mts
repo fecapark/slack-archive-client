@@ -1,12 +1,14 @@
 import { fs } from 'zx'
 
-import { appRouteBasePath, indent } from './common.mts'
+import { appRouteBasePath, indent, log } from './common.mts'
 
 const themeFilePath = `${appRouteBasePath}/theme.css`
 
 function assertThemeFileExist() {
   if (!fs.existsSync(themeFilePath)) {
-    throw new Error(`❗️ ${appRouteBasePath} 경로에 theme.css를 찾을 수 없어요: ${themeFilePath}`)
+    log.error(`${appRouteBasePath} 경로에 theme.css를 찾을 수 없어요: ${themeFilePath}`, {
+      throwError: true,
+    })
   }
 }
 
@@ -17,7 +19,8 @@ function readThemeFile() {
 function readThemeVariableNames(file: string) {
   const variables = file.match(/:root\s*{([^}]*)}/s)?.[1]
   if (!variables) {
-    throw new Error('❗️ theme.css 파일 내에 :root { ... } 블록을 찾을 수 없어요.')
+    log.error('theme.css 파일 내에 :root { ... } 블록을 찾을 수 없어요.')
+    return []
   }
 
   return variables
@@ -39,6 +42,8 @@ function injectTailwindThemeTokens(file: string, tokens: string[]) {
 }
 
 function main() {
+  log.running('@theme 블록에 변수를 생성하고 있어요...\n')
+
   assertThemeFileExist()
 
   const file = readThemeFile()
@@ -47,6 +52,8 @@ function main() {
   const newFile = injectTailwindThemeTokens(file, tokens)
 
   fs.writeFileSync(themeFilePath, newFile)
+
+  log.success('theme.css 파일에 Tailwind CSS 테마 변수를 추가했어요.')
 }
 
 main()

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { WriteFileOptions } from 'node:fs'
 import { dirname } from 'node:path'
 import { fs } from 'zx'
@@ -23,4 +25,30 @@ export const writeFileEnsureDirectorySync = (
 
 export const removeDirectoryWithFilesSync = (path: string) => {
   fs.rmSync(path, { recursive: true, force: true })
+}
+
+const logColor = {
+  fgBlack: '\x1b[30m',
+  fgRed: '\x1b[31m',
+  fgGreen: '\x1b[32m',
+  fgYellow: '\x1b[33m',
+  fgBlue: '\x1b[34m',
+  fgMagenta: '\x1b[35m',
+  fgCyan: '\x1b[36m',
+  fgWhite: '\x1b[37m',
+  fgGray: '\x1b[90m',
+  reset: '\x1b[0m',
+}
+
+export const log = {
+  info: (message: string) => console.log(`ℹ️ ${message}`),
+  warn: (message: string) => console.log(logColor.fgGreen, `⚠️ ${message}`, logColor.reset),
+  error: (message: string, { throwError = true }: { throwError?: boolean } = {}) => {
+    if (throwError) {
+      throw new Error(`${logColor.fgRed}❗️ ${message}${logColor.reset}`)
+    }
+    console.log(logColor.fgRed, `❗️ ${message}`, logColor.reset)
+  },
+  running: (message: string) => console.log(logColor.fgCyan, `🏃 ${message}`, logColor.reset),
+  success: (message: string) => console.log(logColor.fgGreen, `✅ ${message}`, logColor.reset),
 }
