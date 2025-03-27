@@ -10,6 +10,10 @@ import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { convertNewlineToJSX } from '@toss/react'
 
 const Home = () => {
+  const makeStaticSlackTimestamp = (hour: number, minutes: number) => {
+    return (new Date(`2000/1/1 ${hour}:${minutes}`).getTime() / 1000).toString()
+  }
+
   return (
     <div className="flex size-full flex-col pt-20">
       <main className="flex grow flex-col items-center gap-10 px-10">
@@ -40,7 +44,7 @@ const Home = () => {
             />
             <LandingSlackConversation.Slack>
               <SlackMessageItem
-                createdAt="오후 12:39"
+                createdAt={makeStaticSlackTimestamp(13, 39)}
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U06T3GUSD4J-dca2ff688ee2-72"
                 username="Feca [Web FE]"
               >
@@ -58,14 +62,14 @@ const Home = () => {
             />
             <LandingSlackConversation.Slack>
               <SlackMessageItem
-                createdAt="오전 11:12"
+                createdAt={makeStaticSlackTimestamp(11, 12)}
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U06T3GUSD4J-dca2ff688ee2-72"
                 username="Feca [Web FE]"
               >
                 !아카이브
               </SlackMessageItem>
               <SlackMessageItem
-                createdAt="오전 11:14"
+                createdAt={makeStaticSlackTimestamp(11, 14)}
                 isBot
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U08FFDZE0VB-d5e5fc94462d-72"
                 username="멘션봇"

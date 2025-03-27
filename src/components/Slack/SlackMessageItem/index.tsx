@@ -1,10 +1,12 @@
 import Image from 'next/image'
 
 import { SlackMarkdown } from '@/components/SlackMarkdown'
+import { convertSlackTimestampToISOString, formatTemplates } from '@/utils/date'
 
 interface SlackMessageItemProps {
   children: string // 마크다운 파싱을 위해 문자열로만 받아요.
   createdAt: string
+  createdAtFormat?: keyof typeof formatTemplates
   isBot?: boolean
   profileImageUrl: string
   username: string
@@ -15,6 +17,7 @@ export const SlackMessageItem = ({
   profileImageUrl,
   username,
   createdAt,
+  createdAtFormat = '오전 10:00',
   isBot,
 }: SlackMessageItemProps) => {
   return (
@@ -33,7 +36,9 @@ export const SlackMessageItem = ({
             </span>
           )}
           &nbsp;&nbsp;
-          <span className="text-xs text-[#616061]">{createdAt}</span>
+          <span className="text-xs text-[#616061]">
+            {formatTemplates[createdAtFormat](convertSlackTimestampToISOString(createdAt))}
+          </span>
         </div>
         <SlackMarkdown>{children}</SlackMarkdown>
       </div>

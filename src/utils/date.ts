@@ -31,4 +31,9 @@ export const formatTemplates = {
   '오전 10:00': formatKo('a	h:mm'),
   '11일 10:00': formatKo('do HH:mm'),
   '10:00': formatKo('HH:mm'),
+  '2월 3일, 오후 10:23': formatKo('MMM do, aaaa h:mm'),
+}
+
+export const convertSlackTimestampToISOString = (timestamp: string) => {
+  return new Date(Number(timestamp) * 1000).toISOString()
 }
