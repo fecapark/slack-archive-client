@@ -1,14 +1,12 @@
 import { fs } from 'zx'
 
-const __root = process.cwd() // eslint-disable-line @typescript-eslint/naming-convention
-const themeFileBasePath = `${__root}/src/app`
-const themeFilePath = `${themeFileBasePath}/theme.css`
+import { appRouteBasePath, indent } from './common.mts'
 
-const indent = ' '.repeat(2)
+const themeFilePath = `${appRouteBasePath}/theme.css`
 
 function assertThemeFileExist() {
   if (!fs.existsSync(themeFilePath)) {
-    throw new Error(`❗️ ${themeFileBasePath} 경로에 theme.css를 찾을 수 없어요: ${themeFilePath}`)
+    throw new Error(`❗️ ${appRouteBasePath} 경로에 theme.css를 찾을 수 없어요: ${themeFilePath}`)
   }
 }
 
