@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 
 import '@/styles/globals.css'
 import { GNB } from '@/components/GNB'
+import { Providers } from '@/components/Providers'
 
 const pretendard = localFont({
   src: 'fonts/PretendardVariable.woff2',
@@ -25,10 +26,12 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body className={`${pretendard.variable} antialiased`}>
-        <div className="flex size-full flex-col">
-          <GNB />
-          {children}
-        </div>
+        <Providers>
+          <div className="flex size-full flex-col">
+            <GNB />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   )
