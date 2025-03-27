@@ -13,7 +13,7 @@ interface ChannelItemProps {
 
 const channelItem = tv({
   slots: {
-    link: 'hover:bg-grey100 group text-text-secondary flex cursor-pointer items-center gap-2 rounded-sm p-2',
+    link: 'hover:bg-grey100 group text-text-secondary ease-ease flex cursor-pointer items-center gap-2 rounded-sm p-2 transition-colors duration-300',
     icon: 'group-hover:text-text-primary size-4',
     text: 'group-hover:text-text-primary text-sm font-medium',
   },

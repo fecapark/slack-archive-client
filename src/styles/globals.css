@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './theme.gen.css';
+@import './transition.css';
 
 @theme {
   --font-pretendard: var(--font-pretendard);
