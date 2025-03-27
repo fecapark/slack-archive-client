@@ -36,3 +36,5 @@ export const MessageSchema = z.object({
     )
     .nullable(),
 })
+
+export type MessageItem = z.infer<typeof MessageSchema>

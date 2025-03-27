@@ -1,8 +1,8 @@
 import { getChannel } from '@/apis/channels'
 import { getThreads } from '@/apis/threads'
+import { SlackThreadHeadItem } from '@/app/archives/[channelId]/components/SlackThreadHeadItem'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
-import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 
 interface ChannelLayoutProps {
   params: Promise<{
@@ -28,19 +28,7 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
       >
         <div className="flex flex-col">
           {threads.map(({ head }) => (
-            <div
-              className="hover:bg-grey100 ease-ease cursor-pointer rounded-md px-4 py-3 transition-colors duration-300"
-              key={head.ts}
-            >
-              <SlackMessageItem
-                createdAt={head.ts}
-                createdAtFormat="2월 3일, 오후 10:23"
-                profileImageUrl={head.user.avatar}
-                username={head.user.name}
-              >
-                {head.text}
-              </SlackMessageItem>
-            </div>
+            <SlackThreadHeadItem head={head} key={head.ts} />
           ))}
         </div>
       </ArchivePannel>
