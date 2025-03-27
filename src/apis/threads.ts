@@ -1,21 +1,18 @@
 import { z } from 'zod'
 
 import { api } from '@/apis/api'
-import { ChannelSchema } from '@/apis/channels'
-import { MessageSchema } from '@/apis/messages'
+import { ChannelSchema, MessageSchema, ThreadSchema } from '@/types/schema'
 
-export const ThreadSchema = z.object({
-  ts: z.string(),
-  archivedAt: z.string(),
-  channel: ChannelSchema,
+export const ThreadResponseSchema = ThreadSchema.extend({
   head: MessageSchema,
+  channel: ChannelSchema,
 })
 
-export const ThreadListSchema = z.array(ThreadSchema)
+export const ThreadListSchema = z.array(ThreadResponseSchema)
 
-export type ThreadItem = z.infer<typeof ThreadSchema>
+export type ThreadItem = z.infer<typeof ThreadResponseSchema>
 
 export const getThreads = async (channelId: string) => {
-  const res = await api.get(`api/${channelId}/threads`).json()
+  const res = await api.get<ThreadItem[]>(`api/${channelId}/threads`).json()
   return ThreadListSchema.parse(res)
 }

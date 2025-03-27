@@ -1,12 +1,7 @@
 import { z } from 'zod'
 
 import { api } from '@/apis/api'
-
-export const ChannelSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string().optional(),
-})
+import { ChannelSchema } from '@/types/schema'
 
 export const ChannelListSchema = z.array(ChannelSchema)
 
