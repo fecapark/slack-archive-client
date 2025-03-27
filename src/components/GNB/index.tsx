@@ -1,6 +1,5 @@
-import Link from 'next/link'
-
 import AutoHeightImage from '@/components/AutoHeightImage'
+import { LinkList } from '@/components/GNB/LinkList'
 
 export const GNB = () => {
   return (
@@ -13,15 +12,7 @@ export const GNB = () => {
       </div>
 
       <div className="flex items-center gap-8">
-        <Link className="disabled:text-text-disabled text-lg font-extrabold" href="/">
-          홈
-        </Link>
-        <Link className="text-text-disabled text-lg font-extrabold" href="/">
-          키워드
-        </Link>
-        <Link className="text-text-disabled text-lg font-extrabold" href="/">
-          아카이브
-        </Link>
+        <LinkList />
       </div>
     </header>
   )
