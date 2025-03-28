@@ -17,6 +17,9 @@ importers:
       '@toss/react':
         specifier: ^1.8.1
         version: 1.8.1(react@19.0.0)
+      '@toss/utils':
+        specifier: ^1.6.1
+        version: 1.6.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
