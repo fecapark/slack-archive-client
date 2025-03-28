@@ -8,13 +8,13 @@ import { Code } from '@/components/SlackMarkdown/components/Code'
 import { CodeBlock } from '@/components/SlackMarkdown/components/CodeBlock'
 import { MdImage } from '@/components/SlackMarkdown/components/MdImage'
 import { MdLink } from '@/components/SlackMarkdown/components/MdLink'
-import { MentionSpan, Span } from '@/components/SlackMarkdown/components/Span'
+import { MentionSpan } from '@/components/SlackMarkdown/components/MentionSpan'
 import {
   convertCodeBlockString,
   convertLinkString,
   convertMentionString,
-  convertNewlineDouble,
-  magicCodeBlockString,
+  convertNewLineToRawElement,
+  decodeCodeBlockContent,
 } from '@/components/SlackMarkdown/utils/convert'
 import { parseDataset } from '@/components/SlackMarkdown/utils/dataset'
 import { tramsformToHTMLAttributes } from '@/components/SlackMarkdown/utils/transform'
@@ -26,8 +26,8 @@ const NotoSansKR = Noto_Sans_KR({
 
 export const SlackMarkdown = ({ children }: { children: string }) => {
   const converts = [
+    convertNewLineToRawElement,
     convertMentionString,
-    convertNewlineDouble,
     convertCodeBlockString,
     convertLinkString,
   ]
@@ -42,14 +42,24 @@ export const SlackMarkdown = ({ children }: { children: string }) => {
       <ReactMarkdown
         options={{
           renderRule(next, node, _, state) {
-            if (node.type === RuleType.codeInline && node.text.startsWith(magicCodeBlockString)) {
-              const rawText = String.raw`${node.text.replace(magicCodeBlockString, '')}`
-              return <CodeBlock key={state.key}>{rawText}</CodeBlock>
+            if (node.type === RuleType.codeInline) {
+              return <Code key={state.key}>{node.text}</Code>
             }
             return next()
           },
           overrides: {
-            code: (props) => <Code {...props} />,
+            pre: (props) => {
+              const p = tramsformToHTMLAttributes<HTMLAttributes<HTMLPreElement>>(props)
+              const { content, codeblock } = parseDataset(p)
+
+              if (codeblock && typeof content === 'string') {
+                return <CodeBlock {...p}>{decodeCodeBlockContent(content)}</CodeBlock>
+              }
+              return <pre {...p} />
+            },
+            code: ({ children }) => {
+              return <>{children}</>
+            },
             // Next.js Image로 폴백해줘요.
             img: (props) => <MdImage {...props} alt={props.alt} />,
             span: (props) => {
@@ -59,7 +69,7 @@ export const SlackMarkdown = ({ children }: { children: string }) => {
               if (dataset.mention) {
                 return <MentionSpan {...p} />
               }
-              return <Span {...p} />
+              return <span {...p} />
             },
             p: ({ children }) => <>{children}</>,
             b: ({ children }) => <em>{children}</em>,

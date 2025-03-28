@@ -28,8 +28,8 @@ export const SlackMessageItem = ({
         </div>
       </div>
       <div className="flex-[1_1_0]">
-        <div className="-mt-1 mb-0.5 flex items-center">
-          <span className="font-bold text-[#1d1c1d]">{username}</span>
+        <div className="-mt-1 flex items-center">
+          <span className="text-[15px] font-bold text-[#1d1c1d]">{username}</span>
           {isBot && (
             <span className="ml-1 flex h-[14px] items-center rounded-xs bg-[rgba(29,28,29,0.13)] px-[3px] py-[1px] text-[10px] font-bold text-[rgba(29,28,29,0.7)]">
               앱
