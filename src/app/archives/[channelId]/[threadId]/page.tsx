@@ -18,6 +18,7 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
         {messages.map((message) => (
           <SlackMessageItem
             createdAt={message.ts}
+            files={message.files ?? undefined}
             isBot={message.user.isBot}
             key={message.ts}
             profileImageUrl={message.user.avatar}
