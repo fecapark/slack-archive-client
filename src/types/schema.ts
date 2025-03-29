@@ -14,13 +14,15 @@ export const ThreadSchema = z.object({
 export const MessageFileSchema = z.object({
   created: z.number(),
   filetype: z.string(),
-  height: z.string().optional(),
+  height: z.number().optional(),
   id: z.string(),
   mimetype: z.string(),
   name: z.string(),
   size: z.number(),
-  width: z.string().optional(),
+  width: z.number().optional(),
 })
+
+export type MessageFileItem = z.infer<typeof MessageFileSchema>
 
 export const MessageReactionSchema = z.object({
   name: z.string(),
