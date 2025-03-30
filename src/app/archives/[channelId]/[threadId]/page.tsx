@@ -12,8 +12,13 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
   const { threadId } = await params
   const messages = await getMessages(threadId)
 
+  const getThreadListLink = () => {
+    const channelId = messages[0].channel.id
+    return `/archives/${channelId}`
+  }
+
   return (
-    <ArchivePannel title="쓰레드">
+    <ArchivePannel closeLink={getThreadListLink()} title="쓰레드">
       <div className="flex h-0 grow flex-col gap-4 overflow-y-auto">
         {messages.map((message) => (
           <SlackMessageItem
