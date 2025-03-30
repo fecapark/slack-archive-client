@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 import { ThreadItem } from '@/apis/threads'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 
-interface SlackThreadHeadItemProps {
+interface SlackThreadLinkItemProps {
   head: ThreadItem['head']
 }
 
-export const SlackThreadHeadItem = ({ head }: SlackThreadHeadItemProps) => {
+export const SlackThreadLinkItem = ({ head }: SlackThreadLinkItemProps) => {
   const router = useRouter()
 
   const onClick = () => {
