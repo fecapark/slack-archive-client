@@ -26,7 +26,7 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
           </div>
         }
       >
-        <div className="flex flex-col">
+        <div className="flex h-0 grow flex-col overflow-y-auto">
           {threads.map(({ head }) => (
             <SlackThreadHeadItem head={head} key={head.ts} />
           ))}
