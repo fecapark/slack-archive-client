@@ -4,6 +4,7 @@ import { ThreadItem } from '@/apis/threads'
 import { SlackThreadInformation } from '@/app/archives/[channelId]/components/SlackThreadInformation'
 import { SlackThreadInformationSkeleton } from '@/app/archives/[channelId]/components/SlackThreadInformationSkeleton'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
+import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
 
 interface SlackThreadLinkItemProps {
   archivedAt: string
@@ -21,6 +22,7 @@ export const SlackThreadLinkItem = ({ head, archivedAt }: SlackThreadLinkItemPro
       >
         <SlackMessageItem.Markdown isEdited={head.edited}>{head.text}</SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={head.files ?? undefined} />
+        {head.reactions && <SlackMessageReactionList reactions={head.reactions} />}
         <Suspense fallback={<SlackThreadInformationSkeleton />}>
           <SlackThreadInformation
             archivedAt={archivedAt}

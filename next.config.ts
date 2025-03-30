@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'emoji.slack-edge.com',
+      },
+      {
+        protocol: 'https',
         hostname: process.env.NEXT_PUBLIC_API_URL.replace('https://', ''),
       },
     ],

@@ -28,7 +28,10 @@ export const MessageReactionSchema = z.object({
   name: z.string(),
   users: z.array(z.string()),
   count: z.number(),
+  url: z.string().optional(),
 })
+
+export type MessageReactionItem = z.infer<typeof MessageReactionSchema>
 
 export const MessageUserSchema = z.object({
   id: z.string(),

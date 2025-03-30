@@ -2,6 +2,7 @@ import clsx from 'clsx'
 
 import { MessageItem } from '@/apis/messages'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
+import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
 
 interface SlackThreadMessageItemProps {
   className?: string
@@ -21,6 +22,7 @@ export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessag
           {message.text}
         </SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={message.files ?? undefined} />
+        {message.reactions && <SlackMessageReactionList reactions={message.reactions} />}
       </SlackMessageItem>
     </div>
   )
