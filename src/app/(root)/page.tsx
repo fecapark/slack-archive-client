@@ -48,9 +48,11 @@ const Home = () => {
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U06T3GUSD4J-dca2ff688ee2-72"
                 username="Feca [Web FE]"
               >
-                {
-                  '`@fe` (<@Feca [Web FE]> <@Hanna> <@Juun> <@Ssol> <@EATSTEAK> <@Jerome>)\n안녕하세요!'
-                }
+                <SlackMessageItem.Markdown>
+                  {
+                    '`@fe` (<@Feca [Web FE]> <@Hanna> <@Juun> <@Ssol> <@EATSTEAK> <@Jerome>)\n안녕하세요!'
+                  }
+                </SlackMessageItem.Markdown>
               </SlackMessageItem>
               <SlackMessageInput>{convertNewlineToJSX('@fe\n안녕하세요!')}</SlackMessageInput>
             </LandingSlackConversation.Slack>
@@ -66,7 +68,7 @@ const Home = () => {
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U06T3GUSD4J-dca2ff688ee2-72"
                 username="Feca [Web FE]"
               >
-                !아카이브
+                <SlackMessageItem.Markdown>!아카이브</SlackMessageItem.Markdown>
               </SlackMessageItem>
               <SlackMessageItem
                 createdAt={makeStaticSlackTimestamp(11, 14)}
@@ -74,7 +76,9 @@ const Home = () => {
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U08FFDZE0VB-d5e5fc94462d-72"
                 username="멘션봇"
               >
-                {'✅ **아카이빙을 완료했어요.**'}
+                <SlackMessageItem.Markdown>
+                  {'✅ **아카이빙을 완료했어요.**'}
+                </SlackMessageItem.Markdown>
               </SlackMessageItem>
               <SlackMessageInput>!아카이브</SlackMessageInput>
             </LandingSlackConversation.Slack>
