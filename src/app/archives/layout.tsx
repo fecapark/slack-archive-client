@@ -8,7 +8,7 @@ const ArchivesLayout = async ({ children }: React.PropsWithChildren<unknown>) =>
   return (
     <div className="flex h-full gap-2 px-5 py-2">
       <ArchivePannel className="w-[320px]" title="채널">
-        <div className="flex flex-col gap-1">
+        <div className="flex h-0 grow flex-col gap-1 overflow-y-auto">
           {channels.map((channel) => (
             <SidebarChannelItem channel={channel} key={channel.id} />
           ))}
