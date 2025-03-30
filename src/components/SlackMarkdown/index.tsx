@@ -16,6 +16,7 @@ import {
   convertLinkString,
   convertMentionString,
   convertNewLineToRawElement,
+  convertStrikeString,
   decodeCodeBlockContent,
 } from '@/components/SlackMarkdown/utils/convert'
 import { parseDataset } from '@/components/SlackMarkdown/utils/dataset'
@@ -34,6 +35,7 @@ const NotoSansKR = Noto_Sans_KR({
 export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
   const converts = [
     convertNewLineToRawElement,
+    convertStrikeString,
     convertMentionString,
     convertCodeBlockString,
     convertLinkString,

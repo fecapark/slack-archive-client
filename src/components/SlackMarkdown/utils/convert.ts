@@ -110,3 +110,10 @@ export const convertInlineEmojiString = (text: string) => {
     return `<span data-emoji-url="${url}" data-emoji-name="${name}" data-emoji-size="${isOnlyEmojis ? 'large' : 'medium'}"></span>`
   })
 }
+
+export const convertStrikeString = (text: string) => {
+  return text.replace(/~([^~]+)~/g, (match) => {
+    const resolveNewLine = match.replace(rawNewLineElement, '</s><s>')
+    return `<s>${resolveNewLine.slice(1, -1)}</s>`
+  })
+}
