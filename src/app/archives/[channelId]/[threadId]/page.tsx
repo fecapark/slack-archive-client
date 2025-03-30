@@ -1,6 +1,7 @@
 import { getMessages } from '@/apis/messages'
+import { SlackThreadHeadMessageItem } from '@/app/archives/[channelId]/[threadId]/components/SlackThreadHeadMessageItem'
+import { SlackThreadMessageItem } from '@/app/archives/[channelId]/[threadId]/components/SlackThreadMessageItem'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
-import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 
 interface ThreadPageProps {
   params: Promise<{
@@ -10,7 +11,7 @@ interface ThreadPageProps {
 
 const ThreadPage = async ({ params }: ThreadPageProps) => {
   const { threadId } = await params
-  const messages = await getMessages(threadId)
+  const [headMessage, ...messages] = await getMessages(threadId)
 
   const getThreadListLink = () => {
     const channelId = messages[0].channel.id
@@ -20,19 +21,13 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
   return (
     <ArchivePannel className="w-full" closeLink={getThreadListLink()} title="쓰레드">
       <div className="flex h-0 grow flex-col overflow-y-auto">
+        <SlackThreadHeadMessageItem
+          key={headMessage.ts}
+          message={headMessage}
+          messageCount={messages.length}
+        />
         {messages.map((message) => (
-          <div className="px-4 pt-2 pb-1" key={message.ts}>
-            <SlackMessageItem
-              createdAt={message.ts}
-              files={message.files ?? undefined}
-              isBot={message.user.isBot}
-              isEdited={message.edited}
-              profileImageUrl={message.user.avatar}
-              username={message.user.name}
-            >
-              {message.text}
-            </SlackMessageItem>
-          </div>
+          <SlackThreadMessageItem key={message.ts} message={message} />
         ))}
       </div>
     </ArchivePannel>
