@@ -21,7 +21,11 @@ export const SlackMessageImageDialog = ({
   const padding = 20
 
   return (
-    <Dialog className="!size-fit !max-h-none !max-w-none" onOpenChange={onOpenChange} open={open}>
+    <Dialog
+      className="animate-dialog-fadein !size-fit !max-h-none !max-w-none !bg-transparent"
+      onOpenChange={onOpenChange}
+      open={open}
+    >
       <div
         className="relative"
         style={{
@@ -30,7 +34,7 @@ export const SlackMessageImageDialog = ({
           aspectRatio: `${width ?? 1}/${height ?? 1}`,
         }}
       >
-        <Image alt="이미지" fill loading="eager" src={src} />
+        <Image alt="이미지" className="rounded-2xl" fill loading="eager" src={src} />
       </div>
     </Dialog>
   )

@@ -2,4 +2,17 @@
 
 @theme {
   --ease-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  --animate-dialog-fadein: dialog-fadein 0.2s cubic-bezier(0.2, 0, 0, 1) forwards;
+
+  @keyframes dialog-fadein {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
