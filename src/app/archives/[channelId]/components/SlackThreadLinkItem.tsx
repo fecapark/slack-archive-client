@@ -24,12 +24,11 @@ export const SlackThreadLinkItem = ({ head }: SlackThreadLinkItemProps) => {
       <SlackMessageItem
         createdAt={head.ts}
         createdAtFormat="2월 3일, 오후 10:23"
-        files={head.files ?? undefined}
-        isEdited={head.edited}
         profileImageUrl={head.user.avatar}
         username={head.user.name}
       >
-        {head.text}
+        <SlackMessageItem.Markdown isEdited={head.edited}>{head.text}</SlackMessageItem.Markdown>
+        <SlackMessageItem.MediaList files={head.files ?? undefined} />
       </SlackMessageItem>
     </div>
   )
