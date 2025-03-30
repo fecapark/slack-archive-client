@@ -1,4 +1,4 @@
-import { trimEnd, trimStart } from 'es-toolkit'
+import { trim, trimEnd, trimStart } from 'es-toolkit'
 
 import { objectKeys } from '@toss/utils'
 
@@ -101,7 +101,7 @@ export const convertInlineEmojiString = (text: string) => {
     const [rawUrl, rawName] = match.split('|')
 
     let url = trimStart(rawUrl ?? '', ':')
-    let name = trimEnd(rawName ?? '', ':')
+    let name = trim(rawName ?? '', ':')
     if (!name) {
       url = trimEnd(url, ':')
       name = url

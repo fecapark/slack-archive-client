@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import { tv } from 'tailwind-variants'
 
+import { HoverTooltip } from '@/components/HoverTooltip'
+
 interface InlineEmojiProps {
   name: string
   size: 'large' | 'medium'
@@ -26,13 +28,30 @@ const inlineEmoji = tv({
   },
 })
 
+const TooltipContent = ({ name, url }: { name: string; url: string }) => {
+  return (
+    <div className="flex max-w-[200px] flex-col items-center">
+      <Image
+        alt="이모지"
+        className="mb-2 rounded-md bg-white object-contain p-1"
+        height={64}
+        src={url}
+        width={64}
+      />
+      <div className="text-center text-[13px] leading-[1.38463] font-bold text-white">:{name}:</div>
+    </div>
+  )
+}
+
 export const InlineEmoji = ({ name, url, size }: InlineEmojiProps) => {
   const { container, image } = inlineEmoji({ size })
   const sizeLiteral = size === 'large' ? 32 : 22
 
   return (
-    <span className={container()}>
-      <Image alt={name} className={image()} height={sizeLiteral} src={url} width={sizeLiteral} />
-    </span>
+    <HoverTooltip content={<TooltipContent name={name} url={url} />}>
+      <span className={container()}>
+        <Image alt={name} className={image()} height={sizeLiteral} src={url} width={sizeLiteral} />
+      </span>
+    </HoverTooltip>
   )
 }
