@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'a.slack-edge.com',
+      },
+      {
+        protocol: 'https',
         hostname: process.env.NEXT_PUBLIC_API_URL.replace('https://', ''),
       },
     ],

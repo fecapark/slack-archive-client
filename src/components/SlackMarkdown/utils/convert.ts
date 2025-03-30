@@ -86,3 +86,27 @@ export const convertLinkString = (text: string) => {
     return `<a href="${url}">${text}</a>`
   })
 }
+
+export const convertInlineEmojiString = (text: string) => {
+  const emojiRegex = /:https:\/\/[^|]+\|((:[^:]+:(?::skin-tone-\d+:)?)):/g
+
+  const leftString = text.replace(emojiRegex, '').replace(rawNewLineElement, '')
+  const isOnlyEmojis = leftString.trim().length === 0
+
+  return text.replace(emojiRegex, (match) => {
+    if (!match.includes('|')) {
+      return match
+    }
+
+    const [rawUrl, rawName] = match.split('|')
+
+    let url = trimStart(rawUrl ?? '', ':')
+    let name = trimEnd(rawName ?? '', ':')
+    if (!name) {
+      url = trimEnd(url, ':')
+      name = url
+    }
+
+    return `<span data-emoji-url="${url}" data-emoji-name="${name}" data-emoji-size="${isOnlyEmojis ? 'large' : 'medium'}"></span>`
+  })
+}
