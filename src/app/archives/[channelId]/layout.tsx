@@ -16,7 +16,7 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
   const threads = await getThreads(channelId)
 
   return (
-    <>
+    <div className="flex items-center gap-2">
       <ArchivePannel
         className="w-full"
         description={channel.description}
@@ -33,7 +33,7 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
         </div>
       </ArchivePannel>
       {children}
-    </>
+    </div>
   )
 }
 
