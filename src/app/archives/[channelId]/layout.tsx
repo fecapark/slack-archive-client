@@ -1,6 +1,6 @@
 import { getChannel } from '@/apis/channels'
 import { getThreads } from '@/apis/threads'
-import { SlackThreadHeadItem } from '@/app/archives/[channelId]/components/SlackThreadHeadItem'
+import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/SlackThreadLinkItem'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
 
@@ -28,7 +28,7 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
       >
         <div className="flex h-0 grow flex-col overflow-y-auto">
           {threads.map(({ head }) => (
-            <SlackThreadHeadItem head={head} key={head.ts} />
+            <SlackThreadLinkItem head={head} key={head.ts} />
           ))}
         </div>
       </ArchivePannel>
