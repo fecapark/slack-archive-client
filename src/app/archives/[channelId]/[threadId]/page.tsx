@@ -19,19 +19,20 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
 
   return (
     <ArchivePannel closeLink={getThreadListLink()} title="쓰레드">
-      <div className="flex h-0 grow flex-col gap-4 overflow-y-auto">
+      <div className="flex h-0 grow flex-col overflow-y-auto">
         {messages.map((message) => (
-          <SlackMessageItem
-            createdAt={message.ts}
-            files={message.files ?? undefined}
-            isBot={message.user.isBot}
-            isEdited={message.edited}
-            key={message.ts}
-            profileImageUrl={message.user.avatar}
-            username={message.user.name}
-          >
-            {message.text}
-          </SlackMessageItem>
+          <div className="px-4 py-3" key={message.ts}>
+            <SlackMessageItem
+              createdAt={message.ts}
+              files={message.files ?? undefined}
+              isBot={message.user.isBot}
+              isEdited={message.edited}
+              profileImageUrl={message.user.avatar}
+              username={message.user.name}
+            >
+              {message.text}
+            </SlackMessageItem>
+          </div>
         ))}
       </div>
     </ArchivePannel>
