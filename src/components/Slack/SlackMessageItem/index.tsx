@@ -11,6 +11,7 @@ interface SlackMessageItemProps {
   createdAtFormat?: keyof typeof formatTemplates
   files?: MessageFileItem[]
   isBot?: boolean
+  isEdited?: boolean
   profileImageUrl: string
   username: string
 }
@@ -23,6 +24,7 @@ export const SlackMessageItem = ({
   createdAtFormat = '오전 10:00',
   files,
   isBot,
+  isEdited,
 }: SlackMessageItemProps) => {
   return (
     <div className="flex">
@@ -46,7 +48,7 @@ export const SlackMessageItem = ({
         </div>
 
         <div className="mb-1">
-          <SlackMarkdown>{children}</SlackMarkdown>
+          <SlackMarkdown isEdited={isEdited}>{children}</SlackMarkdown>
         </div>
 
         {files && <SlackMessageMediaList files={files} />}
