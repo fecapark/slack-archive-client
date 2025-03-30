@@ -20,6 +20,7 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
             createdAt={message.ts}
             files={message.files ?? undefined}
             isBot={message.user.isBot}
+            isEdited={message.edited}
             key={message.ts}
             profileImageUrl={message.user.avatar}
             username={message.user.name}

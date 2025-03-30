@@ -20,11 +20,16 @@ import { parseDataset } from '@/components/SlackMarkdown/utils/dataset'
 import { tramsformToHTMLAttributes } from '@/components/SlackMarkdown/utils/transform'
 import { assertNonNullish } from '@/utils/assertion'
 
+interface SlackMarkdownProps {
+  children: string
+  isEdited?: boolean
+}
+
 const NotoSansKR = Noto_Sans_KR({
   subsets: ['latin'],
 })
 
-export const SlackMarkdown = ({ children }: { children: string }) => {
+export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
   const converts = [
     convertNewLineToRawElement,
     convertMentionString,
@@ -84,6 +89,7 @@ export const SlackMarkdown = ({ children }: { children: string }) => {
       >
         {children && converts.reduce((acc, convert) => convert(acc), children)}
       </ReactMarkdown>
+      {isEdited && <span className="text-[13px] text-[rgb(134,134,134)]"> (편집됨)</span>}
     </div>
   )
 }

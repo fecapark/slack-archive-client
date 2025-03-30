@@ -25,6 +25,7 @@ export const SlackThreadHeadItem = ({ head }: SlackThreadHeadItemProps) => {
         createdAt={head.ts}
         createdAtFormat="2월 3일, 오후 10:23"
         files={head.files ?? undefined}
+        isEdited={head.edited}
         profileImageUrl={head.user.avatar}
         username={head.user.name}
       >
