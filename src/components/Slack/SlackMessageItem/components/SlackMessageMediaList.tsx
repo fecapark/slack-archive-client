@@ -24,7 +24,9 @@ export const SlackMessageMediaList = ({ files }: SlackMessageMediaListProps) => 
           const src = toFileSrc(file.id, file.mimetype)
 
           if (fileType === 'image') {
-            return <SlackMessageImage key={file.id} src={src} />
+            return (
+              <SlackMessageImage height={file.height} key={file.id} src={src} width={file.width} />
+            )
           }
           if (fileType === 'video') {
             return (
