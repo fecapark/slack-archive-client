@@ -13,13 +13,14 @@ export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessag
     <div className={clsx('px-4 pt-2 pb-1', className)}>
       <SlackMessageItem
         createdAt={message.ts}
-        files={message.files ?? undefined}
         isBot={message.user.isBot}
-        isEdited={message.edited}
         profileImageUrl={message.user.avatar}
         username={message.user.name}
       >
-        {message.text}
+        <SlackMessageItem.Markdown isEdited={message.edited}>
+          {message.text}
+        </SlackMessageItem.Markdown>
+        <SlackMessageItem.MediaList files={message.files ?? undefined} />
       </SlackMessageItem>
     </div>
   )

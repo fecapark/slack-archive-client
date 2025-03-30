@@ -6,14 +6,35 @@ import { MessageFileItem } from '@/types/schema'
 import { convertSlackTimestampToISOString, formatTemplates } from '@/utils/date'
 
 interface SlackMessageItemProps {
-  children: string // 마크다운 파싱을 위해 문자열로만 받아요.
   createdAt: string
   createdAtFormat?: keyof typeof formatTemplates
-  files?: MessageFileItem[]
   isBot?: boolean
-  isEdited?: boolean
   profileImageUrl: string
   username: string
+}
+
+interface SlackMessageMediaListProps {
+  files?: MessageFileItem[]
+}
+
+interface SlackMarkdownProps {
+  children: string // 마크다운 파싱을 위해 문자열로만 받아요.
+  isEdited?: boolean
+}
+
+const Markdown = ({ children, isEdited }: SlackMarkdownProps) => {
+  return (
+    <div className="mb-1">
+      <SlackMarkdown isEdited={isEdited}>{children}</SlackMarkdown>
+    </div>
+  )
+}
+
+const MediaList = ({ files }: SlackMessageMediaListProps) => {
+  if (!files) {
+    return undefined
+  }
+  return <SlackMessageMediaList files={files} />
 }
 
 export const SlackMessageItem = ({
@@ -22,10 +43,8 @@ export const SlackMessageItem = ({
   username,
   createdAt,
   createdAtFormat = '오전 10:00',
-  files,
   isBot,
-  isEdited,
-}: SlackMessageItemProps) => {
+}: React.PropsWithChildren<SlackMessageItemProps>) => {
   return (
     <div className="flex">
       <div className="mr-2 shrink-0">
@@ -47,12 +66,11 @@ export const SlackMessageItem = ({
           </span>
         </div>
 
-        <div className="mb-1">
-          <SlackMarkdown isEdited={isEdited}>{children}</SlackMarkdown>
-        </div>
-
-        {files && <SlackMessageMediaList files={files} />}
+        {children}
       </div>
     </div>
   )
 }
+
+SlackMessageItem.MediaList = MediaList
+SlackMessageItem.Markdown = Markdown
