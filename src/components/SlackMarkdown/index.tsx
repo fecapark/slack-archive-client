@@ -6,11 +6,13 @@ import { AnchorHTMLAttributes, HTMLAttributes } from 'react'
 
 import { Code } from '@/components/SlackMarkdown/components/Code'
 import { CodeBlock } from '@/components/SlackMarkdown/components/CodeBlock'
+import { InlineEmoji } from '@/components/SlackMarkdown/components/InlineEmoji'
 import { MdImage } from '@/components/SlackMarkdown/components/MdImage'
 import { MdLink } from '@/components/SlackMarkdown/components/MdLink'
 import { MentionSpan } from '@/components/SlackMarkdown/components/MentionSpan'
 import {
   convertCodeBlockString,
+  convertInlineEmojiString,
   convertLinkString,
   convertMentionString,
   convertNewLineToRawElement,
@@ -35,6 +37,7 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
     convertMentionString,
     convertCodeBlockString,
     convertLinkString,
+    convertInlineEmojiString,
   ]
 
   return (
@@ -73,6 +76,17 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
 
               if (dataset.mention) {
                 return <MentionSpan {...p} />
+              }
+              if (dataset['emoji-url'] && dataset['emoji-name'] && dataset['emoji-size']) {
+                const { 'emoji-url': url, 'emoji-name': name, 'emoji-size': size } = dataset
+                if (
+                  typeof url === 'string' &&
+                  typeof name === 'string' &&
+                  typeof size === 'string' &&
+                  (size === 'large' || size === 'medium')
+                ) {
+                  return <InlineEmoji name={name} size={size} url={url} />
+                }
               }
               return <span {...p} />
             },
