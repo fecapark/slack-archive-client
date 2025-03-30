@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 
 import { ThreadItem } from '@/apis/threads'
 import { SlackThreadInformation } from '@/app/archives/[channelId]/components/SlackThreadInformation'
+import { SlackThreadInformationSkeleton } from '@/app/archives/[channelId]/components/SlackThreadInformationSkeleton'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 
 interface SlackThreadLinkItemProps {
@@ -20,7 +21,7 @@ export const SlackThreadLinkItem = ({ head, archivedAt }: SlackThreadLinkItemPro
       >
         <SlackMessageItem.Markdown isEdited={head.edited}>{head.text}</SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={head.files ?? undefined} />
-        <Suspense>
+        <Suspense fallback={<SlackThreadInformationSkeleton />}>
           <SlackThreadInformation
             archivedAt={archivedAt}
             channelId={head.channel}
