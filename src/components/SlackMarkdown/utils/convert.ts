@@ -7,6 +7,15 @@ const gtltConvertMap = {
   '&lt;': '<',
 }
 
+const replaceABrAfterTag = (text: string, tagname: string) => {
+  return text.replace(
+    new RegExp(`<${tagname} .*>.*</${tagname}>(${rawBrElement})`, 'g'),
+    (match) => {
+      return match.replace(new RegExp(`${rawBrElement}$`, 'g'), rawNewLineElement)
+    }
+  )
+}
+
 export const convertMentionString = (text: string) => {
   const wrapMentions = (text: string) => {
     return text.replace(/(<@[^>]+>\s*)+/g, (match) => {
@@ -61,7 +70,7 @@ export const convertCodeBlockString = (text: string) => {
     */
     return `<pre data-content="${encodeURIComponent(codeBlockContent)}" data-codeblock="true"></pre>`
   })
-  return res
+  return replaceABrAfterTag(res, 'pre')
 }
 
 export const decodeCodeBlockContent = (text: string) => {
@@ -163,7 +172,7 @@ export const convertBlockquoteString = (text: string) => {
     .replace(/^&gt;&gt;/m, placeholder['twice'])
     .replace(/^&gt;/m, placeholder['once'])
 
-  return preConvertedText
+  const blockquoted = preConvertedText
     .replace(generatePlaceholderRegex('br-twice'), (match) => {
       const content = match.replaceAll(placeholder['br-twice'], '')
       return `${rawBrElement}<blockquote data-type="twice">${content}</blockquote>`
@@ -194,4 +203,6 @@ export const convertBlockquoteString = (text: string) => {
         return match.replaceAll(rawBrElement, '').replaceAll(rawNewLineElement, '')
       }
     )
+
+  return replaceABrAfterTag(blockquoted, 'blockquote')
 }
