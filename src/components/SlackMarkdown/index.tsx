@@ -4,6 +4,7 @@ import ReactMarkdown, { RuleType } from 'markdown-to-jsx'
 import { Noto_Sans_KR } from 'next/font/google'
 import { AnchorHTMLAttributes, HTMLAttributes } from 'react'
 
+import { Blockquote } from '@/components/SlackMarkdown/components/Blockquote'
 import { Code } from '@/components/SlackMarkdown/components/Code'
 import { CodeBlock } from '@/components/SlackMarkdown/components/CodeBlock'
 import { InlineEmoji } from '@/components/SlackMarkdown/components/InlineEmoji'
@@ -11,6 +12,7 @@ import { MdImage } from '@/components/SlackMarkdown/components/MdImage'
 import { MdLink } from '@/components/SlackMarkdown/components/MdLink'
 import { MentionSpan } from '@/components/SlackMarkdown/components/MentionSpan'
 import {
+  convertBlockquoteString,
   convertCodeBlockString,
   convertInlineEmojiString,
   convertLinkString,
@@ -40,6 +42,7 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
     convertCodeBlockString,
     convertLinkString,
     convertInlineEmojiString,
+    convertBlockquoteString,
   ]
 
   return (
@@ -99,6 +102,15 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
               const p = tramsformToHTMLAttributes<AnchorHTMLAttributes<HTMLAnchorElement>>(props)
               assertNonNullish(p.href)
               return <MdLink {...p} href={p.href} />
+            },
+            blockquote: (props) => {
+              const p = tramsformToHTMLAttributes<HTMLAttributes<HTMLQuoteElement>>(props)
+              const dataset = parseDataset(p)
+
+              if (dataset.type === 'once' || dataset.type === 'twice') {
+                return <Blockquote {...p} type={dataset.type} />
+              }
+              return <span {...p} />
             },
           },
         }}
