@@ -1,9 +1,11 @@
 'use client'
 
-import Lottie from 'react-lottie-player/dist/LottiePlayerLight'
+import dynamic from 'next/dynamic'
 
 import lottieData from '@/../public/ppusung.json'
 import { useHover } from '@/hooks/useHover'
+
+const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false })
 
 export const LandingLogo = () => {
   const [ref, isHover] = useHover<HTMLDivElement>()
