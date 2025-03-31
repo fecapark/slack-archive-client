@@ -184,3 +184,40 @@ git commit -m "s 새로운 피처를 만들었어요"
 | 날짜 파싱 | date-fns | 1. tree-shaking,<br />2.(개인취향) day-js 대비 직관적 |
 | 마크다운 | markdown-to-jsx | 슬랙 마크다운 커스터마이징<br />1. `react-markdown` 은 span, div 파싱이 의도한대로 이루어지지 않아요.<br />2. 더 넓은 렌더링 규칙 확장성 |
 | 유틸리티 | @toss/react, @toss/utils, es-toolkit | 내가 구현하는게 다 여기 있다, type safety |
+
+<br />
+
+## 배포
+
+Vercel에서 호스팅하고 있어요.
+
+무료 버전을 사용하고 있기 떄문에 yourssu 조직 레포의 접근이 제한되는 문제가 있어요.
+
+<br />
+
+따라서, [fecapark/slack-archive-client](https://github.com/fecapark/slack-archive-client) 레포지토리로 fork 해서 
+
+이 fork된 레포지토리를 Vercel이 바라보도록 배포를 돌리고 있어요.
+
+<br />
+
+이에 따른 레포지토리 이원화 문제는 두 레포지토리를 싱크해주는 액션을 구성하여 임시로 해소하고 있어요.
+
+> 이 레포지토리에 push 
+> 
+> -> fork 레포지토리에 싱크 
+> 
+> -> Vercel push 이벤트 발생
+
+<br />
+
+### 주의사항
+
+현재 레포지토리 싱크 액션이 force push를 지원하지 않고 있어요.
+
+**따라서 커밋 해시가 바뀌는 rebase push가 생길 경우 액션이 동작하지 않아요.**
+
+해결 전까지는 커밋 해시가 바뀌지 않도록 최대한 주의해주세요. (스쿼시 등)
+
+어쩔 수 없는 경우에는, 저(Feca)를 슬랙에서 찾아주세요.
+
