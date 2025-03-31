@@ -1,10 +1,9 @@
-import { Suspense } from 'react'
-
 import { ThreadItem } from '@/apis/threads'
 import { SlackThreadInformation } from '@/app/archives/[channelId]/components/SlackThreadInformation'
-import { SlackThreadInformationSkeleton } from '@/app/archives/[channelId]/components/SlackThreadInformationSkeleton'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
+import { getQueryClient } from '@/utils/query'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 interface SlackThreadLinkItemProps {
   archivedAt: string
@@ -23,13 +22,13 @@ export const SlackThreadLinkItem = ({ head, archivedAt }: SlackThreadLinkItemPro
         <SlackMessageItem.Markdown isEdited={head.edited}>{head.text}</SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={head.files ?? undefined} />
         {head.reactions && <SlackMessageReactionList reactions={head.reactions} />}
-        <Suspense fallback={<SlackThreadInformationSkeleton />}>
+        <HydrationBoundary state={dehydrate(getQueryClient())}>
           <SlackThreadInformation
             archivedAt={archivedAt}
             channelId={head.channel}
             threadId={head.threadTs}
           />
-        </Suspense>
+        </HydrationBoundary>
       </SlackMessageItem>
     </div>
   )
