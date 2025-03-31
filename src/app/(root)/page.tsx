@@ -82,7 +82,7 @@ const Home = () => {
               </SlackMessageItem>
               <SlackMessageInput>!아카이브</SlackMessageInput>
             </LandingSlackConversation.Slack>
-            <LandingSlackConversation.LinkButton href="/">
+            <LandingSlackConversation.LinkButton href="/archives">
               아카이브
               <MdArrowOutward className="text-xl" />
             </LandingSlackConversation.LinkButton>
