@@ -1,4 +1,4 @@
-import { addHours, DateArg } from 'date-fns'
+import { addHours, compareDesc, DateArg } from 'date-fns'
 import { formatWithOptions } from 'date-fns/fp'
 import { ko } from 'date-fns/locale/ko'
 
@@ -48,4 +48,8 @@ export const formatTemplates = {
 
 export const convertSlackTimestampToISOString = (timestamp: string) => {
   return new Date(Number(timestamp) * 1000).toISOString()
+}
+
+export const compareSlackTimestampDesc = (a: string, b: string) => {
+  return compareDesc(convertSlackTimestampToISOString(a), convertSlackTimestampToISOString(b))
 }
