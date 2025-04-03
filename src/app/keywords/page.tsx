@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { MdArrowOutward } from 'react-icons/md'
+import { MdArrowOutward, MdWarning } from 'react-icons/md'
+import { RiQuestionLine } from 'react-icons/ri'
 
 import { LandingSlackConversation } from '@/app/(root)/components/LandingSlackConversation'
 import { Section } from '@/app/keywords/components/Section'
 import { SectionGroup } from '@/app/keywords/components/SectionGroup'
 import AutoHeightImage from '@/components/AutoHeightImage'
 import { Footer } from '@/components/Footer'
+import { HoverTooltip } from '@/components/HoverTooltip'
 import { SlackMessageInput } from '@/components/Slack/SlackMessageInput'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { makeStaticSlackTimestamp } from '@/utils/date'
@@ -15,11 +17,18 @@ const KeywordsPage = () => {
   return (
     <div className="overflow-x-hidden px-10 break-keep">
       <div className="flex flex-col items-center gap-24 pt-20">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex w-full flex-col items-center gap-2">
           <h1 className="text-3xl font-bold">키워드</h1>
-          <h3 className="text-grey600 text-base font-semibold">
+          <h3 className="text-grey600 mb-6 text-base font-semibold">
             멘션봇이 인식하는 멘션 키워드들이에요.
           </h3>
+          <div className="bg-grey200 text-text-secondary flex w-full max-w-[600px] items-center rounded-xl px-4 py-4 font-semibold">
+            <MdWarning className="text-red500 mr-2 size-4.5" />
+            사용을 위해 반드시 멘션봇을 먼저 채널에 초대해주세요.
+            <HoverTooltip content="채널 > 설정 편집 > 통합 > 앱 추가 에서 멘션봇을 추가할 수 있어요.">
+              <RiQuestionLine className="ml-1" />
+            </HoverTooltip>
+          </div>
         </div>
 
         <SectionGroup title="팀별 키워드">
