@@ -1,11 +1,20 @@
 'use client'
 
+import Link from 'next/link'
 import { IoEllipsisHorizontal } from 'react-icons/io5'
-import { MdContentCopy } from 'react-icons/md'
+import { MdContentCopy, MdOpenInNew } from 'react-icons/md'
 import { tv } from 'tailwind-variants'
 
 import { IconSlack } from '@/components/Icons/IconSlack'
 import { Menu } from '@/components/Menu'
+import { useToast } from '@/hooks/useToast'
+import { getSlackMessagePermalink } from '@/utils/slack'
+
+interface SlackMessageMenuProps {
+  channelId: string
+  messageId?: string
+  threadId: string
+}
 
 const menu = tv({
   slots: {
@@ -18,26 +27,46 @@ const menu = tv({
   },
 })
 
-export const SlackMessageMenu = () => {
+export const SlackMessageMenu = ({ threadId, channelId, messageId }: SlackMessageMenuProps) => {
   const { target, content, buttonItem } = menu()
-  return (
-    <Menu>
-      <Menu.Target>
-        <div className={target()}>
-          <IoEllipsisHorizontal />
-        </div>
-      </Menu.Target>
+  const toast = useToast()
+  const isThreadMessage = !!messageId
 
-      <Menu.Content align="end" className={content()} sideOffset={4}>
-        <Menu.ButtonItem className={buttonItem()}>
-          <MdContentCopy />
-          <div>링크 복사</div>
-        </Menu.ButtonItem>
-        <Menu.ButtonItem className={buttonItem()}>
-          <IconSlack className="size-3.5" />
-          <div>슬랙에서 보기</div>
-        </Menu.ButtonItem>
-      </Menu.Content>
-    </Menu>
+  return (
+    <div className="absolute top-1 right-2">
+      <Menu>
+        <Menu.Target>
+          <div className={target()}>
+            <IoEllipsisHorizontal />
+          </div>
+        </Menu.Target>
+
+        <Menu.Content align="end" className={content()} sideOffset={4}>
+          <Menu.ButtonItem
+            className={buttonItem()}
+            onClick={() =>
+              toast.success(`${isThreadMessage ? '메시지' : '스레드'} 링크를 복사했어요.`)
+            }
+          >
+            <MdContentCopy />
+            <div>링크 복사하기</div>
+          </Menu.ButtonItem>
+          <Menu.ButtonItem className="w-full">
+            <Link
+              className={buttonItem()}
+              href={getSlackMessagePermalink({ channelId, threadId, messageId })}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <IconSlack className="size-3.5" />
+              <div className="flex items-center gap-1">
+                슬랙에서 보기
+                <MdOpenInNew />
+              </div>
+            </Link>
+          </Menu.ButtonItem>
+        </Menu.Content>
+      </Menu>
+    </div>
   )
 }

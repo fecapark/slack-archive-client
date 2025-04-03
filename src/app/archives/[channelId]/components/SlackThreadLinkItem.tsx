@@ -31,9 +31,8 @@ export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadL
           />
         </HydrationBoundary>
       </SlackMessageItem>
-      <div className="absolute top-1 right-2">
-        <SlackMessageMenu />
-      </div>
+
+      <SlackMessageMenu channelId={head.channel} threadId={head.threadTs} />
     </div>
   )
 }
