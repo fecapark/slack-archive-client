@@ -1,3 +1,5 @@
+'use client'
+
 import { Popover, PopoverProps } from '@/components/Popover'
 
 const ButtonItem = ({
@@ -11,6 +13,9 @@ const ButtonItem = ({
   )
 }
 
+/* 
+  반드시 'use client' directive를 사용해주세요.
+*/
 export const Menu = ({ children, ...props }: React.PropsWithChildren<PopoverProps>) => {
   return <Popover {...props}>{children}</Popover>
 }

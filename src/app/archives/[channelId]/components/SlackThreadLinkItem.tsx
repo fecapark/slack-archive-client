@@ -1,4 +1,5 @@
 import { ThreadItem } from '@/apis/threads'
+import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMessageMenu'
 import { SlackThreadInformation } from '@/app/archives/[channelId]/components/SlackThreadInformation'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
@@ -11,7 +12,7 @@ type SlackThreadLinkItemProps = Pick<ThreadItem, 'head' | 'metadata'> & {
 
 export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadLinkItemProps) => {
   return (
-    <div className="hover:bg-grey100 ease-ease rounded-md px-4 py-3 transition-colors duration-300">
+    <div className="hover:bg-grey100 ease-ease relative rounded-md px-4 py-3 transition-colors duration-300">
       <SlackMessageItem
         createdAt={head.ts}
         createdAtFormat="2월 3일, 오후 10:23"
@@ -30,6 +31,9 @@ export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadL
           />
         </HydrationBoundary>
       </SlackMessageItem>
+      <div className="absolute top-1 right-2">
+        <SlackMessageMenu />
+      </div>
     </div>
   )
 }
