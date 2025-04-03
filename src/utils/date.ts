@@ -1,4 +1,4 @@
-import { addHours, compareDesc, DateArg } from 'date-fns'
+import { addHours, compareDesc, DateArg, isThisYear } from 'date-fns'
 import { formatWithOptions } from 'date-fns/fp'
 import { ko } from 'date-fns/locale/ko'
 
@@ -44,6 +44,10 @@ export const formatTemplates = {
   '11일 10:00': formatKo('do HH:mm'),
   '10:00': formatKo('HH:mm'),
   '2월 3일, 오후 10:23': formatKo('MMM do, aaaa h:mm'),
+  '(2024년)? 2월 3일, 오후 10:23': (v: DateArg<Date>) => {
+    const fn = formatKo(isThisYear(v) ? 'MMM do, aaaa h:mm' : 'yyyy년 MMM do, aaaa h:mm')
+    return fn(v)
+  },
 }
 
 export const convertSlackTimestampToISOString = (timestamp: string) => {

@@ -38,7 +38,7 @@ export const SlackThreadInformation = ({
             {metadata.messagesAmount - 1}개의 댓글
           </div>
           <div className="ml-2 text-[rgb(97,96,97)]">
-            {formatTemplates['2월 3일, 오후 10:23'](archivedAt)} 에 아카이브됨
+            {formatTemplates['(2024년)? 2월 3일, 오후 10:23'](archivedAt)} 에 아카이브됨
           </div>
         </div>
         <div className="ease-ease pr-1 text-[10px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">

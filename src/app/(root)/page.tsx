@@ -45,6 +45,7 @@ const Home = () => {
             <LandingSlackConversation.Slack>
               <SlackMessageItem
                 createdAt={makeStaticSlackTimestamp(13, 39)}
+                createdAtFormat="오전 10:00"
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U06T3GUSD4J-dca2ff688ee2-72"
                 username="Feca [Web FE]"
               >
@@ -65,6 +66,7 @@ const Home = () => {
             <LandingSlackConversation.Slack>
               <SlackMessageItem
                 createdAt={makeStaticSlackTimestamp(11, 12)}
+                createdAtFormat="오전 10:00"
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U06T3GUSD4J-dca2ff688ee2-72"
                 username="Feca [Web FE]"
               >
@@ -72,6 +74,7 @@ const Home = () => {
               </SlackMessageItem>
               <SlackMessageItem
                 createdAt={makeStaticSlackTimestamp(11, 14)}
+                createdAtFormat="오전 10:00"
                 isBot
                 profileImageUrl="https://ca.slack-edge.com/T2SRCGYPQ-U08FFDZE0VB-d5e5fc94462d-72"
                 username="멘션봇"
