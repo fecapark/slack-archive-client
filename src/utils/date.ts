@@ -1,7 +1,19 @@
+import { addHours, DateArg } from 'date-fns'
 import { formatWithOptions } from 'date-fns/fp'
-import { ko } from 'date-fns/locale'
+import { ko } from 'date-fns/locale/ko'
 
-const formatKo = formatWithOptions({ locale: ko })
+/* 
+  locale과 timezone을 한국 기준으로 포맷해요.
+  서버 사이드에서 UTC로 렌더링되는 부분에 대한 오프셋을 줘요.
+*/
+const formatKo = (fmt: string) => {
+  const fn = formatWithOptions({ locale: ko })(fmt)
+  const kstOffset = 9 // KST: UTC+9
+  return (date: DateArg<Date>) => {
+    return fn(addHours(date, kstOffset))
+  }
+}
+
 // https://github.com/date-fns/date-fns/blob/main/src/locale/ko/snapshot.md
 export const formatTemplates = {
   '1월 11일 수요일': formatKo('MMM do EEEE'),
