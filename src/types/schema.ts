@@ -11,6 +11,8 @@ export const ThreadMetadataSchema = z.object({
   userAvatars: z.array(z.string()),
 })
 
+export type ThreadMetadataItem = z.infer<typeof ThreadMetadataSchema>
+
 export const ThreadSchema = z.object({
   ts: z.string(),
   archivedAt: z.string(),

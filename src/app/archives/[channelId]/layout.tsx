@@ -1,11 +1,9 @@
 import { getChannel } from '@/apis/channels'
-import { getMessages } from '@/apis/messages'
 import { getThreads } from '@/apis/threads'
 import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/SlackThreadLinkItem'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
 import { handleError } from '@/utils/error'
-import { getQueryClient } from '@/utils/query'
 
 interface ChannelLayoutProps {
   params: Promise<{
@@ -14,22 +12,7 @@ interface ChannelLayoutProps {
 }
 
 const fetchChannelPageData = async (channelId: string) => {
-  const getThreadsWithPrefetch = async (channelId: string) => {
-    const queryClient = getQueryClient()
-    const threads = await getThreads(channelId)
-    const prefetch = (threadId: string) =>
-      queryClient.fetchQuery({
-        queryKey: ['thread', threadId],
-        queryFn: () => getMessages(threadId),
-      })
-    await Promise.all(threads.map(({ head }) => prefetch(head.threadTs)))
-    return threads
-  }
-
-  const [channel, threads] = await Promise.all([
-    getChannel(channelId),
-    getThreadsWithPrefetch(channelId),
-  ])
+  const [channel, threads] = await Promise.all([getChannel(channelId), getThreads(channelId)])
   return { channel, threads }
 }
 
@@ -50,8 +33,13 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
           }
         >
           <div className="flex h-0 grow flex-col overflow-y-auto">
-            {threads.map(({ head, archivedAt }) => (
-              <SlackThreadLinkItem archivedAt={archivedAt} head={head} key={head.ts} />
+            {threads.map(({ head, archivedAt, metadata }) => (
+              <SlackThreadLinkItem
+                archivedAt={archivedAt}
+                head={head}
+                key={head.ts}
+                metadata={metadata}
+              />
             ))}
           </div>
         </ArchivePannel>

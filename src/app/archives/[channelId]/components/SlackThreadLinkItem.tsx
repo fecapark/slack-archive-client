@@ -5,12 +5,11 @@ import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/co
 import { getQueryClient } from '@/utils/query'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
-interface SlackThreadLinkItemProps {
+type SlackThreadLinkItemProps = Pick<ThreadItem, 'head' | 'metadata'> & {
   archivedAt: string
-  head: ThreadItem['head']
 }
 
-export const SlackThreadLinkItem = ({ head, archivedAt }: SlackThreadLinkItemProps) => {
+export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadLinkItemProps) => {
   return (
     <div className="hover:bg-grey100 ease-ease rounded-md px-4 py-3 transition-colors duration-300">
       <SlackMessageItem
@@ -26,6 +25,7 @@ export const SlackThreadLinkItem = ({ head, archivedAt }: SlackThreadLinkItemPro
           <SlackThreadInformation
             archivedAt={archivedAt}
             channelId={head.channel}
+            metadata={metadata}
             threadId={head.threadTs}
           />
         </HydrationBoundary>
