@@ -42,7 +42,7 @@ export const SlackMessageItem = ({
   profileImageUrl,
   username,
   createdAt,
-  createdAtFormat = '오전 10:00',
+  createdAtFormat = '(2024년)? 2월 3일, 오후 10:23',
   isBot,
 }: React.PropsWithChildren<SlackMessageItemProps>) => {
   return (
