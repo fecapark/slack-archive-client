@@ -5,7 +5,7 @@
   <div align="center">
     <b>유어슈 슬랙의 스레드를 아카이브해요.</b>
     <br />
-    <a href="https://slack-archive-client.vercel.app" target="_blank" rel="noopener noreferrer">아카이브 링크</a>
+    <a href="https://archive.yourssu.com" target="_blank" rel="noopener noreferrer">아카이브 링크</a>
   </div>
 </p>
 
