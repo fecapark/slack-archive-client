@@ -27,7 +27,7 @@ export const ReactionTooltipContent = ({
 
   const getReactionDescription = (reaction: MessageReactionItem) => {
     if (reaction.count > 1) {
-      return `${reaction.users.join(', ')} 및 ${reaction.users.at(-1)}`
+      return `${reaction.users.slice(0, -1).join(', ')} 및 ${reaction.users.at(-1)}`
     }
     return reaction.users[0]
   }
