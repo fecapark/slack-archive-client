@@ -6,9 +6,15 @@ export const ChannelSchema = z.object({
   description: z.string().optional(),
 })
 
+export const ThreadMetadataSchema = z.object({
+  messagesAmount: z.number(),
+  userAvatars: z.array(z.string()),
+})
+
 export const ThreadSchema = z.object({
   ts: z.string(),
   archivedAt: z.string(),
+  metadata: ThreadMetadataSchema,
 })
 
 export const MessageFileSchema = z.object({
