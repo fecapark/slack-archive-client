@@ -139,7 +139,12 @@ const KeywordsPage = () => {
               </div>
 
               <div className="keywords-lg:-mx-[128px] keywords-lg:ml-0 max-w-[800px] overflow-hidden">
-                <AutoHeightImage alt="추가 가이드" className="object-cover" src="/add-guide.png" />
+                <AutoHeightImage
+                  alt="추가 가이드"
+                  className="object-cover"
+                  loading="eager"
+                  src="/add-guide.png"
+                />
               </div>
             </div>
           </Section>
