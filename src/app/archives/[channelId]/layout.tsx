@@ -3,6 +3,7 @@ import { getThreads } from '@/apis/threads'
 import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/SlackThreadLinkItem'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
+import { compareSlackTimestampDesc } from '@/utils/date'
 
 interface ChannelLayoutProps {
   params: Promise<{
@@ -12,7 +13,10 @@ interface ChannelLayoutProps {
 
 const fetchChannelPageData = async (channelId: string) => {
   const [channel, threads] = await Promise.all([getChannel(channelId), getThreads(channelId)])
-  return { channel, threads }
+  return {
+    channel,
+    threads: threads.toSorted((a, b) => compareSlackTimestampDesc(a.head.ts, b.head.ts)),
+  }
 }
 
 const ChannelLayout = async ({ params, children }: React.PropsWithChildren<ChannelLayoutProps>) => {
