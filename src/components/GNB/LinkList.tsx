@@ -47,6 +47,10 @@ const linkData: Array<{ href: string; name: string; startsWith?: boolean }> = [
     href: '/',
   },
   {
+    name: '키워드',
+    href: '/keywords',
+  },
+  {
     name: '아카이브',
     href: '/archives',
     startsWith: true,
