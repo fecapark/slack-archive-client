@@ -57,3 +57,7 @@ export const convertSlackTimestampToISOString = (timestamp: string) => {
 export const compareSlackTimestampDesc = (a: string, b: string) => {
   return compareDesc(convertSlackTimestampToISOString(a), convertSlackTimestampToISOString(b))
 }
+
+export const makeStaticSlackTimestamp = (hour: number, minutes: number) => {
+  return (new Date(`2000/1/1 ${hour}:${minutes}`).getTime() / 1000).toString()
+}

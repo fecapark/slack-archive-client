@@ -7,13 +7,10 @@ import { YourssuSlackLink } from '@/app/(root)/components/YourssuSlackLink'
 import { Footer } from '@/components/Footer'
 import { SlackMessageInput } from '@/components/Slack/SlackMessageInput'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
+import { makeStaticSlackTimestamp } from '@/utils/date'
 import { convertNewlineToJSX } from '@toss/react'
 
 const Home = () => {
-  const makeStaticSlackTimestamp = (hour: number, minutes: number) => {
-    return (new Date(`2000/1/1 ${hour}:${minutes}`).getTime() / 1000).toString()
-  }
-
   return (
     <div className="flex size-full flex-col pt-20">
       <main className="flex grow flex-col items-center gap-10 px-10">
