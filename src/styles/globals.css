@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import './theme.gen.css';
 @import './transition.css';
+@import './breakpoint.css';
 
 @theme {
   --font-pretendard: var(--font-pretendard);

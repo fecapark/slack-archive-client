@@ -20,9 +20,20 @@ const CommandItem = ({ name, description, selected }: CommandItemProps) => {
         </div>
         <div className="flex flex-col">
           <div className="text-[15px] leading-[22px] font-bold">{name}</div>
-          <div className="text-[13px] leading-[18px]">
-            <span className="mr-0.5 font-bold">명령 · 멘션봇</span>
-            <span> · {description}</span>
+          <div className="flex text-[13px] leading-[18px]">
+            <span className="mr-0.5 shrink-0 font-bold">명령 · 멘션봇</span>
+            <span
+              className="grow overflow-hidden text-ellipsis"
+              style={{
+                whiteSpace: 'initial',
+                display: '-webkit-box',
+                WebkitLineClamp: 1,
+                WebkitBoxOrient: 'vertical',
+              }}
+            >
+              {' '}
+              · {description}
+            </span>
           </div>
         </div>
       </div>
@@ -32,8 +43,8 @@ const CommandItem = ({ name, description, selected }: CommandItemProps) => {
 
 export const SlackMessageInputCommandOverlay = ({ children }: React.PropsWithChildren<unknown>) => {
   return (
-    <div className="absolute top-0.5 -left-1.5 -translate-y-[100%]" data-command-overlay>
-      <div className="w-[435px] rounded-lg bg-white py-2 shadow-[shadow:rgba(29,_28,_29,_0.13)_0_0_0_1px,rgba(0,0,0,0.1)_0_4px_12px_0]">
+    <div className="absolute top-0.5 -left-1.5 w-full -translate-y-[100%]" data-command-overlay>
+      <div className="w-full max-w-[435px] rounded-lg bg-white py-2 shadow-[shadow:rgba(29,_28,_29,_0.13)_0_0_0_1px,rgba(0,0,0,0.1)_0_4px_12px_0]">
         {children}
       </div>
     </div>
