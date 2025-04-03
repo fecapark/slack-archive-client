@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { MdArrowOutward } from 'react-icons/md'
 
-import { LandingLogo } from '@/app/(root)/components/LandingLogo'
 import { LandingSlackConversation } from '@/app/(root)/components/LandingSlackConversation'
 import { YourssuSlackLink } from '@/app/(root)/components/YourssuSlackLink'
 import { Footer } from '@/components/Footer'
+import { InteractiveLogo } from '@/components/InteractiveLogo/InteractiveLogo'
 import { SlackMessageInput } from '@/components/Slack/SlackMessageInput'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { makeStaticSlackTimestamp } from '@/utils/date'
@@ -16,7 +16,7 @@ const Home = () => {
       <main className="flex grow flex-col items-center gap-10 px-10">
         {/* CLS를 방지해요 */}
         <div className="h-[86px] w-[64px]">
-          <LandingLogo />
+          <InteractiveLogo />
         </div>
 
         <div className="mb-14 flex flex-col items-center gap-2">

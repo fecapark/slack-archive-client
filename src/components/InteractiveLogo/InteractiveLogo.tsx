@@ -7,7 +7,7 @@ import { useHover } from '@/hooks/useHover'
 
 const Lottie = dynamic(() => import('react-lottie-player'), { ssr: false })
 
-export const LandingLogo = () => {
+export const InteractiveLogo = () => {
   const [ref, isHover] = useHover<HTMLDivElement>()
 
   const option: { direction: -1 | 1; speed: number } = isHover
