@@ -34,7 +34,7 @@ const Home = () => {
               title={
                 <>
                   원하는{' '}
-                  <Link className="px-0.5 underline" href="/">
+                  <Link className="px-0.5 underline" href="/keywords">
                     키워드
                     <MdArrowOutward className="inline text-base" />
                   </Link>
