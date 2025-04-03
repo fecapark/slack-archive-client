@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+@theme {
+  --breakpoint-keywords-lg: 1124px;
+}
