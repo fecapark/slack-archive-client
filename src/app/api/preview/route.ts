@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  const res = await getLinkPreview(url)
+  const res = await getLinkPreview(url, { imagesPropertyType: 'og' })
   if ('title' in res) {
     return NextResponse.json(res, {
       status: 200,
