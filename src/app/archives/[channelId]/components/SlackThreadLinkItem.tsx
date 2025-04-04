@@ -24,7 +24,6 @@ export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadL
       >
         <SlackMessageItem.Markdown isEdited={head.edited}>{head.text}</SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={head.files ?? undefined} />
-        {head.reactions && <SlackMessageReactionList reactions={head.reactions} />}
         {links.map((link) => {
           return (
             <Suspense key={link}>
@@ -32,6 +31,7 @@ export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadL
             </Suspense>
           )
         })}
+        {head.reactions && <SlackMessageReactionList reactions={head.reactions} />}
         <SlackThreadInformation
           archivedAt={archivedAt}
           channelId={head.channel}
