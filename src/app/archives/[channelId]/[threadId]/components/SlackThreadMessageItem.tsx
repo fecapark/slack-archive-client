@@ -1,8 +1,11 @@
 import clsx from 'clsx'
+import { Suspense } from 'react'
 
 import { MessageItem } from '@/apis/messages'
 import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMessageMenu'
+import { useAllLinksInText } from '@/app/archives/[channelId]/hooks/useAllLinksInText'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
+import { SlackMessageLinkPreview } from '@/components/Slack/SlackMessageItem/components/SlackMessageLinkPreivew'
 import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
 
 interface SlackThreadMessageItemProps {
@@ -11,6 +14,7 @@ interface SlackThreadMessageItemProps {
 }
 
 export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessageItemProps) => {
+  const links = useAllLinksInText(message.text)
   return (
     <div
       className={clsx(
@@ -29,6 +33,13 @@ export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessag
         </SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={message.files ?? undefined} />
         {message.reactions && <SlackMessageReactionList reactions={message.reactions} />}
+        {links.map((link) => {
+          return (
+            <Suspense key={link}>
+              <SlackMessageLinkPreview url={link} />
+            </Suspense>
+          )
+        })}
       </SlackMessageItem>
 
       <SlackMessageMenu
