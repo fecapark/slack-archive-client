@@ -1,5 +1,12 @@
 import { trim, trimEnd, trimStart } from 'es-toolkit'
 
+import {
+  codeBlockRegex,
+  emojiRegex,
+  linkWithTextRegex,
+  mentionRegex,
+  strikeRegex,
+} from '@/components/SlackMarkdown/utils/regex'
 import { objectKeys } from '@toss/utils'
 
 const gtltConvertMap = {
@@ -18,18 +25,17 @@ const replaceABrAfterTag = (text: string, tagname: string) => {
 
 export const convertMentionString = (text: string) => {
   const wrapMentions = (text: string) => {
-    return text.replace(/(<(@|!)[^>]+>\s*)+/g, (match) => {
+    return text.replace(mentionRegex.multiple, (match) => {
       return `<span class="inline-flex items-center gap-1 flex-wrap">${match}</span>`
     })
   }
 
-  return wrapMentions(text).replace(/<(@|!)[^>]+>/g, (match) => {
+  return wrapMentions(text).replace(mentionRegex.single, (match) => {
     match = match.replace(/<(@|!)|>/g, '')
     return `<span data-mention="true">@${match}</span>`
   })
 }
 
-const codeBlockRegex = /```[^`]*(?:`(?!``)[^`]*)*```/g
 const codeBlockPlaceholder =
   '_____f1ae2436-495c-4cde-9396-cdca8965b295_CODEBLOCK_f1ae2436-495c-4cde-9396-cdca8965b295____'
 const rawNewLineElement = String.raw`<div className="h-2" />`
@@ -83,7 +89,7 @@ export const decodeCodeBlockContent = (text: string) => {
 }
 
 export const convertLinkString = (text: string) => {
-  return text.replace(/<(http[^>]+)>/g, (match) => {
+  return text.replace(linkWithTextRegex, (match) => {
     const [rawUrl, rawText] = match.split('|')
 
     let url = trimStart(rawUrl ?? '', '<')
@@ -98,8 +104,6 @@ export const convertLinkString = (text: string) => {
 }
 
 export const convertInlineEmojiString = (text: string) => {
-  const emojiRegex = /:https:\/\/[^|]+\|((:[^:]+:(?::skin-tone-\d+:)?)):/g
-
   const leftString = text
     .replace(emojiRegex, '')
     .replaceAll(rawNewLineElement, '')
@@ -125,7 +129,7 @@ export const convertInlineEmojiString = (text: string) => {
 }
 
 export const convertStrikeString = (text: string) => {
-  return text.replace(/~([^~]+)~/g, (match) => {
+  return text.replace(strikeRegex, (match) => {
     const resolveNewLine = match
       .replaceAll(rawNewLineElement, '</s><s>')
       .replaceAll(rawBrElement, '</s><s>')
