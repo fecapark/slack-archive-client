@@ -32,7 +32,6 @@ export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessag
           {message.text}
         </SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={message.files ?? undefined} />
-        {message.reactions && <SlackMessageReactionList reactions={message.reactions} />}
         {links.map((link) => {
           return (
             <Suspense key={link}>
@@ -40,6 +39,7 @@ export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessag
             </Suspense>
           )
         })}
+        {message.reactions && <SlackMessageReactionList reactions={message.reactions} />}
       </SlackMessageItem>
 
       <SlackMessageMenu
