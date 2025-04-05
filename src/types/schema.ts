@@ -78,7 +78,7 @@ export const MessageYoutubeAttachmentSchema = z.object({
   titleLink: z.string(),
   type: z.literal('youtube'),
   url: z.string(),
-  videoHTM: z.string(),
+  videoHTML: z.string(),
   videoHTMLHeight: z.number(),
   videoHTMLWidth: z.number(),
 })
