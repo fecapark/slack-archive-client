@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import Image from 'next/image'
 
 import { SlackMessageMediaList } from '@/components/Slack/SlackMessageItem/components/SlackMessageMediaList'
@@ -49,7 +48,12 @@ export const SlackMessageItem = ({
   isGrouped,
 }: React.PropsWithChildren<SlackMessageItemProps>) => {
   return (
-    <div className={clsx('flex', isGrouped && 'pl-11')}>
+    <div className="flex">
+      {isGrouped && (
+        <div className="ease-ease mr-2 h-fit w-9 shrink-0 text-right text-xs leading-[22.0002px] text-[rgb(97,96,97)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          {formatTemplates['10:00'](convertSlackTimestampToISOString(createdAt))}
+        </div>
+      )}
       {!isGrouped && (
         <div className="mr-2 shrink-0">
           <div className="overflow-hidden rounded-md">

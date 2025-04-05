@@ -24,7 +24,7 @@ export const SlackThreadMessageItem = ({
   return (
     <div
       className={clsx(
-        'hover:bg-grey100 ease-ease relative rounded-md px-4 pt-2 pb-1 transition-colors duration-300',
+        'hover:bg-grey100 ease-ease group relative rounded-md px-4 pt-2 pb-1 transition-colors duration-300',
         isGrouped && '!pt-1 !pb-0',
         className
       )}
