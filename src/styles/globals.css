@@ -38,3 +38,10 @@ body {
     'Helvetica Neue',
     sans-serif;
 }
+
+.yt-embed,
+.yt-embed iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
