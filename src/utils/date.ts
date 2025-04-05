@@ -1,4 +1,5 @@
-import { addHours, compareDesc, DateArg, isThisYear } from 'date-fns'
+import { compareDesc, DateArg, isThisYear } from 'date-fns'
+import { toZonedTime } from 'date-fns-tz'
 import { formatWithOptions } from 'date-fns/fp'
 import { ko } from 'date-fns/locale/ko'
 
@@ -8,9 +9,8 @@ import { ko } from 'date-fns/locale/ko'
 */
 const formatKo = (fmt: string) => {
   const fn = formatWithOptions({ locale: ko })(fmt)
-  const kstOffset = 9 // KST: UTC+9
   return (date: DateArg<Date>) => {
-    return fn(addHours(date, kstOffset))
+    return fn(toZonedTime(date, 'Asia/Seoul'))
   }
 }
 
