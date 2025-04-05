@@ -1,6 +1,7 @@
 import { getMessages } from '@/apis/messages'
 import { SlackThreadHeadMessageItem } from '@/app/archives/[channelId]/[threadId]/components/SlackThreadHeadMessageItem'
 import { SlackThreadMessageItem } from '@/app/archives/[channelId]/[threadId]/components/SlackThreadMessageItem'
+import { groupMessagesWithSameUser } from '@/app/archives/[channelId]/[threadId]/utils/groupMessagesWithSameUser'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { formatTemplates } from '@/utils/date'
 
@@ -14,10 +15,11 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
   const { threadId } = await params
   const [headMessage, ...messages] = await getMessages(threadId)
 
+  const groupedMessages = groupMessagesWithSameUser(messages)
   const { archivedAt } = headMessage.thread
 
   const getThreadListLink = () => {
-    const channelId = messages[0].channel.id
+    const channelId = headMessage.channel.id
     return `/archives/${channelId}`
   }
 
@@ -34,8 +36,17 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
           message={headMessage}
           messageCount={messages.length}
         />
-        {messages.map((message) => (
-          <SlackThreadMessageItem key={message.ts} message={message} />
+        {groupedMessages.map((messageGroup) => (
+          <>
+            <SlackThreadMessageItem
+              className={messageGroup.length > 1 ? '!pb-0' : ''}
+              key={messageGroup[0].ts}
+              message={messageGroup[0]}
+            />
+            {messageGroup.slice(1).map((message) => (
+              <SlackThreadMessageItem isGrouped key={message.ts} message={message} />
+            ))}
+          </>
         ))}
       </div>
     </ArchivePannel>

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Image from 'next/image'
 
 import { SlackMessageMediaList } from '@/components/Slack/SlackMessageItem/components/SlackMessageMediaList'
@@ -9,6 +10,7 @@ interface SlackMessageItemProps {
   createdAt: string
   createdAtFormat?: keyof typeof formatTemplates
   isBot?: boolean
+  isGrouped?: boolean
   profileImageUrl: string
   username: string
 }
@@ -44,27 +46,32 @@ export const SlackMessageItem = ({
   createdAt,
   createdAtFormat = '(2024년)? 2월 3일, 오후 10:23',
   isBot,
+  isGrouped,
 }: React.PropsWithChildren<SlackMessageItemProps>) => {
   return (
-    <div className="flex">
-      <div className="mr-2 shrink-0">
-        <div className="overflow-hidden rounded-md">
-          <Image alt="Avatar" height={36} src={profileImageUrl} width={36} />
+    <div className={clsx('flex', isGrouped && 'pl-11')}>
+      {!isGrouped && (
+        <div className="mr-2 shrink-0">
+          <div className="overflow-hidden rounded-md">
+            <Image alt="Avatar" height={36} src={profileImageUrl} width={36} />
+          </div>
         </div>
-      </div>
+      )}
       <div className="flex-[1_1_0]">
-        <div className="-mt-1 flex items-center">
-          <span className="text-[15px] font-bold text-[#1d1c1d]">{username}</span>
-          {isBot && (
-            <span className="ml-1 flex h-[14px] items-center rounded-xs bg-[rgba(29,28,29,0.13)] px-[3px] py-[1px] text-[10px] font-bold text-[rgba(29,28,29,0.7)]">
-              앱
+        {!isGrouped && (
+          <div className="-mt-1 flex items-center">
+            <span className="text-[15px] font-bold text-[#1d1c1d]">{username}</span>
+            {isBot && (
+              <span className="ml-1 flex h-[14px] items-center rounded-xs bg-[rgba(29,28,29,0.13)] px-[3px] py-[1px] text-[10px] font-bold text-[rgba(29,28,29,0.7)]">
+                앱
+              </span>
+            )}
+            &nbsp;&nbsp;
+            <span className="text-xs text-[#616061]">
+              {formatTemplates[createdAtFormat](convertSlackTimestampToISOString(createdAt))}
             </span>
-          )}
-          &nbsp;&nbsp;
-          <span className="text-xs text-[#616061]">
-            {formatTemplates[createdAtFormat](convertSlackTimestampToISOString(createdAt))}
-          </span>
-        </div>
+          </div>
+        )}
 
         {children}
       </div>

@@ -11,16 +11,22 @@ import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/co
 
 interface SlackThreadMessageItemProps {
   className?: string
+  isGrouped?: boolean
   message: MessageItem
 }
 
-export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessageItemProps) => {
+export const SlackThreadMessageItem = ({
+  message,
+  className,
+  isGrouped,
+}: SlackThreadMessageItemProps) => {
   useScrollToMessageOnMountEffect()
 
   return (
     <div
       className={clsx(
         'hover:bg-grey100 ease-ease relative rounded-md px-4 pt-2 pb-1 transition-colors duration-300',
+        isGrouped && '!pt-1 !pb-0',
         className
       )}
       data-message-id={message.ts}
@@ -28,6 +34,7 @@ export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessag
       <SlackMessageItem
         createdAt={message.ts}
         isBot={message.user.isBot}
+        isGrouped={isGrouped}
         profileImageUrl={message.user.avatar}
         username={message.user.name}
       >
