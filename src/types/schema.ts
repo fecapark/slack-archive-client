@@ -48,6 +48,60 @@ export const MessageUserSchema = z.object({
   avatar: z.string(),
 })
 
+export const MessageLinkAttachmentSchema = z.object({
+  fromUrl: z.string(),
+  imageHeight: z.number().optional(),
+  imageUrl: z.string().optional(),
+  imageWidth: z.number().optional(),
+  serviceIcon: z.string(),
+  serviceName: z.string(),
+  text: z.string().optional(),
+  title: z.string(),
+  titleLink: z.string(),
+  type: z.literal('link'),
+  url: z.string(),
+})
+
+export type MessageLinkAttachmentItem = z.infer<typeof MessageLinkAttachmentSchema>
+
+export const MessageYoutubeAttachmentSchema = z.object({
+  authorLink: z.string(),
+  authorName: z.string(),
+  serviceIcon: z.string(),
+  serviceName: z.string(),
+  serviceUrl: z.string(),
+  text: z.string().optional(),
+  thumbHeight: z.number(),
+  thumbUrl: z.string(),
+  thumbWidth: z.number(),
+  title: z.string(),
+  titleLink: z.string(),
+  type: z.literal('youtube'),
+  url: z.string(),
+  videoHTM: z.string(),
+  videoHTMLHeight: z.number(),
+  videoHTMLWidth: z.number(),
+})
+
+export type MessageYoutubeAttachmentItem = z.infer<typeof MessageYoutubeAttachmentSchema>
+
+export const MessageSlackAttachmentSchema = z.object({
+  authorIcon: z.string(),
+  authorLink: z.string(),
+  authorName: z.string(),
+  footer: z.string(),
+  text: z.string().optional(),
+  type: z.literal('slack'),
+  url: z.string(),
+})
+
+export type MessageSlackAttachmentItem = z.infer<typeof MessageSlackAttachmentSchema>
+
+export type MessageAttachmentItem =
+  | MessageLinkAttachmentItem
+  | MessageSlackAttachmentItem
+  | MessageYoutubeAttachmentItem
+
 export const MessageSchema = z.object({
   ts: z.string(),
   threadTs: z.string(),
@@ -57,4 +111,13 @@ export const MessageSchema = z.object({
   user: MessageUserSchema,
   files: z.array(MessageFileSchema).nullable(),
   reactions: z.array(MessageReactionSchema).nullable(),
+  attachments: z
+    .array(
+      z.union([
+        MessageLinkAttachmentSchema,
+        MessageYoutubeAttachmentSchema,
+        MessageSlackAttachmentSchema,
+      ])
+    )
+    .nullable(),
 })
