@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { useContext, useState } from 'react'
+import { SetStateAction, useContext, useState } from 'react'
 
 import { PopoverContext } from '@/components/Popover/context'
 import { usePopoverBehavior } from '@/components/Popover/hook'
@@ -10,6 +10,7 @@ import * as PrimivtivePopover from '@radix-ui/react-popover'
 
 export interface PopoverProps {
   behavior?: PopoverBehaviorType
+  onOpenChange?: (v: boolean) => void
 }
 
 interface ContentProps extends PrimivtivePopover.PopoverContentProps {
@@ -85,12 +86,24 @@ export const Closeable = ({ children }: React.PropsWithChildren<unknown>) => {
 export const Popover = ({
   children,
   behavior = 'click',
+  onOpenChange,
 }: React.PropsWithChildren<PopoverProps>) => {
   const [open, setOpen] = useState(false)
 
+  const setOpenWrapper = (v: SetStateAction<boolean>) => {
+    if (typeof v === 'function') {
+      const next = v(open)
+      onOpenChange?.(next)
+      setOpen(() => next)
+    } else {
+      onOpenChange?.(v)
+      setOpen(v)
+    }
+  }
+
   return (
-    <PopoverContext.Provider value={{ behavior, open, setOpen }}>
-      <PrimivtivePopover.Root onOpenChange={(v) => setOpen(v)} open={open}>
+    <PopoverContext.Provider value={{ behavior, open, setOpen: setOpenWrapper }}>
+      <PrimivtivePopover.Root onOpenChange={(v) => setOpenWrapper(v)} open={open}>
         {children}
       </PrimivtivePopover.Root>
     </PopoverContext.Provider>

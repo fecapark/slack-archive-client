@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import Link from 'next/link'
 import { IoEllipsisHorizontal } from 'react-icons/io5'
 import { MdContentCopy, MdOpenInNew } from 'react-icons/md'
@@ -13,32 +14,55 @@ import { getSlackMessagePermalink } from '@/utils/slack'
 import { clipboard } from '@toss/utils'
 
 interface SlackMessageMenuProps {
+  active?: boolean
   channelId: string
+  isFirstItem?: boolean
   messageId?: string
+  onOpenChange?: (open: boolean) => void
   threadId: string
 }
 
 const menu = tv({
   slots: {
     target:
-      'hover:bg-grey200 ease-ease cursor-pointer rounded-sm p-2 text-sm transition-colors duration-300',
+      'hover:bg-grey200 ease-ease inline-flex cursor-pointer rounded-sm p-2 text-sm transition-colors duration-300',
     content:
       'min-w-[160px] rounded-lg border-none bg-white px-1 py-2 shadow-[shadow:rgba(23,23,28,0.05)_0px_2px_10px,rgba(23,23,28,0.05)_0px_2px_60px]',
     buttonItem:
       'hover:bg-grey100 ease-ease text-text-secondary flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-colors duration-300',
   },
+  variants: {
+    active: {
+      true: {
+        target: 'bg-grey200',
+      },
+    },
+  },
 })
 
-export const SlackMessageMenu = ({ threadId, channelId, messageId }: SlackMessageMenuProps) => {
+export const SlackMessageMenu = ({
+  threadId,
+  channelId,
+  messageId,
+  isFirstItem,
+  active,
+  onOpenChange,
+}: SlackMessageMenuProps) => {
   const { target, content, buttonItem } = menu()
   const toast = useToast()
   const isThreadMessage = !!messageId
 
   return (
-    <div className="absolute top-1 right-2">
-      <Menu>
+    <div
+      className={clsx(
+        'invisible absolute top-0 right-2 -translate-y-1/2 rounded-sm border border-[rgba(29,28,29,0.13)] bg-white group-hover/menu:visible',
+        active && 'visible',
+        isFirstItem && '!top-1 !-translate-y-0'
+      )}
+    >
+      <Menu onOpenChange={onOpenChange}>
         <Menu.Target>
-          <div className={target()}>
+          <div className={target({ active })}>
             <IoEllipsisHorizontal />
           </div>
         </Menu.Target>

@@ -38,7 +38,7 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
 
           return (
             <div key={groupHead.ts}>
-              <SlackThreadMessageItem className={isGrouped ? '!pb-0' : ''} message={groupHead} />
+              <SlackThreadMessageItem isGrouped={isGrouped} message={groupHead} />
               {others.map((message) => (
                 <SlackThreadMessageItem isGrouped key={message.ts} message={message} />
               ))}

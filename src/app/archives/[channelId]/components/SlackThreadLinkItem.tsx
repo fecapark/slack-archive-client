@@ -1,7 +1,7 @@
 'use client'
 
 import { ThreadItem } from '@/apis/threads'
-import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMessageMenu'
+import { SlackMessageWithMenuItem } from '@/app/archives/[channelId]/components/SlackMessageWithMenuItem'
 import { SlackThreadInformation } from '@/app/archives/[channelId]/components/SlackThreadInformation'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageAttachment } from '@/components/Slack/SlackMessageItem/components/SlackMessageAttachment'
@@ -9,13 +9,21 @@ import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/co
 
 type SlackThreadLinkItemProps = Pick<ThreadItem, 'head' | 'metadata'> & {
   archivedAt: string
+  isFirstItem?: boolean
 }
 
-export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadLinkItemProps) => {
+export const SlackThreadLinkItem = ({
+  head,
+  archivedAt,
+  metadata,
+  isFirstItem,
+}: SlackThreadLinkItemProps) => {
   return (
-    <div
-      className="hover:bg-grey100 ease-ease relative rounded-md px-4 py-3 transition-colors duration-300"
+    <SlackMessageWithMenuItem
+      channelId={head.channel}
       data-thread-id={head.threadTs}
+      isFirstItem={isFirstItem}
+      threadId={head.threadTs}
     >
       <SlackMessageItem
         createdAt={head.ts}
@@ -36,8 +44,6 @@ export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadL
           threadId={head.threadTs}
         />
       </SlackMessageItem>
-
-      <SlackMessageMenu channelId={head.channel} threadId={head.threadTs} />
-    </div>
+    </SlackMessageWithMenuItem>
   )
 }
