@@ -33,6 +33,7 @@ export const SlackThreadMessageItem = ({ message, variants }: SlackThreadMessage
       className={group({ type: variants })}
       data-message-id={message.ts}
       isFirstItem={variants === 'thread-head'}
+      messageId={message.ts}
       threadId={message.threadTs}
     >
       <SlackMessageItem
