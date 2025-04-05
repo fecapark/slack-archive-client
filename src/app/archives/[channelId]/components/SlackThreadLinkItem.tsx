@@ -13,7 +13,10 @@ type SlackThreadLinkItemProps = Pick<ThreadItem, 'head' | 'metadata'> & {
 
 export const SlackThreadLinkItem = ({ head, archivedAt, metadata }: SlackThreadLinkItemProps) => {
   return (
-    <div className="hover:bg-grey100 ease-ease relative rounded-md px-4 py-3 transition-colors duration-300">
+    <div
+      className="hover:bg-grey100 ease-ease relative rounded-md px-4 py-3 transition-colors duration-300"
+      data-thread-id={head.threadTs}
+    >
       <SlackMessageItem
         createdAt={head.ts}
         createdAtFormat="2월 3일, 오후 10:23"
