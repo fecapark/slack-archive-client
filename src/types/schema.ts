@@ -93,6 +93,7 @@ export const MessageSlackAttachmentSchema = z.object({
   text: z.string().optional(),
   type: z.literal('slack'),
   url: z.string(),
+  ts: z.string(),
 })
 
 export type MessageSlackAttachmentItem = z.infer<typeof MessageSlackAttachmentSchema>
