@@ -9,6 +9,7 @@ import { IconSlack } from '@/components/Icons/IconSlack'
 import { Menu } from '@/components/Menu'
 import { useToast } from '@/hooks/useToast'
 import { getSlackMessagePermalink } from '@/utils/slack'
+import { clipboard } from '@toss/utils'
 
 interface SlackMessageMenuProps {
   channelId: string
@@ -44,9 +45,15 @@ export const SlackMessageMenu = ({ threadId, channelId, messageId }: SlackMessag
         <Menu.Content align="end" className={content()} sideOffset={4}>
           <Menu.ButtonItem
             className={buttonItem()}
-            onClick={() =>
+            onClick={() => {
+              const queryString = messageId
+                ? `?${new URLSearchParams({ m: messageId }).toString()}`
+                : ''
+              clipboard.writeText(
+                `${process.env.NEXT_PUBLIC_PUBLIC_ORIGIN}/archives/${channelId}/${threadId}${queryString}`
+              )
               toast.success(`${isThreadMessage ? '메시지' : '스레드'} 링크를 복사했어요.`)
-            }
+            }}
           >
             <MdContentCopy />
             <div>링크 복사하기</div>
