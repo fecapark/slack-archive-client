@@ -9,39 +9,36 @@ import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageAttachment } from '@/components/Slack/SlackMessageItem/components/SlackMessageAttachment'
 import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
 interface SlackThreadMessageItemProps {
-  isFirstItem?: boolean
-  isGrouped?: boolean
   message: MessageItem
+  variants?: 'group-child' | 'group-head' | 'group-head-alone' | 'thread-head'
 }
 
 const group = tv({
   variants: {
-    isGrouped: {
-      true: 'pt-1 pb-0',
-      false: 'pt-2 pb-1',
+    type: {
+      'group-head': 'pt-2 pb-0',
+      'group-head-alone': 'pt-2 pb-1',
+      'group-child': 'pt-1 pb-0',
+      'thread-head': 'pt-2 pb-1',
     },
   },
 })
 
-export const SlackThreadMessageItem = ({
-  message,
-  isFirstItem,
-  isGrouped,
-}: SlackThreadMessageItemProps) => {
+export const SlackThreadMessageItem = ({ message, variants }: SlackThreadMessageItemProps) => {
   useScrollToMessageOnMountEffect()
 
   return (
     <SlackMessageWithMenuItem
       channelId={message.channel.id}
-      className={group({ isGrouped })}
+      className={group({ type: variants })}
       data-message-id={message.ts}
-      isFirstItem={isFirstItem}
+      isFirstItem={variants === 'thread-head'}
       threadId={message.threadTs}
     >
       <SlackMessageItem
         createdAt={message.ts}
         isBot={message.user.isBot}
-        isGrouped={isGrouped}
+        isGrouped={variants === 'group-child'}
         profileImageUrl={message.user.avatar}
         username={message.user.name}
       >

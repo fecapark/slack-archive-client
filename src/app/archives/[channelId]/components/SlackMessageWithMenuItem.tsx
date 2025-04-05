@@ -22,7 +22,7 @@ export const SlackMessageWithMenuItem = ({
   return (
     <div
       className={clsx(
-        'hover:bg-grey100 ease-ease group/menu relative rounded-md px-4 py-3 transition-colors duration-300',
+        'hover:bg-grey100 ease-ease group relative rounded-md px-4 py-3 transition-colors duration-300',
         itemActive && 'bg-grey100',
         className
       )}
