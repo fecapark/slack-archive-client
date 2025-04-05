@@ -55,7 +55,7 @@ export const SlackMessageMenu = ({
   return (
     <div
       className={clsx(
-        'invisible absolute top-0 right-2 -translate-y-1/2 rounded-sm border border-[rgba(29,28,29,0.13)] bg-white group-hover/menu:visible',
+        'invisible absolute top-0 right-2 -translate-y-1/2 rounded-sm border border-[rgba(29,28,29,0.13)] bg-white group-hover:visible',
         active && 'visible',
         isFirstItem && '!top-1 !-translate-y-0'
       )}

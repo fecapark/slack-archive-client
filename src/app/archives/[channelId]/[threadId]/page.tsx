@@ -34,13 +34,16 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
         <SlackThreadHeadMessageItem message={headMessage} messageCount={messages.length} />
         {groupedMessages.map((messageGroup) => {
           const [groupHead, ...others] = messageGroup
-          const isGrouped = others.length > 0
+          const isAlone = others.length === 0
 
           return (
             <div key={groupHead.ts}>
-              <SlackThreadMessageItem isGrouped={isGrouped} message={groupHead} />
+              <SlackThreadMessageItem
+                message={groupHead}
+                variants={isAlone ? 'group-head-alone' : 'group-head'}
+              />
               {others.map((message) => (
-                <SlackThreadMessageItem isGrouped key={message.ts} message={message} />
+                <SlackThreadMessageItem key={message.ts} message={message} variants="group-child" />
               ))}
             </div>
           )
