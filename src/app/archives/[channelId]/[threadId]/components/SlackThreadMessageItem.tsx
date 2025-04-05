@@ -8,7 +8,6 @@ import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMes
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageAttachment } from '@/components/Slack/SlackMessageItem/components/SlackMessageAttachment'
 import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
-
 interface SlackThreadMessageItemProps {
   className?: string
   isGrouped?: boolean
@@ -43,7 +42,7 @@ export const SlackThreadMessageItem = ({
         </SlackMessageItem.Markdown>
         <SlackMessageItem.MediaList files={message.files ?? undefined} />
         {message.attachments?.map((attachment) => {
-          return <SlackMessageAttachment attachment={attachment} key={attachment.url} />
+          return <SlackMessageAttachment attachment={attachment} key={attachment.id} />
         })}
         {message.reactions && <SlackMessageReactionList reactions={message.reactions} />}
       </SlackMessageItem>

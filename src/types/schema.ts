@@ -60,6 +60,7 @@ export const MessageLinkAttachmentSchema = z.object({
   titleLink: z.string(),
   type: z.literal('link'),
   url: z.string(),
+  id: z.string(),
 })
 
 export type MessageLinkAttachmentItem = z.infer<typeof MessageLinkAttachmentSchema>
@@ -81,6 +82,7 @@ export const MessageYoutubeAttachmentSchema = z.object({
   videoHTML: z.string(),
   videoHTMLHeight: z.number(),
   videoHTMLWidth: z.number(),
+  id: z.string(),
 })
 
 export type MessageYoutubeAttachmentItem = z.infer<typeof MessageYoutubeAttachmentSchema>
@@ -94,6 +96,7 @@ export const MessageSlackAttachmentSchema = z.object({
   type: z.literal('slack'),
   url: z.string(),
   ts: z.string(),
+  id: z.string(),
 })
 
 export type MessageSlackAttachmentItem = z.infer<typeof MessageSlackAttachmentSchema>

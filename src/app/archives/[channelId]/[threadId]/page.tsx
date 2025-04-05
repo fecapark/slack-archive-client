@@ -31,23 +31,20 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
       title="스레드"
     >
       <div className="flex h-0 grow flex-col overflow-y-auto">
-        <SlackThreadHeadMessageItem
-          key={headMessage.ts}
-          message={headMessage}
-          messageCount={messages.length}
-        />
-        {groupedMessages.map((messageGroup) => (
-          <>
-            <SlackThreadMessageItem
-              className={messageGroup.length > 1 ? '!pb-0' : ''}
-              key={messageGroup[0].ts}
-              message={messageGroup[0]}
-            />
-            {messageGroup.slice(1).map((message) => (
-              <SlackThreadMessageItem isGrouped key={message.ts} message={message} />
-            ))}
-          </>
-        ))}
+        <SlackThreadHeadMessageItem message={headMessage} messageCount={messages.length} />
+        {groupedMessages.map((messageGroup) => {
+          const [groupHead, ...others] = messageGroup
+          const isGrouped = others.length > 0
+
+          return (
+            <div key={groupHead.ts}>
+              <SlackThreadMessageItem className={isGrouped ? '!pb-0' : ''} message={groupHead} />
+              {others.map((message) => (
+                <SlackThreadMessageItem isGrouped key={message.ts} message={message} />
+              ))}
+            </div>
+          )
+        })}
       </div>
     </ArchivePannel>
   )
