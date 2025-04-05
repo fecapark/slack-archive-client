@@ -6,6 +6,7 @@ import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMes
 interface SlackMessageWithMenuItemProps extends React.HTMLAttributes<HTMLDivElement> {
   channelId: string
   isFirstItem?: boolean
+  messageId?: string
   threadId: string
 }
 
@@ -15,6 +16,7 @@ export const SlackMessageWithMenuItem = ({
   threadId,
   isFirstItem,
   className,
+  messageId,
   ...props
 }: React.PropsWithChildren<SlackMessageWithMenuItemProps>) => {
   const [itemActive, setItemActive] = useState(false)
@@ -33,6 +35,7 @@ export const SlackMessageWithMenuItem = ({
         active={itemActive}
         channelId={channelId}
         isFirstItem={isFirstItem}
+        messageId={messageId}
         onOpenChange={setItemActive}
         threadId={threadId}
       />
