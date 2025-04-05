@@ -35,10 +35,11 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
         }
       >
         <div className="flex h-0 grow flex-col overflow-y-auto">
-          {threads.map(({ head, archivedAt, metadata }) => (
+          {threads.map(({ head, archivedAt, metadata }, index) => (
             <SlackThreadLinkItem
               archivedAt={archivedAt}
               head={head}
+              isFirstItem={index === 0}
               key={head.ts}
               metadata={metadata}
             />

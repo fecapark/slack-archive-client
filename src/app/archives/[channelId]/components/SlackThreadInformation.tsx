@@ -20,7 +20,7 @@ export const SlackThreadInformation = ({
 }: SlackThreadInformationProps) => {
   return (
     <Link href={`/archives/${channelId}/${threadId}`}>
-      <div className="group ease-ease mb-1 -ml-1 flex max-w-[600px] items-center justify-between rounded-md border border-transparent p-1 text-[13px] transition-colors duration-300 hover:border hover:border-[rgba(29,28,29,0.13)] hover:bg-white">
+      <div className="group/link ease-ease mb-1 -ml-1 flex max-w-[600px] items-center justify-between rounded-md border border-transparent p-1 text-[13px] transition-colors duration-300 hover:border hover:border-[rgba(29,28,29,0.13)] hover:bg-white">
         <div className="flex items-center">
           <div className="flex items-center">
             {metadata.userAvatars.map((avatar) => (
@@ -41,7 +41,7 @@ export const SlackThreadInformation = ({
             {formatTemplates['(2024년)? 2월 3일, 오후 10:23'](archivedAt)} 에 아카이브됨
           </div>
         </div>
-        <div className="ease-ease pr-1 text-[10px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="ease-ease pr-1 text-[10px] opacity-0 transition-opacity duration-300 group-hover/link:opacity-100">
           <MdArrowForwardIos />
         </div>
       </div>

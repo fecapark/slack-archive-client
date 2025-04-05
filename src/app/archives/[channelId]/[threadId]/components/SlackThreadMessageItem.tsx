@@ -1,34 +1,42 @@
 'use client'
 
-import clsx from 'clsx'
+import { tv } from 'tailwind-variants'
 
 import { MessageItem } from '@/apis/messages'
 import { useScrollToMessageOnMountEffect } from '@/app/archives/[channelId]/[threadId]/hooks/useScrollToMessageOnMountEffect'
-import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMessageMenu'
+import { SlackMessageWithMenuItem } from '@/app/archives/[channelId]/components/SlackMessageWithMenuItem'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageAttachment } from '@/components/Slack/SlackMessageItem/components/SlackMessageAttachment'
 import { SlackMessageReactionList } from '@/components/Slack/SlackMessageItem/components/SlackMessageReactionList'
 interface SlackThreadMessageItemProps {
-  className?: string
+  isFirstItem?: boolean
   isGrouped?: boolean
   message: MessageItem
 }
 
+const group = tv({
+  variants: {
+    isGrouped: {
+      true: 'pt-1 pb-0',
+      false: 'pt-2 pb-1',
+    },
+  },
+})
+
 export const SlackThreadMessageItem = ({
   message,
-  className,
+  isFirstItem,
   isGrouped,
 }: SlackThreadMessageItemProps) => {
   useScrollToMessageOnMountEffect()
 
   return (
-    <div
-      className={clsx(
-        'hover:bg-grey100 ease-ease group relative rounded-md px-4 pt-2 pb-1 transition-colors duration-300',
-        isGrouped && '!pt-1 !pb-0',
-        className
-      )}
+    <SlackMessageWithMenuItem
+      channelId={message.channel.id}
+      className={group({ isGrouped })}
       data-message-id={message.ts}
+      isFirstItem={isFirstItem}
+      threadId={message.threadTs}
     >
       <SlackMessageItem
         createdAt={message.ts}
@@ -46,12 +54,6 @@ export const SlackThreadMessageItem = ({
         })}
         {message.reactions && <SlackMessageReactionList reactions={message.reactions} />}
       </SlackMessageItem>
-
-      <SlackMessageMenu
-        channelId={message.channel.id}
-        messageId={message.ts}
-        threadId={message.threadTs}
-      />
-    </div>
+    </SlackMessageWithMenuItem>
   )
 }
