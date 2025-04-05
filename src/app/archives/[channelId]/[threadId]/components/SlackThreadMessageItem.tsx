@@ -3,6 +3,7 @@
 import clsx from 'clsx'
 
 import { MessageItem } from '@/apis/messages'
+import { useScrollToMessageOnMountEffect } from '@/app/archives/[channelId]/[threadId]/hooks/useScrollToMessageOnMountEffect'
 import { SlackMessageMenu } from '@/app/archives/[channelId]/components/SlackMessageMenu'
 import { SlackMessageItem } from '@/components/Slack/SlackMessageItem'
 import { SlackMessageAttachment } from '@/components/Slack/SlackMessageItem/components/SlackMessageAttachment'
@@ -14,12 +15,15 @@ interface SlackThreadMessageItemProps {
 }
 
 export const SlackThreadMessageItem = ({ message, className }: SlackThreadMessageItemProps) => {
+  useScrollToMessageOnMountEffect()
+
   return (
     <div
       className={clsx(
         'hover:bg-grey100 ease-ease relative rounded-md px-4 pt-2 pb-1 transition-colors duration-300',
         className
       )}
+      data-message-id={message.ts}
     >
       <SlackMessageItem
         createdAt={message.ts}
