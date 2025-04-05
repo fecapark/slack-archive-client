@@ -53,7 +53,7 @@ export const MessageLinkAttachmentSchema = z.object({
   imageHeight: z.number().optional(),
   imageUrl: z.string().optional(),
   imageWidth: z.number().optional(),
-  serviceIcon: z.string(),
+  serviceIcon: z.string().optional(),
   serviceName: z.string(),
   text: z.string().optional(),
   title: z.string(),
@@ -67,7 +67,7 @@ export type MessageLinkAttachmentItem = z.infer<typeof MessageLinkAttachmentSche
 export const MessageYoutubeAttachmentSchema = z.object({
   authorLink: z.string(),
   authorName: z.string(),
-  serviceIcon: z.string(),
+  serviceIcon: z.string().optional(),
   serviceName: z.string(),
   serviceUrl: z.string(),
   text: z.string().optional(),

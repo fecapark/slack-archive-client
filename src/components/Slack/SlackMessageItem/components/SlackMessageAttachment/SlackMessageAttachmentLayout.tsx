@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { SlackMarkdown } from '@/components/SlackMarkdown'
 
 interface AttachmentHeaderProps {
-  imageUrl: string
+  imageUrl?: string
 }
 
 interface AttachmentTitleLinkProps {
@@ -25,11 +25,13 @@ const AttachmentHeader = ({
 }: React.PropsWithChildren<AttachmentHeaderProps>) => {
   return (
     <div className="flex items-center">
-      <div className="mr-2 mb-[3px] size-4">
-        {/* 이미지 호스트의 URL을 예측할 수 없기 때문에 HTML img 태그로 변경해요. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="favicon" className="size-full object-contain" src={imageUrl} />
-      </div>
+      {imageUrl && (
+        <div className="mr-2 mb-[3px] size-4">
+          {/* 이미지 호스트의 URL을 예측할 수 없기 때문에 HTML img 태그로 변경해요. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img alt="favicon" className="size-full object-contain" src={imageUrl} />
+        </div>
+      )}
       <div className="font-bold">{children}</div>
     </div>
   )
