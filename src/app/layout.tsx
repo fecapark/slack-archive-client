@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
 import '@/styles/globals.css'
+import { stage } from '@/components/config'
 import { GNB } from '@/components/GNB'
 import { Providers } from '@/components/Providers'
 
@@ -14,7 +15,7 @@ const pretendard = localFont({
 })
 
 export const metadata: Metadata = {
-  title: '유어슈 슬랙 아카이브',
+  title: (stage === 'dev' ? '[개발] ' : '') + '유어슈 슬랙 아카이브',
   description: '어떤 일이 있었을까요?',
 }
 
