@@ -37,10 +37,10 @@ export const convertMentionString = (text: string) => {
 export const convertNewLineToRawElement = (text: string) => {
   const convert = (t: string) => {
     const unifiedNewLineVariants = t.replace(/\r\n|\r|\n/g, '\n')
-    const convertedOnlyOneNewLine = unifiedNewLineVariants.replace(/(?<!\n)\n(?!\n)/g, rawBrElement)
-    return convertedOnlyOneNewLine.replace(/\n{2,}/g, (match) => {
+    const convertedMultipleNewLines = unifiedNewLineVariants.replace(/\n{2,}/g, (match) => {
       return rawNewLineElement.repeat(match.length - 1)
     })
+    return convertedMultipleNewLines.replaceAll('\n', rawBrElement)
   }
 
   const originCodeBlockText = text.match(codeBlockRegex)
