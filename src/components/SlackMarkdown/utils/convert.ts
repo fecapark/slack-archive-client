@@ -5,14 +5,12 @@ import {
   emojiRegex,
   linkWithTextRegex,
   mentionRegex,
+  placeholders,
+  rawBrElement,
+  rawNewLineElement,
   strikeRegex,
 } from '@/components/SlackMarkdown/utils/regex'
 import { objectKeys } from '@toss/utils'
-
-const gtltConvertMap = {
-  '&gt;': '>',
-  '&lt;': '<',
-}
 
 const replaceABrAfterTag = (text: string, tagname: string) => {
   return text.replace(
@@ -36,11 +34,6 @@ export const convertMentionString = (text: string) => {
   })
 }
 
-const codeBlockPlaceholder =
-  '_____f1ae2436-495c-4cde-9396-cdca8965b295_CODEBLOCK_f1ae2436-495c-4cde-9396-cdca8965b295____'
-const rawNewLineElement = String.raw`<div className="h-2" />`
-const rawBrElement = String.raw`<br />`
-
 export const convertNewLineToRawElement = (text: string) => {
   const convert = (t: string) => {
     const unifiedNewLineVariants = t.replace(/\r\n|\r|\n/g, '\n')
@@ -55,10 +48,10 @@ export const convertNewLineToRawElement = (text: string) => {
     return convert(text)
   }
 
-  const safeCodeBlockText = text.replace(codeBlockRegex, codeBlockPlaceholder)
+  const safeCodeBlockText = text.replace(codeBlockRegex, placeholders.codeBlock)
   const convertedText = convert(safeCodeBlockText)
   const result = convertedText.replace(
-    new RegExp(codeBlockPlaceholder, 'g'),
+    new RegExp(placeholders.codeBlock, 'g'),
     originCodeBlockText[0]
   )
   return result
@@ -80,6 +73,11 @@ export const convertCodeBlockString = (text: string) => {
 }
 
 export const decodeCodeBlockContent = (text: string) => {
+  const gtltConvertMap = {
+    '&gt;': '>',
+    '&lt;': '<',
+  }
+
   const decoded = decodeURIComponent(text)
 
   return objectKeys(gtltConvertMap).reduce((acc, key) => {
@@ -138,67 +136,62 @@ export const convertStrikeString = (text: string) => {
 }
 
 export const convertBlockquoteString = (text: string) => {
-  const generatePlaceholderRegex = (k: keyof typeof placeholder) => {
+  const generatePlaceholderRegex = (k: keyof typeof placeholders.blockquote) => {
     const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    const escapedPlaceholder = escapeRegex(placeholder[k])
+    const escapedPlaceholder = escapeRegex(placeholders.blockquote[k])
     const escapedBr = escapeRegex(rawBrElement)
     const escapedDiv = escapeRegex(rawNewLineElement)
-    const allEscapedPlaceholders = objectKeys(placeholder)
-      .map((key) => escapeRegex(placeholder[key]))
+    const allEscapedPlaceholders = objectKeys(placeholders.blockquote)
+      .map((key) => escapeRegex(placeholders.blockquote[key].trim()))
       .join('|')
 
     return new RegExp(
-      `(${escapedPlaceholder}\\s+.*?)(?=${escapedBr}|${escapedDiv}|${allEscapedPlaceholders}|$)`,
-      'g'
+      `(${escapedPlaceholder.trim()}\\s+.*?)(?=${escapedBr}|${escapedDiv}|${allEscapedPlaceholders}|$)`,
+      'gm'
     )
-  }
-
-  const placeholder = {
-    'br-once':
-      '_____f1ae2436-495c-4cde-9396-cdca8965b295_BLOCKQUOTE-BR-ONCE_f1ae2436-495c-4cde-9396-cdca8965b295____',
-    'br-twice':
-      '_____f1ae2436-495c-4cde-9396-cdca8965b295_BLOCKQUOTE-BR-TWICE_f1ae2436-495c-4cde-9396-cdca8965b295____',
-    'div-once':
-      '_____f1ae2436-495c-4cde-9396-cdca8965b295_BLOCKQUOTE-DIV-ONCE_f1ae2436-495c-4cde-9396-cdca8965b295____',
-    'div-twice':
-      '_____f1ae2436-495c-4cde-9396-cdca8965b295_BLOCKQUOTE-DIV-TWICE_f1ae2436-495c-4cde-9396-cdca8965b295____',
-    once: '_____f1ae2436-495c-4cde-9396-cdca8965b295_BLOCKQUOTE-ONCE_f1ae2436-495c-4cde-9396-cdca8965b295____',
-    twice:
-      '_____f1ae2436-495c-4cde-9396-cdca8965b295_BLOCKQUOTE-TWICE_f1ae2436-495c-4cde-9396-cdca8965b295____',
   }
 
   // 반드시 replace하는 순서 고정
   const preConvertedText = text
-    .replaceAll(`${rawBrElement}&gt;&gt;`, placeholder['br-twice'])
-    .replaceAll(`${rawNewLineElement}&gt;&gt;`, placeholder['div-twice'])
-    .replaceAll(`${rawBrElement}&gt;`, placeholder['br-once'])
-    .replaceAll(`${rawNewLineElement}>`, placeholder['div-once'])
-    .replace(/^&gt;&gt;/m, placeholder['twice'])
-    .replace(/^&gt;/m, placeholder['once'])
+    .replaceAll(
+      new RegExp(`${rawBrElement}(&gt;|>)(&gt;|>) `, 'gm'),
+      placeholders.blockquote['br-twice']
+    )
+    .replaceAll(
+      new RegExp(`${rawNewLineElement}(&gt;|>)(&gt;|>) `, 'gm'),
+      placeholders.blockquote['div-twice']
+    )
+    .replaceAll(new RegExp(`${rawBrElement}(&gt;|>) `, 'gm'), placeholders.blockquote['br-once'])
+    .replaceAll(
+      new RegExp(`${rawNewLineElement}(&gt;|>) `, 'gm'),
+      placeholders.blockquote['div-once']
+    )
+    .replace(/^(&gt;|>)(&gt;|>) /m, placeholders.blockquote['twice'])
+    .replace(/^(&gt;|>) /m, placeholders.blockquote['once'])
 
   const blockquoted = preConvertedText
     .replace(generatePlaceholderRegex('br-twice'), (match) => {
-      const content = match.replaceAll(placeholder['br-twice'], '')
+      const content = match.replace(placeholders.blockquote['br-twice'], '')
       return `${rawBrElement}<blockquote data-type="twice">${content}</blockquote>`
     })
     .replace(generatePlaceholderRegex('div-twice'), (match) => {
-      const content = match.replaceAll(placeholder['div-twice'], '')
+      const content = match.replaceAll(placeholders.blockquote['div-twice'], '')
       return `${rawNewLineElement}<blockquote data-type="twice">${content}</blockquote>`
     })
     .replace(generatePlaceholderRegex('br-once'), (match) => {
-      const content = match.replaceAll(placeholder['br-once'], '')
+      const content = match.replaceAll(placeholders.blockquote['br-once'], '')
       return `${rawBrElement}<blockquote data-type="once">${content}</blockquote>`
     })
     .replace(generatePlaceholderRegex('div-once'), (match) => {
-      const content = match.replaceAll(placeholder['div-once'], '')
+      const content = match.replaceAll(placeholders.blockquote['div-once'], '')
       return `${rawNewLineElement}<blockquote data-type="once">${content}</blockquote>`
     })
     .replace(generatePlaceholderRegex('once'), (match) => {
-      const content = match.replaceAll(placeholder['once'], '')
+      const content = match.replaceAll(placeholders.blockquote['once'], '')
       return `<blockquote data-type="once">${content}</blockquote>`
     })
     .replace(generatePlaceholderRegex('twice'), (match) => {
-      const content = match.replaceAll(placeholder['twice'], '')
+      const content = match.replaceAll(placeholders.blockquote['twice'], '')
       return `<blockquote data-type="twice">${content}</blockquote>`
     })
     .replace(
