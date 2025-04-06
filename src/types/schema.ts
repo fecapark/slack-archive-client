@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const ChannelSchema = z.object({
   id: z.string(),
   name: z.string(),
-  description: z.string().optional(),
+  description: z.string().nullish(),
 })
 
 export const ThreadMetadataSchema = z.object({
@@ -22,12 +22,12 @@ export const ThreadSchema = z.object({
 export const MessageFileSchema = z.object({
   created: z.number(),
   filetype: z.string(),
-  height: z.number().optional(),
+  height: z.number().nullish(),
   id: z.string(),
   mimetype: z.string(),
   name: z.string(),
   size: z.number(),
-  width: z.number().optional(),
+  width: z.number().nullish(),
 })
 
 export type MessageFileItem = z.infer<typeof MessageFileSchema>
@@ -36,7 +36,7 @@ export const MessageReactionSchema = z.object({
   name: z.string(),
   users: z.array(z.string()),
   count: z.number(),
-  url: z.string().optional(),
+  url: z.string().nullish(),
 })
 
 export type MessageReactionItem = z.infer<typeof MessageReactionSchema>
@@ -50,12 +50,12 @@ export const MessageUserSchema = z.object({
 
 export const MessageLinkAttachmentSchema = z.object({
   fromUrl: z.string(),
-  imageHeight: z.number().optional(),
-  imageUrl: z.string().optional(),
-  imageWidth: z.number().optional(),
-  serviceIcon: z.string().optional(),
+  imageHeight: z.number().nullish(),
+  imageUrl: z.string().nullish(),
+  imageWidth: z.number().nullish(),
+  serviceIcon: z.string().nullish(),
   serviceName: z.string(),
-  text: z.string().optional(),
+  text: z.string().nullish(),
   title: z.string(),
   titleLink: z.string(),
   type: z.literal('link'),
@@ -68,10 +68,10 @@ export type MessageLinkAttachmentItem = z.infer<typeof MessageLinkAttachmentSche
 export const MessageYoutubeAttachmentSchema = z.object({
   authorLink: z.string(),
   authorName: z.string(),
-  serviceIcon: z.string().optional(),
+  serviceIcon: z.string().nullish(),
   serviceName: z.string(),
   serviceUrl: z.string(),
-  text: z.string().optional(),
+  text: z.string().nullish(),
   thumbHeight: z.number(),
   thumbUrl: z.string(),
   thumbWidth: z.number(),
@@ -92,7 +92,7 @@ export const MessageSlackAttachmentSchema = z.object({
   authorLink: z.string(),
   authorName: z.string(),
   footer: z.string(),
-  text: z.string().optional(),
+  text: z.string().nullish(),
   type: z.literal('slack'),
   url: z.string(),
   ts: z.string(),
@@ -113,8 +113,8 @@ export const MessageSchema = z.object({
   edited: z.boolean(),
   text: z.string(),
   user: MessageUserSchema,
-  files: z.array(MessageFileSchema).nullable(),
-  reactions: z.array(MessageReactionSchema).nullable(),
+  files: z.array(MessageFileSchema).nullish(),
+  reactions: z.array(MessageReactionSchema).nullish(),
   attachments: z
     .array(
       z.union([
@@ -123,5 +123,5 @@ export const MessageSchema = z.object({
         MessageSlackAttachmentSchema,
       ])
     )
-    .nullable(),
+    .nullish(),
 })
