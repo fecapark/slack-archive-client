@@ -36,7 +36,7 @@ export const Blockquote = ({ children, type }: React.PropsWithChildren<Blockquot
         'first:before:rounded-t-sm first:after:rounded-t-sm last:before:rounded-b-sm last:after:rounded-b-sm'
       )}
     >
-      <span className="block h-[22px]">{children}</span>
+      <span className="block min-h-[22px] leading-[22px]">{children}</span>
     </blockquote>
   )
 }
