@@ -17,7 +17,9 @@ export const ArchivePannel = ({
   closeLink,
 }: React.PropsWithChildren<ArchivePannelProps>) => {
   return (
-    <div className={clsx('flex h-full flex-col rounded-2xl bg-white p-2', className)}>
+    <div
+      className={clsx('flex h-full flex-col rounded-none bg-white p-2 md:rounded-2xl', className)}
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           <div className="mr-1 p-2 text-base font-bold">{title}</div>

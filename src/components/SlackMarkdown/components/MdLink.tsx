@@ -4,7 +4,7 @@ export const MdLink = ({ children, href }: React.PropsWithChildren<{ href: strin
   return (
     <HoverTooltip content={href}>
       <a
-        className="text-[rgb(18,100,163)] hover:underline"
+        className="break-all text-[rgb(18,100,163)] hover:underline"
         href={href}
         rel="noopener noreferrer"
         target="_blank"

@@ -25,7 +25,7 @@ const ThreadPage = async ({ params }: ThreadPageProps) => {
 
   return (
     <ArchivePannel
-      className="w-full"
+      className="z-[2] w-full"
       closeLink={getThreadListLink()}
       description={`${formatTemplates['(2024년)? 2월 3일, 오후 10:23'](archivedAt)} 에 아카이브됨`}
       title="스레드"

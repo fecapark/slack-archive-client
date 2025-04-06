@@ -7,7 +7,7 @@ const Archives = async () => {
 
   return (
     <div className="flex size-full -translate-y-[64px] items-center justify-center">
-      <div className="flex flex-col items-center gap-8">
+      <div className="invisible flex flex-col items-center gap-8 md:visible">
         <div className="h-[86px] w-[64px]">
           <InteractiveLogo />
         </div>

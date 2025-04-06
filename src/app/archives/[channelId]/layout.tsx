@@ -24,9 +24,10 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
   const { channel, threads } = await fetchChannelPageData(channelId)
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="relative flex items-center gap-2">
       <ArchivePannel
-        className="w-full"
+        className="absolute z-[1] w-full md:static"
+        closeLink="/archives"
         description={channel.description}
         title={
           <div className="flex items-center">
