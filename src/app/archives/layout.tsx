@@ -6,8 +6,8 @@ const ArchivesLayout = async ({ children }: React.PropsWithChildren<unknown>) =>
   const channels = await getChannels()
 
   return (
-    <div className="grid h-full grid-cols-[320px_1fr] gap-2 overflow-x-hidden px-5 py-2">
-      <ArchivePannel className="w-[320px]" title="채널">
+    <div className="relative grid h-full grid-cols-[1fr] grid-rows-[1fr] gap-2 overflow-hidden px-0 py-2 md:grid-cols-[320px_1fr] md:px-5">
+      <ArchivePannel className="absolute z-[1] w-full md:static" title="채널">
         <div className="flex h-0 grow flex-col gap-1 overflow-y-auto">
           {channels.map((channel) => (
             <SidebarChannelItem channel={channel} key={channel.id} />
