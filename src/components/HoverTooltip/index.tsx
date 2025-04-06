@@ -28,7 +28,7 @@ export const HoverTooltip = ({
           <Tooltip.Content
             {...otherContentProps}
             className={clsx(
-              'max-w-[400px] rounded-lg bg-black px-3 py-2 text-[13px] font-semibold text-white',
+              'z-10 max-w-[400px] rounded-lg bg-black px-3 py-2 text-[13px] font-semibold text-white',
               className
             )}
             sideOffset={sideOffset ?? 6}
