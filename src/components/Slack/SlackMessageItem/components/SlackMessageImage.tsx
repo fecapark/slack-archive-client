@@ -1,8 +1,7 @@
 'use client'
 
-import clsx from 'clsx'
-
 import AutoHeightImage from '@/components/AutoHeightImage'
+import { ImagePlaceholder } from '@/components/ImagePlaceholder'
 import { SlackMessageImageDialog } from '@/components/Slack/SlackMessageItem/components/SlackMessageImageDialog'
 import { useDisclosure } from '@/hooks/useDisclosure'
 import { useImageFadeLoading } from '@/hooks/useImageFadeLoading'
@@ -24,20 +23,18 @@ export const SlackMessageImage = ({ src, width, height }: SlackMessageImageProps
 
   return (
     <>
-      <div
-        className={clsx(
-          'mb-2 inline-block w-full max-w-[360px] cursor-pointer overflow-hidden rounded-lg border border-[rgba(29,28,29,0.13)] bg-white'
-        )}
-      >
-        <AutoHeightImage
-          alt="이미지"
-          className={fadeStyle}
-          loading="eager"
-          onClick={onClick}
-          onError={onError}
-          onLoad={onLoad}
-          src={src}
-        />
+      <div className="mb-2 w-full max-w-[360px] cursor-pointer">
+        <ImagePlaceholder height={height ?? 0} width={width ?? 0}>
+          <AutoHeightImage
+            alt="이미지"
+            className={fadeStyle}
+            loading="eager"
+            onClick={onClick}
+            onError={onError}
+            onLoad={onLoad}
+            src={src}
+          />
+        </ImagePlaceholder>
       </div>
 
       <SlackMessageImageDialog
