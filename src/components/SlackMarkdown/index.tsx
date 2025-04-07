@@ -50,6 +50,7 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
       className={`line-height-[22.0002px] text-[15px] text-[#1d1c1d] ${NotoSansKR.className} antialiased`}
       style={{
         fontVariantLigatures: 'common-ligatures',
+        wordBreak: 'break-word',
       }}
     >
       <ReactMarkdown
