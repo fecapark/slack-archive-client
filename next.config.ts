@@ -28,6 +28,7 @@ const nextConfig: NextConfig = {
         hostname: 'i.ytimg.com',
       },
     ],
+    unoptimized: true, // 사용량 한계로 임시로 해둬요.
   },
 }
 
