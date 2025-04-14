@@ -6,8 +6,8 @@ import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/Slack
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
 import { compareSlackTimestampDesc } from '@/utils/date'
-import { getQueryClient } from '@/utils/query'
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import { withDehydratedState } from '@/utils/query'
+import { HydrationBoundary, QueryClient } from '@tanstack/react-query'
 
 interface ChannelLayoutProps {
   params: Promise<{
@@ -15,29 +15,28 @@ interface ChannelLayoutProps {
   }>
 }
 
-const fetchChannelPageData = async (channelId: string) => {
-  const queryClient = getQueryClient()
-
-  const [channel, threads] = await Promise.all([getChannel(channelId), getThreads(channelId)])
-  await Promise.all(
-    threads.map((thread) =>
-      queryClient.prefetchQuery({
-        queryKey: getMessagesQueryKey(thread.head.ts),
-        queryFn: () => getMessages(thread.head.ts),
-      })
+const fetchChannelPageData = withDehydratedState(
+  async ({ queryClient, channelId }: { channelId: string; queryClient: QueryClient }) => {
+    const [channel, threads] = await Promise.all([getChannel(channelId), getThreads(channelId)])
+    await Promise.all(
+      threads.map((thread) =>
+        queryClient.prefetchQuery({
+          queryKey: getMessagesQueryKey(thread.head.ts),
+          queryFn: () => getMessages(thread.head.ts),
+        })
+      )
     )
-  )
 
-  return {
-    dehydratedState: dehydrate(queryClient),
-    channel,
-    threads: threads.toSorted((a, b) => compareSlackTimestampDesc(a.head.ts, b.head.ts)),
+    return {
+      channel,
+      threads: threads.toSorted((a, b) => compareSlackTimestampDesc(a.head.ts, b.head.ts)),
+    }
   }
-}
+)
 
 const ChannelLayout = async ({ params, children }: React.PropsWithChildren<ChannelLayoutProps>) => {
   const { channelId } = await params
-  const { dehydratedState, channel, threads } = await fetchChannelPageData(channelId)
+  const { dehydratedState, channel, threads } = await fetchChannelPageData({ channelId })
 
   return (
     <div className="relative flex items-center gap-2">
