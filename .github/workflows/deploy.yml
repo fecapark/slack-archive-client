@@ -18,7 +18,7 @@ jobs:
           cp -R ./* ./.[^.]* output/ 2>/dev/null || :
           rm -rf output/output
       - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
+        uses: fecapark/force-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
         with:
@@ -29,3 +29,4 @@ jobs:
           user-name: fecapark
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
+          force-push: true
