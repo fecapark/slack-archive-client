@@ -20,7 +20,7 @@ export const SlackThreadInformation = ({
 }: SlackThreadInformationProps) => {
   return (
     <Link href={`/archives/${channelId}/${threadId}`}>
-      <div className="group/link ease-ease mb-1 -ml-1 flex max-w-[600px] items-center justify-between rounded-md border border-transparent p-1 text-[13px] transition-colors duration-300 hover:border hover:border-[rgba(29,28,29,0.13)] hover:bg-white">
+      <div className="group/link ease-ease hover:border-slack-stroke-decorative mb-1 -ml-1 flex max-w-[600px] items-center justify-between rounded-md border border-transparent p-1 text-[13px] transition-colors duration-300 hover:border hover:bg-white">
         <div className="flex items-center">
           <div className="flex items-center">
             {metadata.userAvatars.map((avatar) => (
@@ -34,10 +34,10 @@ export const SlackThreadInformation = ({
               />
             ))}
           </div>
-          <div className="ml-[3px] font-bold text-[rgb(18,100,163)] hover:underline">
+          <div className="text-slack-text-link ml-[3px] font-bold hover:underline">
             {metadata.messagesAmount - 1}개의 댓글
           </div>
-          <div className="ml-2 text-[rgb(97,96,97)]">
+          <div className="text-slack-text-secondary ml-2">
             {formatTemplates['(2024년)? 2월 3일, 오후 10:23'](archivedAt)} 에 아카이브됨
           </div>
         </div>

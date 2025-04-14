@@ -17,7 +17,7 @@ export const SlackMessageMediaList = ({ files }: SlackMessageMediaListProps) => 
 
   return (
     <div>
-      <div className="mb-1 text-[13px] text-[rgba(29,28,29,0.7)]">{fileLabel}</div>
+      <div className="text-slack-text-opacity700 mb-1 text-[13px]">{fileLabel}</div>
       <div className={clsx('flex flex-col', isAllImage && 'flex-row items-center')}>
         {files?.map((file) => {
           const fileType = getFileType(file.mimetype)

@@ -43,8 +43,8 @@ export const SlackMessageYoutubeAttachment = ({
       <SlackMessageAttachmentLayout.Header imageUrl={attachment.serviceIcon}>
         {attachment.serviceName}
 
-        <span className="font-normal text-[rgb(221,221,221)]">{' | '}</span>
-        <span className="font-normal text-[rgb(97,96,97)]">{attachment.authorName}</span>
+        <span className="text-slack-divider-inline font-normal">{' | '}</span>
+        <span className="text-slack-text-secondary font-normal">{attachment.authorName}</span>
       </SlackMessageAttachmentLayout.Header>
       <SlackMessageAttachmentLayout.TitleLink href={attachment.titleLink}>
         {attachment.title}

@@ -17,7 +17,7 @@ export const IconWrapper = ({
         containerClassName
       )}
     >
-      <div className={clsx('size-4.5 text-[rgba(29,28,29,0.7)]', className)}>{children}</div>
+      <div className={clsx('text-slack-text-opacity700 size-4.5', className)}>{children}</div>
     </div>
   )
 }

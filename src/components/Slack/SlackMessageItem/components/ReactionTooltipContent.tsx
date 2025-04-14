@@ -49,7 +49,7 @@ export const ReactionTooltipContent = ({
       <div className="flex flex-col items-center gap-4">
         {reactionGroup.map((reaction) => (
           <div
-            className="text-center text-[13px] leading-[1.38463] font-bold text-white"
+            className="text-center text-[13px] leading-[18px] font-bold text-white"
             key={reaction.name}
           >
             {getReactionDescription(reaction)} 님이{' '}

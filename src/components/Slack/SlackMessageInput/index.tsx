@@ -26,7 +26,7 @@ export const SlackMessageInput = ({
         paddingTop: commands.length * 60,
       }}
     >
-      <div className="relative w-full rounded-lg border border-[rgba(29,28,29,0.3)]">
+      <div className="border-slack-stroke-decorative relative w-full rounded-lg border">
         {!!commands.length && (
           <SlackMessageInputCommandOverlay>
             {commands.map((props) => (
@@ -37,7 +37,7 @@ export const SlackMessageInput = ({
         <div className="px-3 py-2">{children}</div>
         <div className="flex h-[40px] items-center justify-between pr-1 pl-1.5">
           <div className="flex items-center">
-            <IconWrapper containerClassName="bg-[rgba(29,28,29,0.06)] rounded-full">
+            <IconWrapper containerClassName="bg-slack-button-default rounded-full">
               <IconAdd />
             </IconWrapper>
             <IconWrapper>
@@ -50,7 +50,7 @@ export const SlackMessageInput = ({
               <IconEllipsisHorizontal />
             </IconWrapper>
           </div>
-          <div className="flex h-7 items-center rounded-sm bg-[#007a5a] py-0.5">
+          <div className="bg-slack-submit-primary flex h-7 items-center rounded-sm py-0.5">
             <div className="flex h-full items-center border-r border-white px-2">
               <IconSendFilled className="size-4 text-white" />
             </div>

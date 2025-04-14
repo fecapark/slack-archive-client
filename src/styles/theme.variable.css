@@ -91,4 +91,19 @@
   --text-secondary: var(--grey700);
   --text-disabled: var(--grey400);
   --yourssu-primary: #816dec;
+
+  --slack-text-primary: #1d1c1d;
+  --slack-text-secondary: #616061;
+  --slack-text-tertiary: #868686;
+  --slack-text-opacity700: #1d1c1db3;
+  --slack-text-link: #1264a3;
+  --slack-text-inline-code: #c01343;
+
+  --slack-divider-inline: #dddddd;
+  --slack-command-active: #1264a3;
+  --slack-submit-primary: #007a5a;
+  --slack-mention-bg: #1d9bd11a;
+  --slack-stroke-decorative: #1d1c1d21;
+  --slack-button-default: #1d1c1d0f;
+  --slack-codeblock-bg: #1d1c1d0a;
 }

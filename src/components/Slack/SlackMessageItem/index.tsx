@@ -70,7 +70,7 @@ export const SlackMessageItem = ({
   return (
     <div className="flex">
       {isGrouped && (
-        <div className="ease-ease mr-2 h-fit w-9 shrink-0 text-right text-xs leading-[22.0002px] text-[rgb(97,96,97)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="ease-ease text-slack-text-secondary mr-2 h-fit w-9 shrink-0 text-right text-xs leading-[22px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           {formatTemplates['10:00'](convertSlackTimestampToISOString(createdAt))}
         </div>
       )}
@@ -84,14 +84,14 @@ export const SlackMessageItem = ({
       <div className="flex-[1_1_0]">
         {!isGrouped && (
           <div className="-mt-1 flex items-center">
-            <span className="text-[15px] font-bold text-[#1d1c1d]">{username}</span>
+            <span className="text-slack-text-primary text-[15px] font-bold">{username}</span>
             {isBot && (
-              <span className="ml-1 flex h-[14px] items-center rounded-xs bg-[rgba(29,28,29,0.13)] px-[3px] py-[1px] text-[10px] font-bold text-[rgba(29,28,29,0.7)]">
+              <span className="text-slack-text-opacity700 bg-slack-stroke-decorative ml-1 flex h-[14px] items-center rounded-xs px-[3px] py-[1px] text-[10px] font-bold">
                 앱
               </span>
             )}
             &nbsp;&nbsp;
-            <span className="text-xs text-[#616061]">
+            <span className="text-slack-text-secondary text-xs">
               {formatTemplates[createdAtFormat](convertSlackTimestampToISOString(createdAt))}
             </span>
           </div>

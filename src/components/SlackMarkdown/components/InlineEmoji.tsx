@@ -11,17 +11,17 @@ interface InlineEmojiProps {
 
 const inlineEmoji = tv({
   slots: {
-    container: 'relative inline-block size-[22px] overflow-visible align-top',
+    container: 'relative inline-block size-5.5 overflow-visible align-top',
     image: 'absolute top-1/2 -mt-[11px] overflow-hidden object-contain',
   },
   variants: {
     size: {
       large: {
-        container: 'size-[32px]',
+        container: 'size-8',
         image: '-mt-[16px]',
       },
       medium: {
-        container: 'size-[22px]',
+        container: 'size-5.5',
         image: '-mt-[11px]',
       },
     },
@@ -38,7 +38,7 @@ const TooltipContent = ({ name, url }: { name: string; url: string }) => {
         src={url}
         width={64}
       />
-      <div className="text-center text-[13px] leading-[1.38463] font-bold text-white">:{name}:</div>
+      <div className="text-center text-[13px] leading-[18px] font-bold text-white">:{name}:</div>
     </div>
   )
 }

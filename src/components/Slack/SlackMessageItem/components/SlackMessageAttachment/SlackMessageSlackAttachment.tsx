@@ -17,15 +17,15 @@ export const SlackMessageSlackAttachment = ({ attachment }: SlackMessageSlackAtt
       <SlackMessageAttachmentLayout.Text markdown>
         {attachment.text ?? ''}
       </SlackMessageAttachmentLayout.Text>
-      <div className="flex items-center gap-1 pt-1 text-xs text-[rgb(97,96,97)]">
+      <div className="text-slack-text-secondary flex items-center gap-1 pt-1 text-xs">
         <div>
           {formatTemplates['(2024년)? 2월 3일, 오후 10:23'](
             convertSlackTimestampToISOString(attachment.ts)
           )}
         </div>
-        <div className="text-[rgb(221,221,221)]">{' | '}</div>
+        <div className="text-slack-divider-inline">{' | '}</div>
         <Link
-          className="text-[rgb(18,100,163)] hover:underline"
+          className="text-slack-text-link hover:underline"
           href={attachment.url}
           rel="noopener noreferrer"
           target="_blank"

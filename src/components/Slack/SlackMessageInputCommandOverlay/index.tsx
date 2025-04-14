@@ -10,7 +10,10 @@ interface CommandItemProps {
 const CommandItem = ({ name, description, selected }: CommandItemProps) => {
   return (
     <div
-      className={clsx('flex h-[60px] w-full items-center', selected && 'bg-[#1264a3] text-white')}
+      className={clsx(
+        'flex h-[60px] w-full items-center',
+        selected && 'bg-slack-command-active text-white'
+      )}
     >
       <div className="flex w-full pl-2">
         <div className="mx-2 mt-1 mb-2.5">
@@ -44,7 +47,7 @@ const CommandItem = ({ name, description, selected }: CommandItemProps) => {
 export const SlackMessageInputCommandOverlay = ({ children }: React.PropsWithChildren<unknown>) => {
   return (
     <div className="absolute top-0.5 -left-1.5 w-full -translate-y-[100%]" data-command-overlay>
-      <div className="w-full max-w-[435px] rounded-lg bg-white py-2 shadow-[shadow:rgba(29,_28,_29,_0.13)_0_0_0_1px,rgba(0,0,0,0.1)_0_4px_12px_0]">
+      <div className="shadow-commands-overlay w-full max-w-[435px] rounded-lg bg-white py-2">
         {children}
       </div>
     </div>

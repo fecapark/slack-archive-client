@@ -14,8 +14,8 @@ export const SlackThreadHeadMessageItem = ({
     <>
       <SlackThreadMessageItem message={message} variants="thread-head" />
       <div className="flex items-center gap-3 px-4">
-        <span className="text-[13px] text-[rgba(29,28,29,0.7)]">{messageCount}개의 댓글</span>
-        <div className="h-[1px] grow bg-[rgb(29,28,29,0.13)]" />
+        <span className="text-slack-text-opacity700 text-[13px]">{messageCount}개의 댓글</span>
+        <div className="bg-slack-stroke-decorative h-[1px] grow" />
       </div>
     </>
   )

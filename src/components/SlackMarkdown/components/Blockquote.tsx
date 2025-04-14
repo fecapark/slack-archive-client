@@ -8,9 +8,9 @@ interface BlockquoteProps {
 const blockQuotePseudoElement = tv({
   slots: {
     before:
-      'before:absolute before:top-0 before:left-0 before:mr-[10px] before:block before:h-full before:w-1 before:bg-[rgb(221,221,221)] before:content-[""]',
+      'before:bg-slack-divider-inline before:absolute before:top-0 before:left-0 before:mr-2.5 before:block before:h-full before:w-1 before:content-[""]',
     after:
-      'after:absolute after:top-0 after:left-0 after:ml-[10px] after:block after:h-full after:w-1 after:bg-[rgb(221,221,221)] after:content-[""]',
+      'after:bg-slack-divider-inline after:absolute after:top-0 after:left-0 after:ml-2.5 after:block after:h-full after:w-1 after:content-[""]',
   },
 })
 

@@ -54,7 +54,7 @@ export const SlackMessageReactionList = ({ reactions }: SlackMessageReactionList
           }
           key={reactionGroup.map((v) => v.name).join(',')}
         >
-          <div className="text-grey600 ease-ease flex h-6 cursor-default items-center gap-1 rounded-full bg-[rgba(29,28,29,0.06)] px-2 text-xs transition-shadow duration-300 select-none hover:bg-transparent hover:shadow-[0_0_0_1px_rgb(124,122,127)]">
+          <div className="text-grey600 ease-ease bg-slack-button-default hover:shadow-reactions-hover flex h-6 cursor-default items-center gap-1 rounded-full px-2 text-xs transition-shadow duration-300 select-none hover:bg-transparent">
             {reactionGroup.map(
               (reaction) =>
                 reaction.url && (
@@ -67,7 +67,7 @@ export const SlackMessageReactionList = ({ reactions }: SlackMessageReactionList
                   />
                 )
             )}
-            <span className="text-[rgb(29,28,29)]">
+            <span className="text-slack-text-primary">
               {getReactionGroupTotalCount(reactionGroup)}
             </span>
           </div>

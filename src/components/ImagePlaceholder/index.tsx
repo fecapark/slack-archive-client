@@ -11,7 +11,7 @@ export const ImagePlaceholder = ({
   return (
     <div
       className={
-        'bg-grey50 inline-block w-full overflow-hidden rounded-lg border border-[rgba(29,28,29,0.13)]'
+        'bg-grey50 border-slack-stroke-decorative inline-block w-full overflow-hidden rounded-lg border'
       }
       style={{ aspectRatio: `${width} / ${height}` }}
     >

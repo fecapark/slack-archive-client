@@ -9,7 +9,7 @@ export const MentionSpan = ({ children, className, ...props }: Props) => {
       className={clsx(
         className,
         'mention-block',
-        'h-fit w-fit rounded-[3px] bg-[rgba(29,155,209,0.1)] px-1 pb-0.5 text-[rgb(18,100,163)]'
+        'text-slack-text-link bg-slack-mention-bg h-fit w-fit rounded-[3px] px-1 pb-0.5'
       )}
     >
       {children}

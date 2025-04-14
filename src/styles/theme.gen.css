@@ -87,4 +87,17 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-disabled: var(--text-disabled);
   --color-yourssu-primary: var(--yourssu-primary);
+  --color-slack-text-primary: var(--slack-text-primary);
+  --color-slack-text-secondary: var(--slack-text-secondary);
+  --color-slack-text-tertiary: var(--slack-text-tertiary);
+  --color-slack-text-opacity700: var(--slack-text-opacity700);
+  --color-slack-text-link: var(--slack-text-link);
+  --color-slack-text-inline-code: var(--slack-text-inline-code);
+  --color-slack-divider-inline: var(--slack-divider-inline);
+  --color-slack-command-active: var(--slack-command-active);
+  --color-slack-submit-primary: var(--slack-submit-primary);
+  --color-slack-mention-bg: var(--slack-mention-bg);
+  --color-slack-stroke-decorative: var(--slack-stroke-decorative);
+  --color-slack-button-default: var(--slack-button-default);
+  --color-slack-codeblock-bg: var(--slack-codeblock-bg);
 }

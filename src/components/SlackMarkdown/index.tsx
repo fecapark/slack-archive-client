@@ -47,7 +47,7 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
 
   return (
     <div
-      className={`line-height-[22.0002px] text-[15px] text-[#1d1c1d] ${NotoSansKR.className} antialiased`}
+      className={`line-height-[22px] text-slack-text-primary text-[15px] ${NotoSansKR.className} antialiased`}
       style={{
         fontVariantLigatures: 'common-ligatures',
         wordBreak: 'break-word',
@@ -118,7 +118,7 @@ export const SlackMarkdown = ({ children, isEdited }: SlackMarkdownProps) => {
       >
         {children && converts.reduce((acc, convert) => convert(acc), children)}
       </ReactMarkdown>
-      {isEdited && <span className="text-[13px] text-[rgb(134,134,134)]"> (편집됨)</span>}
+      {isEdited && <span className="text-slack-text-tertiary text-[13px]"> (편집됨)</span>}
     </div>
   )
 }

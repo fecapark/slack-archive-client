@@ -6,7 +6,7 @@ export const Code = ({ className, children, ...props }: React.HTMLAttributes<HTM
       {...props}
       className={clsx(
         className,
-        'm-[1px] h-fit rounded-[3px] border border-[rgba(29,28,29,0.13)] bg-[rgba(29,28,29,0.04)] px-[3px] pt-[2px] pb-[2px] text-xs text-[rgb(192,19,67)]'
+        'border-slack-stroke-decorative bg-slack-codeblock-bg text-slack-text-inline-code m-[1px] h-fit rounded-[3px] border px-[3px] pt-0.5 pb-0.5 text-xs'
       )}
     >
       {children}

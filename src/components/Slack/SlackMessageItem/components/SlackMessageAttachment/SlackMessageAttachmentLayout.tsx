@@ -44,7 +44,7 @@ const AttachmentTitleLink = ({
   return (
     <div>
       <Link
-        className="font-bold text-[rgb(18,100,163)] hover:underline"
+        className="text-slack-text-link font-bold hover:underline"
         href={href}
         rel="noopener noreferrer"
         target="_blank"
@@ -62,7 +62,7 @@ const AttachmentText = ({ markdown, children }: AttachmentTextProps) => {
 export const SlackMessageAttachmentLayout = ({ children }: React.PropsWithChildren<unknown>) => {
   return (
     <div className="mb-2 flex max-w-[600px]">
-      <div className="w-1 shrink-0 rounded-md bg-[rgb(221,221,221)]" />
+      <div className="bg-slack-divider-inline w-1 shrink-0 rounded-md" />
       <div className="px-3 text-[15px]">{children}</div>
     </div>
   )
