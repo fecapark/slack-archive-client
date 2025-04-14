@@ -4,8 +4,8 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useContext } from 'react'
 import { createPortal } from 'react-dom'
 
-import { ToastContext } from '@/components/Providers/ToastProvider/context'
 import { Toast } from '@/components/Toast'
+import { ToastContext } from '@/components/Toast/ToastProvider/context'
 
 const variants = {
   hidden: (index: number) => ({ opacity: 0, scale: 0.9, x: '-50%', y: index * 80 + 48 }),

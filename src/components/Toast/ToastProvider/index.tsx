@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 
-import { ToastContext, ToastItem } from '@/components/Providers/ToastProvider/context'
+import { ToastContext, ToastItem } from '@/components/Toast/ToastProvider/context'
 
 interface ToastProviderProps {
   duration: number
@@ -11,7 +11,7 @@ interface ToastProviderProps {
 
 const ToastAnimationGroup = dynamic(
   () =>
-    import('@/components/Providers/ToastProvider/ToastAnimationGroup').then(
+    import('@/components/Toast/ToastProvider/ToastAnimationGroup').then(
       (m) => m.ToastAnimationGroup
     ),
   {
