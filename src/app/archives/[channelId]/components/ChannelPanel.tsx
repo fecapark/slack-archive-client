@@ -1,41 +1,16 @@
 'use client'
 
-import { useEffect } from 'react'
-
-import { ChannelItem } from '@/apis/channels'
-import { getMessagesQueryKey, getThreadsQueryKey } from '@/apis/keys'
-import { getMessages } from '@/apis/messages'
-import { getThreads } from '@/apis/threads'
 import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/SlackThreadLinkItem'
+import { useThreadsQuery } from '@/app/archives/[channelId]/hooks/useThreadsQuery'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
-import { getQueryClient } from '@/utils/query'
-import { useSuspenseQuery } from '@tanstack/react-query'
 
 interface ChannelPanelProps {
-  channel: ChannelItem
+  channelId: string
 }
 
-export const ChannelPanel = ({ channel }: ChannelPanelProps) => {
-  const { data: threads } = useSuspenseQuery({
-    queryKey: getThreadsQueryKey(channel.id),
-    queryFn: async () => getThreads(channel.id),
-  })
-
-  useEffect(() => {
-    const prefetchMessages = async () => {
-      const queryClient = getQueryClient()
-      await Promise.all(
-        threads.map((thread) =>
-          queryClient.prefetchQuery({
-            queryKey: getMessagesQueryKey(thread.head.ts),
-            queryFn: () => getMessages(thread.head.ts),
-          })
-        )
-      )
-    }
-    prefetchMessages()
-  }, [threads])
+export const ChannelPanel = ({ channelId }: ChannelPanelProps) => {
+  const { channel, threads } = useThreadsQuery(channelId)
 
   return (
     <ArchivePannel

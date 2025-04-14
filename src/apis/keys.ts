@@ -5,3 +5,7 @@ export const getMessagesQueryKey = (threadId: string) => {
 export const getThreadsQueryKey = (channelId: string) => {
   return ['threads', channelId]
 }
+
+export const getChannelsQueryKey = () => {
+  return ['channels']
+}

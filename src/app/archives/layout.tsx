@@ -1,5 +1,5 @@
 import { getChannels } from '@/apis/channels'
-import { getThreadsQueryKey } from '@/apis/keys'
+import { getChannelsQueryKey, getThreadsQueryKey } from '@/apis/keys'
 import { getThreads } from '@/apis/threads'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelItem } from '@/app/archives/components/SidebarChannelItem'
@@ -8,6 +8,8 @@ import { HydrationBoundary } from '@tanstack/react-query'
 
 const fetchArchivesPageData = withDehydratedState(async ({ queryClient }) => {
   const channels = await getChannels()
+
+  queryClient.setQueryData(getChannelsQueryKey(), channels)
 
   await Promise.all(
     channels.map((channel) =>

@@ -1,4 +1,5 @@
-import { getChannel } from '@/apis/channels'
+import { Suspense } from 'react'
+
 import { ChannelPanel } from '@/app/archives/[channelId]/components/ChannelPanel'
 
 interface ChannelLayoutProps {
@@ -9,11 +10,12 @@ interface ChannelLayoutProps {
 
 const ChannelLayout = async ({ params, children }: React.PropsWithChildren<ChannelLayoutProps>) => {
   const { channelId } = await params
-  const channel = await getChannel(channelId)
 
   return (
     <div className="relative flex items-center gap-2">
-      <ChannelPanel channel={channel} />
+      <Suspense>
+        <ChannelPanel channelId={channelId} />
+      </Suspense>
       {children}
     </div>
   )
