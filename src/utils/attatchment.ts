@@ -1,4 +1,4 @@
-export const getFileType = (mimetype: string) => {
+export const getAttatchmentType = (mimetype: string) => {
   if (mimetype.startsWith('image/')) {
     return 'image'
   }

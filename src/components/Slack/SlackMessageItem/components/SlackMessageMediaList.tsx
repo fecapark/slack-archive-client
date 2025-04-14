@@ -1,17 +1,17 @@
 import clsx from 'clsx'
 
-import { toFileSrc } from '@/apis/file'
+import { toAttatchmentSrc } from '@/apis/attatchment'
 import { SlackMessageImage } from '@/components/Slack/SlackMessageItem/components/SlackMessageImage'
 import { SlackMessageVideo } from '@/components/Slack/SlackMessageItem/components/SlackMessageVideo'
 import { MessageFileItem } from '@/types/schema'
-import { getFileType } from '@/utils/file'
+import { getAttatchmentType } from '@/utils/attatchment'
 
 interface SlackMessageMediaListProps {
   files: MessageFileItem[]
 }
 
 export const SlackMessageMediaList = ({ files }: SlackMessageMediaListProps) => {
-  const isAllImage = files.every((file) => getFileType(file.mimetype) === 'image')
+  const isAllImage = files.every((file) => getAttatchmentType(file.mimetype) === 'image')
 
   const fileLabel = files.length === 1 ? files[0].name : `${files.length}개 파일`
 
@@ -20,15 +20,15 @@ export const SlackMessageMediaList = ({ files }: SlackMessageMediaListProps) => 
       <div className="text-slack-text-opacity700 mb-1 text-[13px]">{fileLabel}</div>
       <div className={clsx('flex flex-col', isAllImage && 'flex-row items-center')}>
         {files?.map((file) => {
-          const fileType = getFileType(file.mimetype)
-          const src = toFileSrc(file.id, file.mimetype)
+          const attatchmentType = getAttatchmentType(file.mimetype)
+          const src = toAttatchmentSrc(file.id, file.mimetype)
 
-          if (fileType === 'image') {
+          if (attatchmentType === 'image') {
             return (
               <SlackMessageImage height={file.height} key={file.id} src={src} width={file.width} />
             )
           }
-          if (fileType === 'video') {
+          if (attatchmentType === 'video') {
             return (
               <SlackMessageVideo height={file.height} key={file.id} src={src} width={file.width} />
             )

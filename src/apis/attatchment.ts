@@ -1,13 +1,13 @@
-import { getFileType } from '@/utils/file'
+import { getAttatchmentType } from '@/utils/attatchment'
 
-export const toFileSrc = (fileId: string, mimetype: string) => {
-  const fileType = getFileType(mimetype)
+export const toAttatchmentSrc = (fileId: string, mimetype: string) => {
+  const attatchmentType = getAttatchmentType(mimetype)
 
-  if (fileType === 'image') {
+  if (attatchmentType === 'image') {
     return `${process.env.NEXT_PUBLIC_API_URL}/api/file/${fileId}`
   }
 
-  if (fileType === 'video') {
+  if (attatchmentType === 'video') {
     // Todo: 백엔드 스트리밍 이슈로 인한 임시 오브젝트 접근 조치
     return `${process.env.NEXT_PUBLIC_S3_OBJECT_URL}/${fileId}`
   }
