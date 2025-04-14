@@ -1,9 +1,29 @@
 import { getChannels } from '@/apis/channels'
+import { getThreadsQueryKey } from '@/apis/keys'
+import { getThreads } from '@/apis/threads'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelItem } from '@/app/archives/components/SidebarChannelItem'
+import { withDehydratedState } from '@/utils/query'
+import { HydrationBoundary } from '@tanstack/react-query'
 
-const ArchivesLayout = async ({ children }: React.PropsWithChildren<unknown>) => {
+const fetchArchivesPageData = withDehydratedState(async ({ queryClient }) => {
   const channels = await getChannels()
+
+  await Promise.all(
+    channels.map((channel) =>
+      queryClient.prefetchQuery({
+        queryKey: getThreadsQueryKey(channel.id),
+        queryFn: () => getThreads(channel.id),
+      })
+    )
+  )
+
+  return {
+    channels,
+  }
+})
+const ArchivesLayout = async ({ children }: React.PropsWithChildren<unknown>) => {
+  const { channels, dehydratedState } = await fetchArchivesPageData()
 
   return (
     <div className="relative grid h-full grid-cols-[1fr] grid-rows-[1fr] gap-2 overflow-hidden px-0 py-2 md:grid-cols-[320px_1fr] md:px-5">
@@ -14,7 +34,7 @@ const ArchivesLayout = async ({ children }: React.PropsWithChildren<unknown>) =>
           ))}
         </div>
       </ArchivePannel>
-      {children}
+      <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
     </div>
   )
 }
