@@ -3,7 +3,7 @@
 import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/SlackThreadLinkItem'
 import { useThreadsQuery } from '@/app/archives/[channelId]/hooks/useThreadsQuery'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
-import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
+import { IconSidebarChannel } from '@/components/Icons/IconSidebarChannel'
 
 interface ChannelPanelProps {
   channelId: string
@@ -19,7 +19,7 @@ export const ChannelPanel = ({ channelId }: ChannelPanelProps) => {
       description={channel.description}
       title={
         <div className="flex items-center">
-          <SidebarChannelIcon className="mr-1 size-4" /> {channel.name}
+          <IconSidebarChannel className="mr-1 size-4" /> {channel.name}
         </div>
       }
     >

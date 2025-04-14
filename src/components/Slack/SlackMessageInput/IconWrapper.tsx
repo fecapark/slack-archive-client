@@ -13,7 +13,7 @@ export const IconWrapper = ({
   return (
     <div
       className={clsx(
-        'm-0.5 inline-flex h-[28px] w-[28px] items-center justify-center p-0.5',
+        'm-0.5 inline-flex size-7 items-center justify-center p-0.5',
         containerClassName
       )}
     >

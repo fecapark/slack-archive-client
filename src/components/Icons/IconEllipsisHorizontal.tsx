@@ -1,4 +1,4 @@
-import { IconProps } from '@/components/Slack/SlackMessageInput/Icons/type'
+import { IconProps } from '@/components/Icons/type'
 
 export const IconEllipsisHorizontal = ({ className }: IconProps) => {
   return (

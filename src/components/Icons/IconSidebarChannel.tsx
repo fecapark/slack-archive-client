@@ -1,4 +1,4 @@
-export const SidebarChannelIcon = ({ className }: { className?: string }) => {
+export const IconSidebarChannel = ({ className }: { className?: string }) => {
   return (
     <svg aria-hidden="true" className={className} viewBox="0 0 20 20">
       <path

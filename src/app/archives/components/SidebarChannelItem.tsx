@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { tv } from 'tailwind-variants'
 
 import { ChannelItem } from '@/apis/channels'
-import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
+import { IconSidebarChannel } from '@/components/Icons/IconSidebarChannel'
 
 interface ChannelItemProps {
   channel: ChannelItem
@@ -35,7 +35,7 @@ export const SidebarChannelItem = ({ channel }: ChannelItemProps) => {
 
   return (
     <Link className={link()} href={`/archives/${channel.id}`} key={channel.id}>
-      <SidebarChannelIcon className={icon()} />
+      <IconSidebarChannel className={icon()} />
       <div className={text()}>{channel.name}</div>
     </Link>
   )
