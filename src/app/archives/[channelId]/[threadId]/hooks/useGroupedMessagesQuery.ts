@@ -1,6 +1,6 @@
 'use client'
 
-import { differenceInMinutes } from 'date-fns'
+import { compareAsc, differenceInMinutes } from 'date-fns'
 
 import { getMessagesQueryKey } from '@/apis/keys'
 import { getMessages } from '@/apis/messages'
@@ -47,7 +47,9 @@ export const useGroupedMessagesQuery = (threadId: string) => {
     queryFn: () => getMessages(threadId),
   })
 
-  const [headMessage, ...messages] = data
+  const [headMessage, ...messages] = [...data].sort((a, b) =>
+    compareAsc(convertSlackTimestampToISOString(a.ts), convertSlackTimestampToISOString(b.ts))
+  )
 
   return {
     headMessage,

@@ -1,5 +1,6 @@
 'use client'
 
+import { compareDesc } from 'date-fns'
 import { useEffect } from 'react'
 
 import { getChannels } from '@/apis/channels'
@@ -44,6 +45,6 @@ export const useThreadsQuery = (channelId: string) => {
 
   return {
     channel,
-    threads,
+    threads: [...threads].sort((a, b) => compareDesc(a.archivedAt, b.archivedAt)),
   }
 }
