@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { FaYoutube } from 'react-icons/fa'
 
 import AutoHeightImage from '@/components/AutoHeightImage'
 import { SlackMessageAttachmentLayout } from '@/components/Slack/SlackMessageItem/components/SlackMessageAttachment/SlackMessageAttachmentLayout'
 import { MessageYoutubeAttachmentItem } from '@/types/schema'
+import { useRefEffect } from '@toss/react'
 
 interface SlackMessageYoutubeAttachmentProps {
   attachment: MessageYoutubeAttachmentItem
@@ -14,29 +15,26 @@ interface SlackMessageYoutubeAttachmentProps {
 export const SlackMessageYoutubeAttachment = ({
   attachment,
 }: SlackMessageYoutubeAttachmentProps) => {
-  const containerRef = useRef<HTMLDivElement>(null)
   const [playing, setPlaying] = useState(false)
 
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) {
-      return
-    }
+  const containerRef = useRefEffect<HTMLDivElement>(
+    (container) => {
+      const handleResize = () => {
+        const aspectRatio = attachment.thumbWidth / attachment.thumbHeight
+        const { width } = container.getBoundingClientRect()
+        const height = Math.floor(width / aspectRatio)
+        container.style.height = `${height}px`
+      }
 
-    const handleResize = () => {
-      const aspectRatio = attachment.thumbWidth / attachment.thumbHeight
-      const { width } = container.getBoundingClientRect()
-      const height = Math.floor(width / aspectRatio)
-      container.style.height = `${height}px`
-    }
+      window.addEventListener('resize', handleResize)
+      handleResize()
 
-    window.addEventListener('resize', handleResize)
-    handleResize()
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [attachment.thumbWidth, attachment.thumbHeight])
+      return () => {
+        window.removeEventListener('resize', handleResize)
+      }
+    },
+    [attachment.thumbWidth, attachment.thumbHeight]
+  )
 
   return (
     <SlackMessageAttachmentLayout>

@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+
+import { useRefEffect } from '@toss/react'
 
 export const useHover = <T extends HTMLElement = HTMLElement>() => {
-  const ref = useRef<null | T>(null)
   const [value, setValue] = useState<boolean>(false)
 
   const handleMouseEnter = () => {
@@ -13,12 +14,7 @@ export const useHover = <T extends HTMLElement = HTMLElement>() => {
     setValue(false)
   }
 
-  useEffect(() => {
-    const target = ref.current
-    if (!target) {
-      return
-    }
-
+  const ref = useRefEffect<T>((target) => {
     target.addEventListener('mouseenter', handleMouseEnter)
     target.addEventListener('mouseleave', handleMouseLeave)
 
@@ -26,7 +22,7 @@ export const useHover = <T extends HTMLElement = HTMLElement>() => {
       target.removeEventListener('mouseenter', handleMouseEnter)
       target.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [ref])
+  }, [])
 
   return [ref, value] as const
 }
