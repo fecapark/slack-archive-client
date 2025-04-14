@@ -1,5 +1,6 @@
 import Image from 'next/image'
 
+import { Skeleton } from '@/components/Skeleton'
 import { SlackMessageMediaList } from '@/components/Slack/SlackMessageItem/components/SlackMessageMediaList'
 import { SlackMarkdown } from '@/components/SlackMarkdown'
 import { MessageFileItem } from '@/types/schema'
@@ -36,6 +37,25 @@ const MediaList = ({ files }: SlackMessageMediaListProps) => {
     return undefined
   }
   return <SlackMessageMediaList files={files} />
+}
+
+const SlackMessageItemSkeleton = () => {
+  return (
+    <div className="flex">
+      <div className="mr-2 shrink-0">
+        <div className="overflow-hidden rounded-md">
+          <Skeleton className="h-9 w-9" />
+        </div>
+      </div>
+      <div className="flex flex-[1_1_0] flex-col gap-[9px]">
+        <div className="flex items-center">
+          <Skeleton className="h-[15px] w-full max-w-[250px]" />
+        </div>
+        <Skeleton className="h-[15px] w-full" />
+        <Skeleton className="h-[15px] w-full" />
+      </div>
+    </div>
+  )
 }
 
 export const SlackMessageItem = ({
@@ -85,3 +105,4 @@ export const SlackMessageItem = ({
 
 SlackMessageItem.MediaList = MediaList
 SlackMessageItem.Markdown = Markdown
+SlackMessageItem.Skeleton = SlackMessageItemSkeleton
