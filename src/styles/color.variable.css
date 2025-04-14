@@ -87,6 +87,8 @@
   --purple800: #73228e;
   --purple900: #65237b;
 
+  --scrollbar-thumb: var(--grey300);
+
   --text-primary: var(--grey800);
   --text-secondary: var(--grey700);
   --text-disabled: var(--grey400);

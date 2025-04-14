@@ -83,6 +83,7 @@
   --color-purple700: var(--purple700);
   --color-purple800: var(--purple800);
   --color-purple900: var(--purple900);
+  --color-scrollbar-thumb: var(--scrollbar-thumb);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-disabled: var(--text-disabled);
