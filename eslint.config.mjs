@@ -82,12 +82,12 @@ const config = [
       'perfectionist/sort-objects': 'off',
       'perfectionist/sort-modules': 'off',
       'react-compiler/react-compiler': 'warn',
-      // 'react-hooks/exhaustive-deps': [
-      //   'error',
-      //   {
-      //     additionalHooks: '(useEnterDoneEffect|useActiveEffect|useCallbackOnce)',
-      //   },
-      // ],
+      'react-hooks/exhaustive-deps': [
+        'error',
+        {
+          additionalHooks: '(useRefEffect)',
+        },
+      ],
       'react-hooks/rules-of-hooks': 'error',
       'react/display-name': [1, { ignoreTranspilerName: false }],
       'react/no-unescaped-entities': 'off',
