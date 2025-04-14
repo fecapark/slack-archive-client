@@ -1,4 +1,4 @@
-import { Prettify } from '@/types/misc'
+import { OptionalPropsWhenEmptyObject, Prettify } from '@/types/misc'
 import { dehydrate, isServer, QueryClient } from '@tanstack/react-query'
 
 let browserQueryClient: QueryClient | undefined = undefined
@@ -32,9 +32,12 @@ export const getQueryClient = () => {
 export const withDehydratedState = <TReturn, TProps extends { queryClient: QueryClient }>(
   fn: (v: TProps) => Promise<TReturn>
 ) => {
+  type TPropsWithoutQueryClient = Prettify<Omit<TProps, 'queryClient'>>
+
   const queryClient = getQueryClient()
 
-  return async (props: Prettify<Omit<TProps, 'queryClient'>>) => {
+  return async (...p: OptionalPropsWhenEmptyObject<TPropsWithoutQueryClient>) => {
+    const props = p[0] ?? {}
     const result = await fn({ ...props, queryClient } as TProps)
     return {
       ...result,
