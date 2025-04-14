@@ -1,9 +1,13 @@
 import { getChannel } from '@/apis/channels'
+import { getMessagesQueryKey } from '@/apis/keys'
+import { getMessages } from '@/apis/messages'
 import { getThreads } from '@/apis/threads'
 import { SlackThreadLinkItem } from '@/app/archives/[channelId]/components/SlackThreadLinkItem'
 import { ArchivePannel } from '@/app/archives/components/ArchivePannel'
 import { SidebarChannelIcon } from '@/app/archives/components/Icons/SidebarChannelIcon'
 import { compareSlackTimestampDesc } from '@/utils/date'
+import { getQueryClient } from '@/utils/query'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 interface ChannelLayoutProps {
   params: Promise<{
@@ -12,8 +16,20 @@ interface ChannelLayoutProps {
 }
 
 const fetchChannelPageData = async (channelId: string) => {
+  const queryClient = getQueryClient()
+
   const [channel, threads] = await Promise.all([getChannel(channelId), getThreads(channelId)])
+  await Promise.all(
+    threads.map((thread) =>
+      queryClient.prefetchQuery({
+        queryKey: getMessagesQueryKey(thread.head.ts),
+        queryFn: () => getMessages(thread.head.ts),
+      })
+    )
+  )
+
   return {
+    dehydratedState: dehydrate(queryClient),
     channel,
     threads: threads.toSorted((a, b) => compareSlackTimestampDesc(a.head.ts, b.head.ts)),
   }
@@ -21,7 +37,7 @@ const fetchChannelPageData = async (channelId: string) => {
 
 const ChannelLayout = async ({ params, children }: React.PropsWithChildren<ChannelLayoutProps>) => {
   const { channelId } = await params
-  const { channel, threads } = await fetchChannelPageData(channelId)
+  const { dehydratedState, channel, threads } = await fetchChannelPageData(channelId)
 
   return (
     <div className="relative flex items-center gap-2">
@@ -47,7 +63,7 @@ const ChannelLayout = async ({ params, children }: React.PropsWithChildren<Chann
           ))}
         </div>
       </ArchivePannel>
-      {children}
+      <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
     </div>
   )
 }

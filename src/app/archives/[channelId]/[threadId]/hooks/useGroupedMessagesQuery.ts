@@ -1,9 +1,14 @@
+'use client'
+
 import { differenceInMinutes } from 'date-fns'
 
+import { getMessagesQueryKey } from '@/apis/keys'
+import { getMessages } from '@/apis/messages'
 import { MessageItem } from '@/apis/messages'
 import { convertSlackTimestampToISOString } from '@/utils/date'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-export const groupMessagesWithSameUser = (messages: MessageItem[]): MessageItem[][] => {
+const groupMessagesWithSameUser = (messages: MessageItem[]): MessageItem[][] => {
   if (messages.length === 0) return []
 
   const result: MessageItem[][] = []
@@ -34,4 +39,19 @@ export const groupMessagesWithSameUser = (messages: MessageItem[]): MessageItem[
   }
 
   return result
+}
+
+export const useGroupedMessagesQuery = (threadId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: getMessagesQueryKey(threadId),
+    queryFn: () => getMessages(threadId),
+  })
+
+  const [headMessage, ...messages] = data
+
+  return {
+    headMessage,
+    groupedMessages: groupMessagesWithSameUser(messages),
+    messagesCount: messages.length,
+  }
 }
