@@ -1,5 +1,5 @@
-/* scripts/codegen/gen-theme.ts에 의해서 자동으로 채워져요. */
-@import './theme.variable.css';
+/* scripts/codegen/gen-color.ts에 의해서 자동으로 채워져요. */
+@import '../color.variable.css';
 @import 'tailwindcss';
 
 @theme {

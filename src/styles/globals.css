@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-@import './theme.variable.css';
-@import './theme.gen.css';
+@import './color.variable.css';
+@import './__generated__/color.gen.css';
 @import './transition.css';
 @import './breakpoint.css';
 @import './shadow.css';

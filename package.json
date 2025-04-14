@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently 'next dev --turbopack' 'pnpm gen-theme:watch'",
+    "dev": "concurrently 'next dev --turbopack' 'pnpm gen-color:watch'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "prepare": "husky",
-    "gen-theme": "pnpm tsx ./scripts/codegen/gen-theme.mts",
-    "gen-theme:watch": "pnpm tsx watch --clear-screen=false --include ./src/styles/theme.variable.css ./scripts/codegen/gen-theme.mts"
+    "gen-color": "pnpm tsx ./scripts/codegen/gen-color.mts",
+    "gen-color:watch": "pnpm tsx watch --clear-screen=false --include ./src/styles/color.variable.css ./scripts/codegen/gen-color.mts"
   },
   "dependencies": {
     "@fecapark/number-rolling": "^0.1.2",

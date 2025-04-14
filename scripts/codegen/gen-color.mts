@@ -1,11 +1,11 @@
 import { fs } from 'zx'
 
-import { indent, log, sourceBasePath, writeFileEnsureDirectorySync } from './common.mts'
+import { __root, indent, log, sourceBasePath, writeFileEnsureDirectorySync } from './common.mts'
 
 const stylesheetsBasePath = `${sourceBasePath}/styles`
-const variablesFileName = 'theme.variable.css'
+const variablesFileName = 'color.variable.css'
 const variablesFilePath = `${stylesheetsBasePath}/${variablesFileName}`
-const resultPath = `${stylesheetsBasePath}/theme.gen.css`
+const resultPath = `${stylesheetsBasePath}/__generated__/color.gen.css`
 
 function assertFileExist(path: string) {
   if (!fs.existsSync(variablesFilePath)) {
@@ -18,14 +18,14 @@ function assertFileExist(path: string) {
   }
 }
 
-function readThemeVariableFile() {
+function readColorVariableFile() {
   return fs.readFileSync(variablesFilePath, 'utf-8')
 }
 
-function readThemeVariableNames(file: string) {
+function readColorVariableNames(file: string) {
   const variables = file.match(/:root\s*{([^}]*)}/s)?.[1]
   if (!variables) {
-    log.error('theme.css 파일 내에 :root { ... } 블록을 찾을 수 없어요.')
+    log.error(`${variablesFileName} 파일 내에 :root { ... } 블록을 찾을 수 없어요.`)
     return []
   }
 
@@ -36,7 +36,7 @@ function readThemeVariableNames(file: string) {
     .map((line) => line.split(':')[0].trim())
 }
 
-function convertToTailwindThemeTokens(variables: string[]) {
+function convertToTailwindThemeColorTokens(variables: string[]) {
   return variables.map((variable) => {
     const name = variable.replace('--', '')
     return `${indent}--color-${name}: var(${variable});`
@@ -44,9 +44,9 @@ function convertToTailwindThemeTokens(variables: string[]) {
 }
 
 function getGeneratedResult(tokens: string[]) {
-  const comment = '/* scripts/codegen/gen-theme.ts에 의해서 자동으로 채워져요. */'
+  const comment = '/* scripts/codegen/gen-color.ts에 의해서 자동으로 채워져요. */'
   const importTailwind = "@import 'tailwindcss';"
-  const importVariables = `@import './${variablesFileName}';`
+  const importVariables = `@import '../${variablesFileName}';`
   const themeBlock = `\n@theme {\n${tokens.join('\n')}\n}`
 
   return [comment, importVariables, importTailwind, themeBlock].join('\n')
@@ -57,14 +57,14 @@ function main() {
 
   assertFileExist(variablesFilePath)
 
-  const varFile = readThemeVariableFile()
-  const variables = readThemeVariableNames(varFile)
-  const tokens = convertToTailwindThemeTokens(variables)
+  const varFile = readColorVariableFile()
+  const variables = readColorVariableNames(varFile)
+  const tokens = convertToTailwindThemeColorTokens(variables)
   const result = getGeneratedResult(tokens)
 
   writeFileEnsureDirectorySync(resultPath, result)
 
-  log.success('src/styles/theme.gen.css 파일에 Tailwind CSS 테마 변수를 추가했어요.', {
+  log.success(`${resultPath.replace(__root, '')} 파일에 Tailwind CSS 테마 변수를 추가했어요.`, {
     end: '\n',
   })
 }
