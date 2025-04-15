@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { tv } from 'tailwind-variants'
 
-export type ImageFadeLoadingState = '로딩완료' | '로딩중' | '에러'
+import { useImageLoadingState } from '@/hooks/useImageLoadingState'
 
 const fade = tv({
   base: 'ease-ease transition-opacity duration-300',
@@ -17,17 +16,9 @@ const fade = tv({
 })
 
 export const useImageFadeLoading = () => {
-  const [loadingState, setLoadingState] = useState<ImageFadeLoadingState>('로딩중')
+  const { loadingState, onError, onLoad } = useImageLoadingState()
 
   const fadeStyle = fade({ fade: loadingState })
-
-  const onLoad = () => {
-    setLoadingState('로딩완료')
-  }
-
-  const onError = () => {
-    setLoadingState('에러')
-  }
 
   return { loadingState, fadeStyle, onLoad, onError }
 }
