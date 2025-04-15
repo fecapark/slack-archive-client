@@ -5,7 +5,7 @@ type AutoHeightImageProps = Omit<ImageProps, 'fill'>
 
 export default function AutoHeightImage({ alt, className, ...props }: AutoHeightImageProps) {
   return (
-    <div className="w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       <Image {...props} alt={alt} className={clsx('!static', className)} fill />
     </div>
   )

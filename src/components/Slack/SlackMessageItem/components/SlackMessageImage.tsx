@@ -31,6 +31,7 @@ export const SlackMessageImage = ({ src, width, height }: SlackMessageImageProps
             onClick={onClick}
             onError={onError}
             onLoad={onLoad}
+            sizes="360px"
             src={src}
           />
         </ImagePlaceholder>
