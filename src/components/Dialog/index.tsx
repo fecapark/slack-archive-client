@@ -35,6 +35,7 @@ export const Dialog = ({
         >
           <VisuallyHidden>
             <PrimitiveDialog.Title />
+            <PrimitiveDialog.Description />
           </VisuallyHidden>
           {children}
         </PrimitiveDialog.Content>
