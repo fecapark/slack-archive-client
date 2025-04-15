@@ -57,7 +57,7 @@ export const SlackMessageYoutubeAttachment = ({
         ) : (
           <div className="relative w-full">
             <button
-              className="group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
+              className="group absolute top-1/2 left-1/2 z-[1] -translate-x-1/2 -translate-y-1/2 cursor-pointer"
               onClick={() => setPlaying(true)}
             >
               <div className="ease-ease absolute top-0 z-0 size-4 -translate-x-1/2 -translate-y-1/2 bg-white opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
