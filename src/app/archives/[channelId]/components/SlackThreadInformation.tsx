@@ -30,6 +30,7 @@ export const SlackThreadInformation = ({
                 height={24}
                 key={avatar}
                 src={avatar}
+                unoptimized
                 width={24}
               />
             ))}

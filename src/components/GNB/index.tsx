@@ -11,7 +11,7 @@ export const GNB = () => {
     <header className="flex h-[64px] w-full shrink-0 items-center justify-between px-5 md:justify-start">
       <Link className="mr-[50px] flex items-center gap-3 select-none" href="/">
         <div className="w-[32px]">
-          <AutoHeightImage alt="Logo" src="/logo.svg" unoptimized />
+          <AutoHeightImage alt="Logo" src="/logo.svg" />
         </div>
         <span className={`text-xl ${DoHyeon.className}`}>멘션봇</span>
       </Link>

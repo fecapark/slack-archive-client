@@ -36,6 +36,7 @@ const TooltipContent = ({ name, url }: { name: string; url: string }) => {
         className="mb-2 rounded-md bg-white object-contain p-1"
         height={64}
         src={url}
+        unoptimized
         width={64}
       />
       <div className="text-center text-[13px] leading-[18px] font-bold text-white">:{name}:</div>
@@ -50,7 +51,14 @@ export const InlineEmoji = ({ name, url, size }: InlineEmojiProps) => {
   return (
     <HoverTooltip content={<TooltipContent name={name} url={url} />}>
       <span className={container()}>
-        <Image alt={name} className={image()} height={sizeLiteral} src={url} width={sizeLiteral} />
+        <Image
+          alt={name}
+          className={image()}
+          height={sizeLiteral}
+          src={url}
+          unoptimized
+          width={sizeLiteral}
+        />
       </span>
     </HoverTooltip>
   )

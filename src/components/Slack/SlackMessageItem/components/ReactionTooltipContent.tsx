@@ -42,6 +42,7 @@ export const ReactionTooltipContent = ({
             height={multipleReactions ? 32 : 64}
             key={reaction.name}
             src={reaction.url ?? ''}
+            unoptimized
             width={multipleReactions ? 32 : 64}
           />
         ))}

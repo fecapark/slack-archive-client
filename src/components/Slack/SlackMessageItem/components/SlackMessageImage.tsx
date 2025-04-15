@@ -28,7 +28,6 @@ export const SlackMessageImage = ({ src, width, height }: SlackMessageImageProps
           <AutoHeightImage
             alt="이미지"
             className={fadeStyle}
-            loading="eager"
             onClick={onClick}
             onError={onError}
             onLoad={onLoad}

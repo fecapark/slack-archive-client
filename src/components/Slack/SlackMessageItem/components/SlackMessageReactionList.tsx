@@ -63,6 +63,7 @@ export const SlackMessageReactionList = ({ reactions }: SlackMessageReactionList
                     height={16}
                     key={reaction.name}
                     src={reaction.url}
+                    unoptimized
                     width={16}
                   />
                 )

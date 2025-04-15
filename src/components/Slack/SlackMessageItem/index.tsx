@@ -77,7 +77,7 @@ export const SlackMessageItem = ({
       {!isGrouped && (
         <div className="mr-2 shrink-0">
           <div className="overflow-hidden rounded-md">
-            <Image alt="Avatar" height={36} src={profileImageUrl} width={36} />
+            <Image alt="Avatar" height={36} src={profileImageUrl} unoptimized width={36} />
           </div>
         </div>
       )}
