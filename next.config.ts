@@ -27,6 +27,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.ytimg.com',
       },
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_S3_OBJECT_URL.replace('https://', ''),
+      },
     ],
   },
 }

@@ -4,7 +4,7 @@ export const toAttatchmentSrc = (fileId: string, mimetype: string) => {
   const attatchmentType = getAttatchmentType(mimetype)
 
   if (attatchmentType === 'image') {
-    return `${process.env.NEXT_PUBLIC_API_URL}/api/file/${fileId}`
+    return `${process.env.NEXT_PUBLIC_S3_OBJECT_URL}/${fileId}`
   }
 
   if (attatchmentType === 'video') {
